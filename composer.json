@@ -1,0 +1,34 @@
+{
+	"name": "thefox/tumblr-parser",
+	"description": "A Tumblr Theme parser in PHP.",
+	"license": "GPLv3",
+	"type": "library",
+	"keywords": [ "tumblr", "theme", "parser" ],
+	"homepage": "http://fox21.at",
+	"authors": [
+		{
+			"name": "Christian Mayer",
+			"email": "thefox21at@gmail.com",
+			"homepage": "http://fox21.at"
+		}
+	],
+	"require": {
+		"php": ">=5.3",
+		"symfony/yaml": "2.4.*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "4.1.*",
+		"thefox/phpcsrs": "1.*",
+		"thefox/utilities": "1.1.*"
+	},
+	"autoload": {
+		"psr-0": {
+			"TheFox": "src"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.1.x-dev"
+		}
+	}
+}
