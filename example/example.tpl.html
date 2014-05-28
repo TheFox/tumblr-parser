@@ -1,0 +1,209 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		
+		<title>{block:IndexPage}{Title}{/block:IndexPage}{block:PermalinkPage}{block:PostTitle}{PostTitle} - {/block:PostTitle}{Title}{/block:PermalinkPage}</title>
+		
+		<link rel="icon" href="{Favicon}"/>
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
+		<link rel="apple-touch-icon" href="{PortraitURL-128}"/> 
+		
+		{block:IfMetaLinkAuthorURL}<link rel="author" href="{text:MetaLink Author URL}" />{/block:IfMetaLinkAuthorURL}
+		{block:IfMetaLinkPublisherURL}<link rel="publisher" href="{text:MetaLink Publisher URL}" />{/block:IfMetaLinkPublisherURL}
+		
+		{block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+		<meta name="viewport" content="width=775"/> <!-- iPhone -->
+		
+		<meta name="if:Show Archive" content="1" />
+		<meta name="if:Show Description" content="1" />
+		<meta name="if:Show Notes" content="1" />
+		<meta name="if:Show Reblog Button" content="1" />
+		<meta name="if:Show Like Button" content="1" />
+		<meta name="if:Show Tags" content="1" />
+		<meta name="if:Show Search" content="1" />
+		<meta name="if:Show Dot After Day" content="0" />
+		<meta name="text:Copyright Years" content="2013" />
+		<meta name="text:Content Owner" content="Your_Name" />
+		<meta name="text:Content Owner URL" content="" />
+		<meta name="text:Google Analytics ID" content="" />
+		<meta name="text:MetaLink Author URL" content="" />
+		<meta name="text:MetaLink Publisher URL" content="" />
+		
+		<style type="text/css">
+			{CustomCSS}
+		</style>
+	</head>
+	
+	<body>
+		
+		<div id="content">
+			
+			<div id="header">
+				<h1><a href="/">{Title}</a></h1>
+				{block:IfShowDescription}{block:Description}<p>{Description}</p>{/block:Description}{/block:IfShowDescription}
+			</div>
+			
+			<div id="sidebar">
+				<ol id="navi">
+					{block:IfShowArchive}<li><a class="page_link" href="/archive">{lang:Archive}</a></li>{/block:IfShowArchive}
+					{block:AskEnabled}<li><a class="page_link" href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
+					{block:HasPages}
+						{block:Pages}<li><a class="page_link" href="{URL}">{Label}</a></li>{/block:Pages}
+					{/block:HasPages}
+				</ol>
+			</div>
+			
+			<div id="posts">
+				{block:Posts}
+					
+					<div class="post">
+						
+						{block:Text}
+							{block:Title}
+								{block:IndexPage}<h3><a href="{Permalink}">{Title}</a></h3>{/block:IndexPage}
+								{block:PermalinkPage}<h3>{Title}</h3>{/block:PermalinkPage}
+							{/block:Title}
+								
+							<div class="text">{Body}</div>
+						{/block:Text}
+						
+						{block:Link}
+							<h3><a href="{URL}" class="link" {Target}>{Name}</a></h3>
+							
+							{block:Description}<div class="description">{Description}</div>{/block:Description}
+						{/block:Link}
+						
+						{block:Photo}
+							{LinkOpenTag}<img src="{PhotoURL-500}" class="photo" alt="{PhotoAlt}" />{LinkCloseTag}
+							
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						{/block:Photo}
+						
+						{block:Photoset}
+							{block:IndexPage}
+								<a href="{Permalink}">
+									{block:Photos}<img src="{PhotoURL-500}" alt="{PhotoAlt}" class="photo" />{/block:Photos}
+								</a>
+							{/block:IndexPage}
+							
+							{block:PermalinkPage}
+								{block:Photos}
+									<img src="{PhotoURL-500}" alt="{PhotoAlt}" class="photo" />
+								{/block:Photos}
+							{/block:PermalinkPage}
+							
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						{/block:Photoset}
+						
+						{block:Quote}
+							<blockquote><p>{Quote}</p></blockquote>
+							{block:Source}<em class="source">&mdash; {Source}</em>{/block:Source}
+						{/block:Quote}
+						
+						{block:Chat}
+							{block:Title}
+								{block:IndexPage}<h3><a href="{Permalink}">{Title}</a></h3>{/block:IndexPage}
+								{block:PermalinkPage}<h3>{Title}</h3>{/block:PermalinkPage}
+							{/block:Title}
+							
+							<ol class="chat">
+								{block:Lines}
+									<li class="chat_line {Alt}">{block:Label}{Label} {/block:Label}<span class="chat_line_text">{Line}</span></li>
+								{/block:Lines}
+							</ol>
+						{/block:Chat}
+						
+						{block:Audio}
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+							
+							<div class="audio">
+								{block:AudioEmbed}
+									{AudioEmbed color="white"}
+								{/block:AudioEmbed}
+							</div>
+						{/block:Audio}
+						
+						{block:Video}
+							<div class="video">
+								{Video-500}
+							</div>
+							
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						{/block:Video}
+						
+						{block:Answer}
+							{block:IndexPage}<h3><a href="{Permalink}">{lang:Asker asked}</a></h3>{/block:IndexPage}
+							{block:PermalinkPage}<h3>{lang:Asker asked 2}:</h3>{/block:PermalinkPage}
+								
+							<div class="text">
+								<blockquote><p>{Question}</p></blockquote>
+								{Answer}
+							</div>
+						{/block:Answer}
+						
+						{block:Date}
+							<div class="date">
+								{block:IndexPage}
+									<em class="permalink">// <a href="{Permalink}">{DayOfWeek}, {DayOfMonth}{block:IfShowDotAfterDay}.{/block:IfShowDotAfterDay} {Month} {Year}</a>{block:IfShowNotes}{block:NoteCount} - {NoteCountWithLabel}{/block:NoteCount}{/block:IfShowNotes}</em>
+								{/block:IndexPage}
+								
+								{block:PermalinkPage}
+									<em class="permalink">// {DayOfWeek}, {DayOfMonth}{block:IfShowDotAfterDay}.{/block:IfShowDotAfterDay} {Month} {Year}</em> {block:IfShowReblogButton}{ReblogButton}{/block:IfShowReblogButton} {block:IfShowLikeButton}{LikeButton}{/block:IfShowLikeButton}
+								{/block:PermalinkPage}
+							</div>
+							<div class="clear"></div>
+						{/block:Date}
+						
+						{block:PermalinkPage}
+							{block:IfShowTags}
+								{block:HasTags}
+									<div class="tags">
+										Tags: {block:Tags}<a href="{TagURL}" class="tag">&#35;{Tag}</a> {/block:Tags}
+									</div>
+								{/block:HasTags}
+							{/block:IfShowTags}
+						{/block:PermalinkPage}
+						
+						{block:IfShowNotes}
+							{block:PostNotes}
+								{PostNotes}
+							{/block:PostNotes}
+						{/block:IfShowNotes}
+						
+						<div class="clear"></div>
+						
+					</div>
+				{/block:Posts}
+				
+				<div class="pages_navi">
+					{block:PreviousPage}<a href="{PreviousPage}">&#171; {lang:Newer posts}</a>{/block:PreviousPage}
+					{block:IndexPage}{lang:Page CurrentPage of TotalPages}{/block:IndexPage}
+					{block:NextPage}<a href="{NextPage}">{lang:Older posts} &#187;</a>{/block:NextPage}
+				</div>
+				
+				{block:IndexPage}
+					{block:IfShowSearch}
+						<div class="search">
+							<form action="/search" method="get">
+								<input type="text" name="q" value="{SearchQuery}" style="width: 400px; font-size: 20px;" /> <br />
+								<input type="submit" value="Search" style="font-size: 20px;" />
+							</form>
+						</div>
+					{/block:IfShowSearch}
+				{/block:IndexPage}
+				
+			</div>
+			
+			<div id="footer">
+				<p>
+					Copyright &copy; {block:IfCopyrightYears}{text:Copyright Years}{/block:IfCopyrightYears}{block:IfContentOwner} by {block:IfContentOwnerURL}<a href="{text:Content Owner URL}" rel="author">{/block:IfContentOwnerURL}{text:Content Owner}{block:IfContentOwnerURL}</a>{/block:IfContentOwnerURL}{/block:IfContentOwner}
+				</p>
+			</div>
+		</div>
+		
+		{block:IfGoogleAnalyticsID}
+			My Google Analytics ID: {text:Google Analytics ID}
+		{/block:IfGoogleAnalyticsID}
+		
+	</body>
+</html>

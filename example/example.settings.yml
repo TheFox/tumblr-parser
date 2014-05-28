@@ -1,0 +1,8 @@
+vars:
+    Title: 'my example page'
+    CustomCSS: '<!-- my custom //-->'
+    MetaDescription: 'my meta description'
+    'if:Show Archive': 0
+posts:
+    - { type: Text, Title: test1, Permalink: /post/1, content: test1.content }
+postsPerPage: 15
