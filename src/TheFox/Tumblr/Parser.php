@@ -190,9 +190,15 @@ class Parser{
 							elseif($name == 'Link'){
 								$element = new LinkBlockElement();
 							}
+							elseif($name == 'IndexPage'){
+								$element = new IndexPageBlockElement();
+							}
+							elseif($name == 'PermalinkPage'){
+								$element = new PermalinkPageBlockElement();
+							}
 							else{
-								#$element = new BlockElement();
 								print str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'"'."\n";
+								throw new RuntimeException('Unknown block "'.$name.'".', 3);
 							}
 						}
 						elseif($type == 'text'){
@@ -205,7 +211,7 @@ class Parser{
 							$this->parseElements($subhtml, $element, $level + 1);
 						}
 						else{
-							#throw new RuntimeException('Unknown type "'.$type.'".', 3);
+							throw new RuntimeException('Can not create element.', 4);
 						}
 						
 					}
@@ -215,7 +221,7 @@ class Parser{
 						if(in_array($nameFull, static::$variableNames)){
 							print str_repeat(' ', 4 * ($level + 1)).'ok'."\n";
 							
-							$element = new HtmlElement();
+							$element = new VariableElement();
 							$element->setName($nameFull);
 							$parentElement->addChild($element);
 						}
@@ -242,7 +248,7 @@ class Parser{
 		}
 		
 		if($level == 1){
-			ve($this->rootElement);
+			#ve($this->rootElement);
 		}
 	}
 	
@@ -257,6 +263,12 @@ class Parser{
 		
 		$this->parseElements();
 		
+		$elemtents = $this->rootElement->getChildren(true);
+		foreach($elemtents as $elementId => $element){
+			#ve($element);
+			print "element: ".$elementId.', '.get_class($element).', "'.$element->getName().'", "'.$element->getContent().'", "'.$element->render().'"'."\n";
+		}
+		
 		if($type == 'page'){
 			
 		}
@@ -264,15 +276,15 @@ class Parser{
 			
 		}
 		
-		#ve($this->rootElement->getChildren(true));
+		#ve();
 		
 		return $this->renderElements($this->rootElement);
 	}
 	
 	public function printHtml($type = 'page', $page = 1){
 		$html = $this->parse($type, $page);
-		#print "\n\n\n\n\n\n\n\n\n"; # TODO
-		#print $html;
+		#print "\n\n\n\n\n\n\n\n\n";
+		#print "\n\n\n\n'$html'\n\n\n\n\n";
 		flush();
 	}
 	
