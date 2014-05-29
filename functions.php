@@ -1,21 +1,17 @@
 <?php
 
 function ve($v = null){
-	try{
+	if(PHP_SAPI == 'cli'){
+		var_export($v);
+		print "\n";
+	}
+	else{
 		print '<pre>';
 		var_export($v);
 		print "</pre>\n";
 	}
-	catch(Exception $e){
-		print "ERROR: ".$e->getMessage()."\n";
-	}
 }
 
 function vej($v = null){
-	try{
-		ve(json_encode($v));
-	}
-	catch(Exception $e){
-		print "ERROR: ".$e->getMessage()."\n";
-	}
+	ve(json_encode($v));
 }
