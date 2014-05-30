@@ -335,11 +335,19 @@ class Parser{
 				$setSub = true;
 			}
 			elseif($element instanceof IfBlockElement){
-				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName])."\n");
+				$pairName = '';
+				if(substr($elementName, 0, 5) == 'IfNot'){
+					$pairName = 'If'.substr($elementName, 5);
+				}
+				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName]).', "'.$pairName.'"'."\n");
 				
 				if(isset($this->variables[$elementName])){
 					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue()."\n");
 					$element->setContent((bool)$this->variables[$elementName]->getValue());
+				}
+				elseif($pairName && isset($this->variables[$pairName])){
+					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- pair: '.$this->variables[$pairName]->getValue()."\n");
+					$element->setContent(!(bool)$this->variables[$pairName]->getValue());
 				}
 				else{
 					$element->setContent(false);
