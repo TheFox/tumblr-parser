@@ -26,16 +26,16 @@ class TextBlockElement extends BlockElement{
 				
 				#print '    element: '.get_class($element).', '.$element->getName()."\n";
 				
-				if($element instanceof TitleBlockElement){
-					$element->setContent($hasTitle);
-				}
-				elseif($element instanceof VariableElement){
+				if($element instanceof VariableElement){
 					if($elementName == 'title'){
 						$element->setContent($content->getTitle());
 					}
 					elseif($elementName == 'body'){
 						$element->setContent($content->getBody());
 					}
+				}
+				elseif($element instanceof TitleBlockElement){
+					$element->setContent($hasTitle);
 				}
 			}
 		}
