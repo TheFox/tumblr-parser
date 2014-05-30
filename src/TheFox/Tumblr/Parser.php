@@ -115,7 +115,7 @@ class Parser{
 			else{
 				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'found {: '.$pos."\n");
 				
-				if($pos > 1){
+				if($pos >= 1){
 					$content = substr($rawhtml, 0, $pos);
 					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$content.'"'."\n");
 					
