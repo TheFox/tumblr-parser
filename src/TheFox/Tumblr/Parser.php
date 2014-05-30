@@ -110,6 +110,7 @@ class Parser{
 	
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
 		#fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': level='.$level."\n");
+		
 		if($level >= 100){
 			throw new RuntimeException('Maximum level of 100 reached.', 2);
 		}
@@ -167,7 +168,7 @@ class Parser{
 					
 					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'found }: '.$pos.', "'.$nameFull.'" '.$nameFullLen."\n");
 					
-					if(strtolower(substr($nameFull, 0, 6)) == 'block:' || strtolower(substr($nameFull, 0, 6)) == 'text:'){
+					if(strtolower(substr($nameFull, 0, 6)) == 'block:'){
 						$nameFullPos = strpos($nameFull, ':');
 						$name = substr($nameFull, $nameFullPos + 1);
 						$type = strtolower(substr($nameFull, 0, $nameFullPos));
@@ -238,9 +239,6 @@ class Parser{
 								throw new RuntimeException('Unknown block "'.$name.'".', 3);
 							}
 						}
-						elseif($type == 'text'){
-							$element = new TextElement();
-						}
 						if($element){
 							$element->setName($name);
 							$parentElement->addChild($element);
@@ -255,7 +253,7 @@ class Parser{
 					else{
 						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'."\n");
 						
-						if(in_array($nameFull, static::$variableNames)){
+						if(in_array($nameFull, static::$variableNames) || substr($nameFull, 0, 5) == 'text:'){
 							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'."\n");
 							
 							$element = new VariableElement();
