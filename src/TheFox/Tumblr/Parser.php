@@ -76,10 +76,12 @@ class Parser{
 				}
 			}
 		}
+		
+		#ve($this->variables);
 	}
 	
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
-		#print __CLASS__.'->'.__FUNCTION__.': '.$level."\n";
+		fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': '.$level."\n");
 		if($level >= 100){
 			throw new RuntimeException('Maximum level of 100 reached.', 2);
 		}
@@ -95,15 +97,14 @@ class Parser{
 		while($rawhtml && $fuse <= 1000){
 			$fuse++;
 			
-			#print 'parse rawhtml'."\n";
-			print str_repeat(' ', 4 * ($level)).'parse: "'.$rawhtml.'"'."\n";
+			#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'parse: "'.$rawhtml.'"'."\n");
 			
 			$content = '';
 			$element = null;
 			
 			$pos = strpos($rawhtml, '{');
 			if($pos === false){
-				#print str_repeat(' ', 4 * ($level)).'no { found'."\n";
+				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'no { found'."\n");
 				
 				$element = new HtmlElement();
 				$element->setContent($rawhtml);
@@ -112,11 +113,11 @@ class Parser{
 				$rawhtml = '';
 			}
 			else{
-				print str_repeat(' ', 4 * ($level)).'found {: '.$pos."\n";
+				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'found {: '.$pos."\n");
 				
 				if($pos > 1){
 					$content = substr($rawhtml, 0, $pos);
-					print str_repeat(' ', 4 * ($level + 1)).'content: "'.$content.'"'."\n";
+					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$content.'"'."\n");
 					
 					$element = new HtmlElement();
 					$element->setContent($content);
@@ -127,7 +128,7 @@ class Parser{
 				$pos = strpos($rawhtml, '}');
 				if($pos === false){
 					$content .= '{'.$rawhtml;
-					print str_repeat(' ', 4 * ($level + 1)).'no } found: "'.$content.'"'."\n";
+					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'no } found: "'.$content.'"'."\n");
 					
 					$element->setContent($content);
 				}
@@ -136,15 +137,14 @@ class Parser{
 					$nameFullLen = strlen($nameFull);
 					$rawhtml = substr($rawhtml, $pos + 1);
 					
-					print str_repeat(' ', 4 * ($level + 1)).'found }: '.$pos.', "'.$nameFull.'" '.$nameFullLen."\n";
+					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'found }: '.$pos.', "'.$nameFull.'" '.$nameFullLen."\n");
 					
 					if(strtolower(substr($nameFull, 0, 6)) == 'block:' || strtolower(substr($nameFull, 0, 6)) == 'text:'){
 						$nameFullPos = strpos($nameFull, ':');
 						$name = substr($nameFull, $nameFullPos + 1);
 						$type = strtolower(substr($nameFull, 0, $nameFullPos));
 						
-						print str_repeat(' ', 4 * ($level + 1)).'block|text: '.$nameFullPos.', "'.$type.'", "'.$name.'"'."\n";
-						print str_repeat(' ', 4 * ($level + 1)).'html: "'.$rawhtml.'"'."\n";
+						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'block|text: '.$nameFullPos.', "'.$type.'", "'.$name.'"'."\n");
 						
 						$offset = 0;
 						$newoffset = 0;
@@ -161,7 +161,7 @@ class Parser{
 								$testhtml = substr($temphtml, 0, $pos);
 								$newoffset = $offset + $pos + 2 + $nameFullLen + 1;
 								
-								print str_repeat(' ', 4 * ($level + 2)).'found: o='.$offset.' ('.$newoffset.'), p='.$pos.': "'.$temphtml.'", "'.$testhtml.'"'."\n";
+								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 2)).'found: o='.$offset.' ('.$newoffset.'), p='.$pos.': "'.$temphtml.'", "'.$testhtml.'"'."\n");
 								
 								$offset = $newoffset;
 							}
@@ -173,7 +173,7 @@ class Parser{
 						$subhtml = substr($rawhtml, 0, $offset - 2 - $nameFullLen - 1);
 						$rawhtml = substr($rawhtml, $offset);
 						
-						print str_repeat(' ', 4 * ($level + 1)).'name: "'.$name.'", "'.$nameFull.'", '.$offset.''."\n";
+						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'name: "'.$name.'", "'.$nameFull.'", '.$offset.''."\n");
 						
 						$element = null;
 						if($type == 'block'){
@@ -197,7 +197,7 @@ class Parser{
 								$element = new PermalinkPageBlockElement();
 							}
 							else{
-								print str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'"'."\n";
+								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'"'."\n");
 								throw new RuntimeException('Unknown block "'.$name.'".', 3);
 							}
 						}
@@ -216,21 +216,18 @@ class Parser{
 						
 					}
 					else{
-						print str_repeat(' ', 4 * ($level + 1)).'else'."\n";
+						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'."\n");
 						
 						if(in_array($nameFull, static::$variableNames)){
-							print str_repeat(' ', 4 * ($level + 1)).'ok'."\n";
+							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'."\n");
 							
 							$element = new VariableElement();
 							$element->setName($nameFull);
 							$parentElement->addChild($element);
 						}
 						else{
-							#$content = '{'.substr($rawhtml, 0, $pos).'}';
-							#$content = substr($rawhtml, 0, $pos);
 							$content = '{'.$nameFull.'}';
-							print str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$content.'"'."\n";
-							#print str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$rawhtml.'"'."\n";
+							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$content.'"'."\n");
 							
 							$element = new HtmlElement();
 							$element->setName($nameFull);
