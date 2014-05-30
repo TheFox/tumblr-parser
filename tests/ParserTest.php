@@ -49,4 +49,30 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 		$parser->setSettings(array('vars' => array(), 'posts' => array()));
 	}
 	
+	public function testParseVariable(){
+		$parser = new Parser();
+		$parser->setSettings(array('vars' => array('Title' => 'my_title'), 'posts' => array(), 'postsPerPage' => 15));
+		
+		$parser->setTemplate('');
+		$this->assertEquals('', $parser->parse());
+		
+		$parser->setTemplate('test');
+		$this->assertEquals('test', $parser->parse());
+		
+		$parser->setTemplate('{Title}>');
+		$this->assertEquals('my_title>', $parser->parse());
+		
+		$parser->setTemplate('<{Title}');
+		$this->assertEquals('<my_title', $parser->parse());
+		
+		$parser->setTemplate('<{Title}>');
+		$this->assertEquals('<my_title>', $parser->parse());
+		
+		$parser->setTemplate('BEGIN<{Title}>END');
+		$this->assertEquals('BEGIN<my_title>END', $parser->parse());
+		
+		$parser->setTemplate('BEGIN Title1={Title} Title2={Title} END');
+		$this->assertEquals('BEGIN Title1=my_title Title2=my_title END', $parser->parse());
+	}
+	
 }
