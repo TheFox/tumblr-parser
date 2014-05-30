@@ -19,9 +19,11 @@ use TheFox\Tumblr\Element\TitleBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\PostTitleBlockElement;
 use TheFox\Tumblr\Element\IfBlockElement;
+use TheFox\Tumblr\Element\DescriptionBlockElement;
 
 #use TheFox\Tumblr\Post\Post;
 use TheFox\Tumblr\Post\TextPost;
+use TheFox\Tumblr\Post\LinkPost;
 
 class Parser{
 	
@@ -29,6 +31,9 @@ class Parser{
 		'Title',
 		'PostTitle',
 		'Body',
+		'URL',
+		'Target',
+		'Name',
 	);
 	
 	private $settings = array();
@@ -224,6 +229,9 @@ class Parser{
 							elseif($name == 'PostTitle'){
 								$element = new PostTitleBlockElement();
 							}
+							elseif($name == 'Description'){
+								$element = new DescriptionBlockElement();
+							}
 							else{
 								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'"'."\n");
 								throw new RuntimeException('Unknown block "'.$name.'".', 3);
@@ -380,12 +388,30 @@ class Parser{
 					$postObj->setBody($post['body']);
 				}
 			}
+			elseif($type == 'link'){
+				$postObj = new LinkPost();
+				if(isset($post['url'])){
+					$postObj->setUrl($post['url']);
+				}
+				if(isset($post['name'])){
+					$postObj->setName($post['name']);
+				}
+				if(isset($post['target'])){
+					$postObj->setTarget($post['target']);
+				}
+			}
+			
+			if($postObj){
+				$postObj->setPermalink($post['permalink']);
+			}
 		}
 		
 		return $postObj;
 	}
 	
 	public function parse($type = 'page', $index = 1){
+		fwrite(STDOUT, 'parse: '.$type.', '.$index."\n");
+		
 		$this->parseMetaSettings();
 		
 		if($this->templateChanged){
@@ -416,7 +442,7 @@ class Parser{
 			}
 		}
 		elseif($isPermalinkPage){
-			$postObj = $this->makePostFromIndex($index);
+			$postObj = $this->makePostFromIndex($index - 1);
 			if($postObj){
 				$posts[] = $postObj;
 				

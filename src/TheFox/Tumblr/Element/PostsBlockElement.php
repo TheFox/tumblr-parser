@@ -3,7 +3,7 @@
 namespace TheFox\Tumblr\Element;
 
 use TheFox\Tumblr\Post\TextPost;
-use TheFox\Tumblr\Element\VariableElement;
+use TheFox\Tumblr\Post\LinkPost;
 
 class PostsBlockElement extends BlockElement{
 	
@@ -31,33 +31,44 @@ class PostsBlockElement extends BlockElement{
 		
 		$children = array();
 		foreach($this->getContent() as $postId => $post){
-			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType().', '.$post->getElementClassName()."\n";
-			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
 			
 			foreach($this->getChildren() as $element){
-				
 				$newElement = clone $element;
-				#print '       element: "'.get_class($newElement).'"'."\n";
+				print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
 				
-				if($newElement instanceof TextBlockElement && $post instanceof TextPost){
-					#print '           set'."\n";
-					$newElement->setContent($post);
+				$add = false;
+				if($newElement instanceof TextBlockElement){
+					if($post instanceof TextPost){
+						print '            set'."\n";
+						#print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
+						$newElement->setContent($post);
+						$add = true;
+					}
+				}
+				elseif($newElement instanceof LinkBlockElement){
+					if($post instanceof LinkPost){
+						print '            set'."\n";
+						#print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
+						$newElement->setContent($post);
+						$add = true;
+					}
+				}
+				elseif($newElement instanceof HtmlElement){
+					print '            set'."\n";
+					#print '        element: "'.get_class($newElement).'", '.$newElement->getName().', "'.$newElement->getContent().'"'."\n";
+					$add = true;
 				}
 				
-				$children[] = $newElement;
+				if($add){
+					$children[] = $newElement;
+				}
+				
 			}
 			
 		}
 		
-		$rv = '';
-		#ve($children);
-		
-		#print 'render'."\n";
-		#$this->setChildren($children);
-		#$rv = parent::render();
-		$rv = $this->renderChildren($children);
-		
-		return $rv;
+		return $this->renderChildren($children);
 	}
 	
 }

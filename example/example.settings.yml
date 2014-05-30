@@ -4,9 +4,11 @@ vars:
     MetaDescription: 'my meta description'
     'if:Show Archive': 1
 posts:
-    - { type: text, title: title_test1, permalink: /post/1, body: test1.body }
-    - { type: text, permalink: /post/2, body: test2.body }
-    - { type: text, title: title_test3, permalink: /post/3, body: test3.body }
-    - { type: text, title: title_test4, permalink: /post/4, body: test4.body }
-    - { type: text, title: title_test5, permalink: /post/5, body: test5.body }
-postsPerPage: 4
+    - { type: text, permalink: '?type=page&index=1', title: title_test1, body: test1.body }
+    - { type: text, permalink: '?type=page&index=2', body: test2.body }
+    - { type: text, permalink: '?type=page&index=3', title: title_test3, body: test3.body }
+    - { type: text, permalink: '?type=page&index=4', title: title_test4, body: test4.body }
+    - { type: text, permalink: '?type=page&index=5', title: title_test5, body: test5.body }
+    - { type: link, permalink: '?type=page&index=6', url: 'http://fox21.at', name: link_name1, target: 'target="_blank"' }
+    - { type: link, permalink: '?type=page&index=7', url: 'http://fox21.at', name: link_name2 }
+postsPerPage: 15

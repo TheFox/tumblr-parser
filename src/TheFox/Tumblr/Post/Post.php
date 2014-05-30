@@ -5,6 +5,7 @@ namespace TheFox\Tumblr\Post;
 class Post{
 	
 	protected $type = '';
+	protected $permalink = '';
 	#protected $elementClassName = '';
 	private $title = '';
 	
@@ -14,6 +15,14 @@ class Post{
 	
 	public function getType(){
 		return $this->type;
+	}
+	
+	public function setPermalink($permalink){
+		$this->permalink = $permalink;
+	}
+	
+	public function getPermalink(){
+		return $this->permalink;
 	}
 	
 	#public function getElementClassName(){

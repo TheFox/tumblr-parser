@@ -2,7 +2,7 @@
 
 namespace TheFox\Tumblr\Element;
 
-use RuntimeException;
+#use RuntimeException;
 
 use TheFox\Tumblr\Post\TextPost;
 
@@ -10,7 +10,7 @@ class TextBlockElement extends BlockElement{
 	
 	public function render(){
 		#print __CLASS__.'->'.__FUNCTION__.''."\n";
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$content = $this->getContent();
 		#ve($content);
@@ -39,8 +39,6 @@ class TextBlockElement extends BlockElement{
 				}
 			}
 		}
-		
-		
 		
 		return parent::render();
 	}
