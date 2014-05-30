@@ -34,6 +34,7 @@ class Parser{
 		'URL',
 		'Target',
 		'Name',
+		'Description',
 	);
 	
 	private $settings = array();
@@ -398,6 +399,9 @@ class Parser{
 				}
 				if(isset($post['target'])){
 					$postObj->setTarget($post['target']);
+				}
+				if(isset($post['description'])){
+					$postObj->setDescription($post['description']);
 				}
 			}
 			

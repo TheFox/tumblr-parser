@@ -7,6 +7,7 @@ class LinkPost extends Post{
 	private $url = '';
 	private $name = '';
 	private $target = '';
+	private $description = '';
 	
 	public function __construct(){
 		$this->type = 'link';
@@ -34,6 +35,14 @@ class LinkPost extends Post{
 	
 	public function getTarget(){
 		return $this->target;
+	}
+	
+	public function setDescription($description){
+		$this->description = $description;
+	}
+	
+	public function getDescription(){
+		return $this->description;
 	}
 	
 }

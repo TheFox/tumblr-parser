@@ -14,8 +14,7 @@ class LinkBlockElement extends BlockElement{
 		
 		if($content instanceof LinkPost){
 			
-			#$hasTitle = (bool)$content->getTitle();
-			#$hasTitle = false;
+			$hasDescription = (bool)$content->getDescription();
 			
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
@@ -32,6 +31,12 @@ class LinkBlockElement extends BlockElement{
 					elseif($elementName == 'target'){
 						$element->setContent($content->getTarget());
 					}
+					elseif($elementName == 'description'){
+						$element->setContent($content->getDescription());
+					}
+				}
+				elseif($element instanceof DescriptionBlockElement){
+					$element->setContent($hasDescription);
 				}
 			}
 		}
