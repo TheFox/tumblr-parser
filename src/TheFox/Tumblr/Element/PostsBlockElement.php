@@ -40,7 +40,7 @@ class PostsBlockElement extends BlockElement{
 				$add = false;
 				if($newElement instanceof TextBlockElement){
 					if($post instanceof TextPost){
-						print '            set'."\n";
+						#print '            set'."\n";
 						#print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
 						$newElement->setContent($post);
 						$add = true;
@@ -48,14 +48,14 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($newElement instanceof LinkBlockElement){
 					if($post instanceof LinkPost){
-						print '            set'."\n";
+						#print '            set'."\n";
 						#print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
 						$newElement->setContent($post);
 						$add = true;
 					}
 				}
 				elseif($newElement instanceof HtmlElement){
-					print '            set'."\n";
+					#print '            set'."\n";
 					#print '        element: "'.get_class($newElement).'", '.$newElement->getName().', "'.$newElement->getContent().'"'."\n";
 					$add = true;
 				}

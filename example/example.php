@@ -49,4 +49,7 @@ END');
 $type = 'post'; $index = 6;
 $type = 'page'; $index = 1;
 
-$parser->printHtml($type, $index);
+$html = $parser->parse($type, $index);
+
+#print "\n'$html'\n";
+
