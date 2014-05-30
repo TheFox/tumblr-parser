@@ -86,7 +86,7 @@ class Parser{
 			throw new RuntimeException('Maximum level of 100 reached.', 2);
 		}
 		
-		if(!$rawhtml){
+		if(!$rawhtml && $level == 1){
 			$rawhtml = $this->template;
 		}
 		if(!$parentElement){
