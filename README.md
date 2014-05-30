@@ -1,4 +1,4 @@
-# Tumblnizer
+# Tumblr Parser
 A Tumblr Theme parser in PHP.
 
 ## [Tumblr Custom Theme](http://www.tumblr.com/docs/en/custom_themes) Implementation
