@@ -81,7 +81,7 @@ class Parser{
 	}
 	
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
-		fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': '.$level."\n");
+		#fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': level='.$level."\n");
 		if($level >= 100){
 			throw new RuntimeException('Maximum level of 100 reached.', 2);
 		}
