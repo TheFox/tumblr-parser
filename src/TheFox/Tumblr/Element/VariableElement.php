@@ -1,6 +1,6 @@
 <?php
 
-namespace TheFox\Tumblr;
+namespace TheFox\Tumblr\Element;
 
 class VariableElement extends Element{
 	

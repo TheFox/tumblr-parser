@@ -1,6 +1,6 @@
 <?php
 
-namespace TheFox\Tumblr;
+namespace TheFox\Tumblr\Element;
 
 #use RuntimeException;
 
@@ -8,12 +8,12 @@ class Element{
 	
 	#private $type = '';
 	private $name = '';
-	private $content = '';
+	private $content = null;
 	private $parent = null;
-	private $children = array();
+	protected $children = array();
 	
 	public function __construct(){
-		print __CLASS__.'->'.__FUNCTION__.''."\n";
+		#print __CLASS__.'->'.__FUNCTION__.''."\n";
 	}
 	
 	/*public function setType($type){
@@ -30,6 +30,10 @@ class Element{
 	
 	public function getName(){
 		return $this->name;
+	}
+	
+	public function getTemplateName(){
+		return $this->getName();
 	}
 	
 	public function setContent($content){
