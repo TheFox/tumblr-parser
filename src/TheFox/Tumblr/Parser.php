@@ -104,8 +104,6 @@ class Parser{
 				}
 			}
 		}
-		
-		#ve($this->variables);
 	}
 	
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
@@ -415,6 +413,8 @@ class Parser{
 		fwrite(STDOUT, 'parse: '.$type.', '.$index."\n");
 		
 		$this->parseMetaSettings();
+		
+		#ve($this->variables);
 		
 		if($this->templateChanged){
 			$this->templateChanged = false;
