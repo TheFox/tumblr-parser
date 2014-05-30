@@ -15,14 +15,13 @@ class IfBlockElement extends BlockElement{
 	}
 	
 	public function render(){
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
-		$html = '';
 		if($this->getContent()){
-			print __CLASS__.'->'.__FUNCTION__.': render'."\n";
-			$html = parent::render();
+			#print __CLASS__.'->'.__FUNCTION__.':     render'."\n";
+			return parent::render();
 		}
-		return $html;
+		return '';
 	}
 	
 }

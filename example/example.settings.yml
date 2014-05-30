@@ -2,7 +2,11 @@ vars:
     Title: 'my example page'
     CustomCSS: '<!-- my custom //-->'
     MetaDescription: 'my meta description'
-    'if:Show Archive': 0
+    'if:Show Archive': 1
 posts:
-    - { type: Text, Title: test1, Permalink: /post/1, content: test1.content }
-postsPerPage: 15
+    - { type: text, title: title_test1, permalink: /post/1, body: test1.body }
+    - { type: text, permalink: /post/2, body: test2.body }
+    - { type: text, title: title_test3, permalink: /post/3, body: test3.body }
+    - { type: text, title: title_test4, permalink: /post/4, body: test4.body }
+    - { type: text, title: title_test5, permalink: /post/5, body: test5.body }
+postsPerPage: 4

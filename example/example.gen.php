@@ -6,6 +6,8 @@ require_once __DIR__.'/../bootstrap.php';
 
 use Symfony\Component\Yaml\Yaml;
 
+exit(1);
+
 $settings = array(
 	
 	'vars' => array(

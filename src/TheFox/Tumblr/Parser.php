@@ -20,11 +20,15 @@ use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\PostTitleBlockElement;
 use TheFox\Tumblr\Element\IfBlockElement;
 
+#use TheFox\Tumblr\Post\Post;
+use TheFox\Tumblr\Post\TextPost;
 
 class Parser{
 	
 	public static $variableNames = array(
 		'Title',
+		'PostTitle',
+		'Body',
 	);
 	
 	private $settings = array();
@@ -66,6 +70,7 @@ class Parser{
 	}
 	
 	private function parseSettingsVars(){
+		#ve($this->settings['vars']);
 		foreach($this->settings['vars'] as $key => $val){
 			$variable = new Variable();
 			$variable->setName($key);
@@ -76,8 +81,9 @@ class Parser{
 	}
 	
 	private function parseMetaSettings(){
-		foreach(array('if:', 'text:') as $type){
-			preg_match_all('/<meta name="('.$type.'[^"]+)" content="([^"]+)"/i', $this->template, $matches);
+		foreach(array('if', 'text') as $type){
+			preg_match_all('/<meta name="('.$type.':[^"]+)" content="([^"]+)"/i', $this->template, $matches);
+			
 			foreach(array_combine($matches[1], $matches[2]) as $key => $val){
 				$variable = new Variable();
 				$variable->setName($key);
@@ -269,20 +275,43 @@ class Parser{
 		#if($level == 1){ ve($this->rootElement); }
 	}
 	
-	private function setElementsValues($isIndexPage = false, $isPermalinkPage = false, $posts = array()){
-		$elemtents = $this->rootElement->getChildren(true);
+	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false, $posts = array(), $level = 1){
+		if($level >= 100){
+			throw new RuntimeException('Maximum level of 100 reached.', 1);
+		}
+		
+		$post = null;
+		if($isPermalinkPage){
+			$post = $posts[0];
+		}
+		
+		#$elemtents = $this->rootElement->getChildren(true);
+		#$elemtents = $element->getChildren(true);
+		$elemtents = $element->getChildren();
+		
 		foreach($elemtents as $elementId => $element){
-			$elementName = $element->getName();
-			$elementTemplateName = $element->getTemplateName();
+			$elementName = $element->getTemplateName();
 			
-			fwrite(STDOUT, 'element['.$elementId.']: '.get_class($element).', "'.$elementName.'" ('.$elementTemplateName.'), "'.$element->getContent().'", "'.$element->render().'"'."\n");
+			$elementNameOut = '';
+			if($elementName){
+				$elementNameOut = ', "'.$elementName.'"';
+			}
+			
+			$className = str_replace('TheFox\Tumblr\Element\\', '', get_class($element));
+			
+			
+			#fwrite(STDOUT, ''.str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut."\n");
+			
+			#usleep(300000);
+			
+			$setSub = false;
+			#$setSub = true;
 			
 			if($element instanceof VariableElement){
-				fwrite(STDOUT, "    'var' has var: ".(int)isset($this->variables[$elementTemplateName])."\n");
-				
-				if(isset($this->variables[$elementTemplateName])){
-					fwrite(STDOUT, "    val: '".$this->variables[$elementTemplateName]->getValue()."'\n");
-					$element->setContent($this->variables[$elementTemplateName]->getValue());
+				#fwrite(STDOUT, "    'var' has var: ".(int)isset($this->variables[$elementName])."\n");
+				if(isset($this->variables[$elementName])){
+					#fwrite(STDOUT, "    val: '".$this->variables[$elementName]->getValue()."'\n");
+					$element->setContent($this->variables[$elementName]->getValue());
 				}
 				else{
 					$element->setContent(null);
@@ -290,27 +319,43 @@ class Parser{
 			}
 			elseif($element instanceof IndexPageBlockElement){
 				$element->setContent($isIndexPage);
+				$setSub = true;
 			}
 			elseif($element instanceof PermalinkPageBlockElement){
 				$element->setContent($isPermalinkPage);
+				$setSub = true;
+			}
+			elseif($element instanceof PostTitleBlockElement){
+				$element->setContent($isPermalinkPage);
+				$setSub = true;
 			}
 			elseif($element instanceof IfBlockElement){
-				fwrite(STDOUT, "    'if' has var: ".(int)isset($this->variables[$elementTemplateName])."\n");
+				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName])."\n");
 				
-				if(isset($this->variables[$elementTemplateName])){
-					fwrite(STDOUT, "    val: '".(int)$this->variables[$elementTemplateName]->getValue()."'\n");
-					$element->setContent((bool)$this->variables[$elementTemplateName]->getValue());
+				if(isset($this->variables[$elementName])){
+					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue()."\n");
+					$element->setContent((bool)$this->variables[$elementName]->getValue());
 				}
 				else{
 					$element->setContent(false);
 				}
+				
+				$setSub = true;
 			}
 			elseif($element instanceof PostsBlockElement){
-				fwrite(STDOUT, "    PostsBlockElement"."\n");
+				#fwrite(STDOUT, "    PostsBlockElement"."\n");
 				$element->setContent($posts);
 			}
+			else{
+				$setSub = true;
+			}
 			
+			if($setSub){
+				$this->setElementsValues($element, $isIndexPage, $isPermalinkPage, $posts, $level + 1);
+			}
 		}
+		
+		#usleep(300000);
 		
 		#ve($elemtents);
 	}
@@ -319,7 +364,28 @@ class Parser{
 		return $element->render();
 	}
 	
-	public function parse($type = 'page', $page = 1){
+	private function makePostFromIndex($index){
+		$postObj = null;
+		
+		if(isset($this->settings['posts'][$index])){
+			$post = $this->settings['posts'][$index];
+			$type = strtolower($post['type']);
+			
+			if($type == 'text'){
+				$postObj = new TextPost();
+				if(isset($post['title'])){
+					$postObj->setTitle($post['title']);
+				}
+				if(isset($post['body'])){
+					$postObj->setBody($post['body']);
+				}
+			}
+		}
+		
+		return $postObj;
+	}
+	
+	public function parse($type = 'page', $index = 1){
 		$this->parseMetaSettings();
 		
 		if($this->templateChanged){
@@ -332,32 +398,45 @@ class Parser{
 		
 		$posts = array();
 		
-		$postIdMin = ($page - 1) * $this->settings['postsPerPage'];
-		$postIdMax = $postIdMin + $this->settings['postsPerPage'];
-		
-		fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax."\n");
-		
-		for($id = $postIdMin; $id < $postIdMax; $id++){
-			if(isset($this->settings['posts'][$id])){
-				$post = $this->settings['posts'][$id];
-				$posts[] = $post;
-				
-				fwrite(STDOUT, '  post: '.$id.', "'.$post['title'].'"'."\n");
+		if($isIndexPage){
+			$postIdMin = ($index - 1) * $this->settings['postsPerPage'];
+			$postIdMax = $postIdMin + $this->settings['postsPerPage'];
+			#fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax."\n");
+			
+			for($id = $postIdMin; $id < $postIdMax; $id++){
+				if(isset($this->settings['posts'][$id])){
+					$postObj = $this->makePostFromIndex($id);
+					if($postObj){
+						$posts[] = $postObj;
+					}
+				}
+				else{
+					break;
+				}
 			}
-			else{
-				break;
+		}
+		elseif($isPermalinkPage){
+			$postObj = $this->makePostFromIndex($index);
+			if($postObj){
+				$posts[] = $postObj;
+				
+				$variable = new Variable();
+				$variable->setName('PostTitle');
+				$variable->setValue($postObj->getTitle());
+				
+				$this->variables['PostTitle'] = $variable;
 			}
 		}
 		
 		#ve($posts);
+		#ve($this->variables);
 		
-		$this->setElementsValues($isIndexPage, $isPermalinkPage, $posts);
-		
+		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage, $posts);
 		return $this->renderElements($this->rootElement);
 	}
 	
-	public function printHtml($type = 'page', $page = 1){
-		$html = $this->parse($type, $page);
+	public function printHtml($type = 'page', $index = 1){
+		$html = $this->parse($type, $index);
 		#print "\n\n\n\n\n\n\n\n\n";
 		
 		print "\n'$html'\n";

@@ -52,20 +52,22 @@ class Element{
 		return $this->parent;
 	}
 	
+	public function setChildren($children){
+		$this->children = $children;
+	}
+	
 	public function addChild(Element $element){
 		$this->children[] = $element;
-		#$element->setParent($this);
+		$element->setParent($this);
 	}
 	
 	public function getChildren($recursive = false){
 		if($recursive){
 			$rv = array();
-			#$rv = $this->children;
-			foreach($this->children as $child){
-				$rv[] = $child;
-				$rv = array_merge($rv, $child->getChildren($recursive));
+			foreach($this->children as $element){
+				$rv[] = $element;
+				$rv = array_merge($rv, $element->getChildren($recursive));
 			}
-			#ve($rv);
 			return $rv;
 		}
 		else{
@@ -73,14 +75,22 @@ class Element{
 		}
 	}
 	
-	public function render(){
+	public function renderChildren($children){
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$html = '';
-		foreach($this->children as $child){
-			$html .= $child->render();
+		foreach($children as $element){
+			#print '       element: "'.get_class($element).'"'."\n";
+			
+			$html .= $element->render();
 		}
 		return $html;
+	}
+	
+	public function render(){
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		
+		return $this->renderChildren($this->children);
 	}
 	
 }

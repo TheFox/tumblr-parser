@@ -13,12 +13,12 @@ class Variable{
 		
 	}
 	
+	public function getType(){
+		return $this->type;
+	}
+	
 	public function setName($name){
 		$this->name = $name;
-		
-		$name = $this->name;
-		
-		
 		$namecmp = strtolower($name);
 		if(substr($namecmp, 0, 3) == 'if:'){
 			$name = str_replace(' ', '', $name);
@@ -26,7 +26,6 @@ class Variable{
 			$this->type = 'bool';
 		}
 		elseif(substr($namecmp, 0, 5) == 'text:'){
-			#$name = 'Text'.substr($name, 5);
 			$this->type = 'text';
 		}
 		
@@ -43,6 +42,10 @@ class Variable{
 	
 	public function setValue($value){
 		$this->value = $value;
+		
+		if(is_string($value)){
+			$this->type = 'text';
+		}
 	}
 	
 	public function getValue(){
