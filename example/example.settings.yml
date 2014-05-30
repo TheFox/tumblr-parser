@@ -9,6 +9,6 @@ posts:
     - { type: text, permalink: '?type=page&index=3', title: title_test3, body: test3.body }
     - { type: text, permalink: '?type=page&index=4', title: title_test4, body: test4.body }
     - { type: text, permalink: '?type=page&index=5', title: title_test5, body: test5.body }
-    - { type: link, permalink: '?type=page&index=6', url: 'http://fox21.at', name: link_name1, target: 'target="_blank"' }
-    - { type: link, permalink: '?type=page&index=7', url: 'http://fox21.at', name: link_name2 }
+    - { type: link, permalink: '?type=page&index=6', url: 'http://fox21.at', name: link_name1, target: 'target="_blank"', description: 'this is my description' }
+    - { type: link, permalink: '?type=page&index=7', url: 'http://www.fox21.at', name: link_name2 }
 postsPerPage: 15
