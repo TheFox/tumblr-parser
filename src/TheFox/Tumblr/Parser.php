@@ -9,18 +9,40 @@ use RuntimeException;
 use Symfony\Component\Yaml\Yaml;
 
 use TheFox\Tumblr\Element\Element;
+use TheFox\Tumblr\Element\AnswerBlockElement;
 use TheFox\Tumblr\Element\AskEnabledBlockElement;
+use TheFox\Tumblr\Element\AudioBlockElement;
+use TheFox\Tumblr\Element\AudioEmbedBlockElement;
+use TheFox\Tumblr\Element\CaptionBlockElement;
+use TheFox\Tumblr\Element\ChatBlockElement;
+use TheFox\Tumblr\Element\DateBlockElement;
 use TheFox\Tumblr\Element\DescriptionBlockElement;
+use TheFox\Tumblr\Element\HasPagesBlockElement;
+use TheFox\Tumblr\Element\HasTagsBlockElement;
 use TheFox\Tumblr\Element\HtmlElement;
 use TheFox\Tumblr\Element\IfBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
+use TheFox\Tumblr\Element\LabelBlockElement;
+use TheFox\Tumblr\Element\LinesBlockElement;
 use TheFox\Tumblr\Element\LinkBlockElement;
+use TheFox\Tumblr\Element\NextPageBlockElement;
+use TheFox\Tumblr\Element\NoteCountBlockElement;
+use TheFox\Tumblr\Element\PagesBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
+use TheFox\Tumblr\Element\PhotoBlockElement;
+use TheFox\Tumblr\Element\PhotosBlockElement;
+use TheFox\Tumblr\Element\PhotosetBlockElement;
+use TheFox\Tumblr\Element\PostNotesBlockElement;
 use TheFox\Tumblr\Element\PostsBlockElement;
 use TheFox\Tumblr\Element\PostTitleBlockElement;
+use TheFox\Tumblr\Element\PreviousPageBlockElement;
+use TheFox\Tumblr\Element\QuoteBlockElement;
+use TheFox\Tumblr\Element\SourceBlockElement;
+use TheFox\Tumblr\Element\TagsBlockElement;
 use TheFox\Tumblr\Element\TextBlockElement;
 use TheFox\Tumblr\Element\TitleBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
+use TheFox\Tumblr\Element\VideoBlockElement;
 
 #use TheFox\Tumblr\Post\Post;
 use TheFox\Tumblr\Post\TextPost;
@@ -235,6 +257,72 @@ class Parser{
 							}
 							elseif($name == 'AskEnabled'){
 								$element = new AskEnabledBlockElement();
+							}
+							elseif($name == 'HasPages'){
+								$element = new HasPagesBlockElement();
+							}
+							elseif($name == 'Pages'){
+								$element = new PagesBlockElement();
+							}
+							elseif($name == 'Photo'){
+								$element = new PhotoBlockElement();
+							}
+							elseif($name == 'Photos'){
+								$element = new PhotosBlockElement();
+							}
+							elseif($name == 'Photoset'){
+								$element = new PhotosetBlockElement();
+							}
+							elseif($name == 'Caption'){
+								$element = new CaptionBlockElement();
+							}
+							elseif($name == 'Quote'){
+								$element = new QuoteBlockElement();
+							}
+							elseif($name == 'Chat'){
+								$element = new ChatBlockElement();
+							}
+							elseif($name == 'Audio'){
+								$element = new AudioBlockElement();
+							}
+							elseif($name == 'Video'){
+								$element = new VideoBlockElement();
+							}
+							elseif($name == 'Answer'){
+								$element = new AnswerBlockElement();
+							}
+							elseif($name == 'Source'){
+								$element = new SourceBlockElement();
+							}
+							elseif($name == 'Lines'){
+								$element = new LinesBlockElement();
+							}
+							elseif($name == 'Label'){
+								$element = new LabelBlockElement();
+							}
+							elseif($name == 'Date'){
+								$element = new DateBlockElement();
+							}
+							elseif($name == 'AudioEmbed'){
+								$element = new AudioEmbedBlockElement();
+							}
+							elseif($name == 'NoteCount'){
+								$element = new NoteCountBlockElement();
+							}
+							elseif($name == 'HasTags'){
+								$element = new HasTagsBlockElement();
+							}
+							elseif($name == 'PostNotes'){
+								$element = new PostNotesBlockElement();
+							}
+							elseif($name == 'PreviousPage'){
+								$element = new PreviousPageBlockElement();
+							}
+							elseif($name == 'NextPage'){
+								$element = new NextPageBlockElement();
+							}
+							elseif($name == 'Tags'){
+								$element = new TagsBlockElement();
 							}
 							else{
 								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'"'."\n");
