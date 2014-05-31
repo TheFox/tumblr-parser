@@ -325,8 +325,8 @@ class Parser{
 								$element = new TagsBlockElement();
 							}
 							else{
-								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'"'."\n");
-								throw new RuntimeException(__FUNCTION__.': Unknown block "'.$name.'".', 3);
+								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'". Path: '.$parentElement->getPath().''."\n");
+								throw new RuntimeException(__FUNCTION__.': Unknown block "'.$name.'". Path: '.$parentElement->getPath(), 3);
 							}
 						}
 						if($element){
@@ -510,7 +510,7 @@ class Parser{
 	}
 	
 	public function parse($type = 'page', $index = 1){
-		fwrite(STDOUT, 'parse: '.$type.', '.$index."\n");
+		#fwrite(STDOUT, 'parse: '.$type.', '.$index."\n");
 		
 		$this->parseMetaSettings();
 		

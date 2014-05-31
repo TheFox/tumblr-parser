@@ -7,7 +7,7 @@ use TheFox\Tumblr\Post\LinkPost;
 class LinkBlockElement extends BlockElement{
 	
 	public function render(){
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$content = $this->getContent();
 		#ve($content);

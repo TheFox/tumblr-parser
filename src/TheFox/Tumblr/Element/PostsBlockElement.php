@@ -27,15 +27,15 @@ class PostsBlockElement extends BlockElement{
 	}
 	
 	public function render(){
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$children = array();
 		foreach($this->getContent() as $postId => $post){
-			print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
 			
 			foreach($this->getChildren() as $element){
 				$newElement = clone $element;
-				print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
+				#print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
 				
 				$add = false;
 				if($newElement instanceof TextBlockElement){
