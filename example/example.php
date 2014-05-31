@@ -13,9 +13,9 @@ if(isset($_GET['type'])){
 	$type = $_GET['type'];
 }
 
-$index = 1;
-if(isset($_GET['index'])){
-	$index = $_GET['index'];
+$id = 1;
+if(isset($_GET['id'])){
+	$id = $_GET['id'];
 }
 
 $template = file_get_contents(__DIR__.'/example.tpl.html');
@@ -50,12 +50,14 @@ END');
 #$parser->setTemplate('{block:IfAskEnabled}OK{/block:IfAskEnabled}{block:IfNotAskEnabled}NOT{/block:IfNotAskEnabled}');
 
 if(PHP_SAPI == 'cli'){
-	$type = 'post'; $index = 6;
-	$type = 'page'; $index = 1;
+	$type = 'post'; $id = 6;
+	$type = 'post'; $id = 2;
+	$type = 'post'; $id = 1;
+	#$type = 'page'; $id = 1;
 }
 
 try{
-	$html = $parser->parse($type, $index);
+	$html = $parser->parse($type, $id);
 	#print "\n'".$html."'\n";
 	if(PHP_SAPI == 'cli'){
 	}

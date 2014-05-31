@@ -16,6 +16,10 @@ class Element{
 		#print __CLASS__.'->'.__FUNCTION__.''."\n";
 	}
 	
+	public function __destruct(){
+		#print __CLASS__.'->'.__FUNCTION__.''."\n";
+	}
+	
 	/*public function setType($type){
 		$this->type = $type;
 	}

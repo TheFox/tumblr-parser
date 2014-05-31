@@ -4,6 +4,7 @@ namespace TheFox\Tumblr\Post;
 
 class TextPost extends Post{
 	
+	#private $title = '';
 	private $body = '';
 	
 	public function __construct(){

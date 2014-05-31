@@ -7,7 +7,7 @@ if(@date_default_timezone_get() == 'UTC') date_default_timezone_set('UTC');
 ini_set('display_errors', true);
 ini_set('memory_limit', '128M');
 
-define('STDOUT', 1, true);
+define('STDOUT', fopen('php://output', 'w'), true);
 
 chdir(__DIR__);
 

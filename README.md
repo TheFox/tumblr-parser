@@ -8,7 +8,13 @@ A Tumblr Theme parser in PHP.
 - `{CustomCSS}`
 - `{block:PermalinkPage}`
 - `{block:IndexPage}`
-- `{block:PostTitle}`
+- `{block:PostTitle}`, `{PostTitle}`
+
+### [Posts](http://www.tumblr.com/docs/en/custom_themes#posts) [incomplete]
+- `{block:Posts}`
+- `{block:Text}`
+- `{block:Link}`
+- `{Permalink}`
 
 ### [Text Posts](http://www.tumblr.com/docs/en/custom_themes#text-posts) [complete]
 

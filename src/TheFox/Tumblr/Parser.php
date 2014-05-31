@@ -24,7 +24,6 @@ use TheFox\Tumblr\Element\IfBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\LabelBlockElement;
 use TheFox\Tumblr\Element\LinesBlockElement;
-use TheFox\Tumblr\Element\LinkBlockElement;
 use TheFox\Tumblr\Element\NextPageBlockElement;
 use TheFox\Tumblr\Element\NoteCountBlockElement;
 use TheFox\Tumblr\Element\PagesBlockElement;
@@ -39,10 +38,11 @@ use TheFox\Tumblr\Element\PreviousPageBlockElement;
 use TheFox\Tumblr\Element\QuoteBlockElement;
 use TheFox\Tumblr\Element\SourceBlockElement;
 use TheFox\Tumblr\Element\TagsBlockElement;
-use TheFox\Tumblr\Element\TextBlockElement;
 use TheFox\Tumblr\Element\TitleBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\VideoBlockElement;
+use TheFox\Tumblr\Element\Post\LinkBlockElement;
+use TheFox\Tumblr\Element\Post\TextBlockElement;
 
 #use TheFox\Tumblr\Post\Post;
 use TheFox\Tumblr\Post\TextPost;
@@ -58,6 +58,17 @@ class Parser{
 		'Target',
 		'Name',
 		'Description',
+		'Permalink',
+		'CustomCSS',
+		'MetaDescription',
+		'AskLabel',
+		'Label',
+		'PreviousPage',
+		'NextPage',
+		'AskLabel',
+		'PostID',
+		'ReblogButton',
+		'LikeButton',
 	);
 	
 	private $settings = array();
@@ -343,7 +354,7 @@ class Parser{
 					else{
 						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'."\n");
 						
-						if(in_array($nameFull, static::$variableNames) || substr($nameFull, 0, 5) == 'text:'){
+						if(in_array($nameFull, static::$variableNames) || substr($nameFull, 0, 5) == 'text:' || substr($nameFull, 0, 5) == 'lang:'){
 							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'."\n");
 							
 							$element = new VariableElement();
@@ -382,10 +393,7 @@ class Parser{
 			$post = $posts[0];
 		}
 		
-		#$elemtents = $this->rootElement->getChildren(true);
-		#$elemtents = $element->getChildren(true);
 		$elemtents = $element->getChildren();
-		
 		foreach($elemtents as $elementId => $element){
 			$elementName = $element->getTemplateName();
 			
@@ -396,18 +404,13 @@ class Parser{
 			
 			$className = str_replace('TheFox\Tumblr\Element\\', '', get_class($element));
 			
-			
-			#fwrite(STDOUT, ''.str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut."\n");
-			
-			#usleep(300000);
+			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut."\n");
 			
 			$setSub = false;
-			#$setSub = true;
-			
 			if($element instanceof VariableElement){
-				#fwrite(STDOUT, "    'var' has var: ".(int)isset($this->variables[$elementName])."\n");
+				#fwrite(STDOUT, str_repeat('    |', ($level)).'-    var has var: '.(int)isset($this->variables[$elementName])."\n");
 				if(isset($this->variables[$elementName])){
-					#fwrite(STDOUT, "    val: '".$this->variables[$elementName]->getValue()."'\n");
+					#fwrite(STDOUT, str_repeat('    |', ($level + 1))."    val: '".$this->variables[$elementName]->getValue()."'\n");
 					$element->setContent($this->variables[$elementName]->getValue());
 				}
 				else{
@@ -426,7 +429,7 @@ class Parser{
 				$element->setContent($isPermalinkPage);
 				$setSub = true;
 			}
-			elseif($element instanceof BoolBlockElement){
+			elseif($element instanceof IfBlockElement){
 				$pairName = '';
 				if(substr($elementName, 0, 5) == 'IfNot'){
 					$pairName = 'If'.substr($elementName, 5);
@@ -453,27 +456,28 @@ class Parser{
 			}
 			else{
 				$setSub = true;
+				
+				#fwrite(STDOUT, ''.str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut."\n");
 			}
 			
 			if($setSub){
 				$this->setElementsValues($element, $isIndexPage, $isPermalinkPage, $posts, $level + 1);
 			}
 		}
-		
-		#usleep(300000);
-		
-		#ve($elemtents);
 	}
 	
 	private function renderElements(Element $element){
 		return $element->render();
 	}
 	
-	private function makePostFromIndex($index){
+	private function makePostFromIndex($id){
+		$htmlId = $id + 1;
+		fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId."\n");
+		
 		$postObj = null;
 		
-		if(isset($this->settings['posts'][$index])){
-			$post = $this->settings['posts'][$index];
+		if(isset($this->settings['posts'][$id])){
+			$post = $this->settings['posts'][$id];
 			$type = strtolower($post['type']);
 			
 			if($type == 'text'){
@@ -502,15 +506,23 @@ class Parser{
 			}
 			
 			if($postObj){
-				$postObj->setPermalink($post['permalink']);
+				if(isset($post['permalink'])){
+					$postObj->setPermalink($post['permalink']);
+				}
+				else{
+					$postObj->setPermalink('?type=post&id='.$htmlId);
+					fwrite(STDOUT, 'makePostFromIndex: '.$postObj->getPermalink()."\n");
+				}
+				
+				$postObj->setPostId($htmlId);
 			}
 		}
 		
 		return $postObj;
 	}
 	
-	public function parse($type = 'page', $index = 1){
-		#fwrite(STDOUT, 'parse: '.$type.', '.$index."\n");
+	public function parse($type = 'page', $id = 1){
+		#fwrite(STDOUT, 'parse: '.$type.', '.$id."\n");
 		
 		$this->parseMetaSettings();
 		
@@ -527,9 +539,9 @@ class Parser{
 		$posts = array();
 		
 		if($isIndexPage){
-			$postIdMin = ($index - 1) * $this->settings['postsPerPage'];
+			$postIdMin = ($id - 1) * $this->settings['postsPerPage'];
 			$postIdMax = $postIdMin + $this->settings['postsPerPage'];
-			#fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax."\n");
+			fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax."\n");
 			
 			for($id = $postIdMin; $id < $postIdMax; $id++){
 				if(isset($this->settings['posts'][$id])){
@@ -544,7 +556,7 @@ class Parser{
 			}
 		}
 		elseif($isPermalinkPage){
-			$postObj = $this->makePostFromIndex($index - 1);
+			$postObj = $this->makePostFromIndex($id - 1);
 			if($postObj){
 				$posts[] = $postObj;
 				
@@ -554,6 +566,8 @@ class Parser{
 				
 				$this->variables['PostTitle'] = $variable;
 			}
+			
+			ve($postObj);
 		}
 		
 		#ve($posts);
@@ -563,11 +577,12 @@ class Parser{
 		return $this->renderElements($this->rootElement);
 	}
 	
-	public function printHtml($type = 'page', $index = 1){
-		$html = $this->parse($type, $index);
+	public function printHtml($type = 'page', $id = 1){
+		$html = $this->parse($type, $id);
 		#print "\n\n\n\n\n\n\n\n\n";
 		
-		print "\n'$html'\n";
+		#print "\n'$html'\n";
+		print $html;
 		flush();
 	}
 	

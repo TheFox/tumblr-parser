@@ -1,13 +1,16 @@
 vars:
     Title: 'my example page'
-    CustomCSS: '<!-- my custom //-->'
+    CustomCSS: 'my custom css'
     MetaDescription: 'my meta description'
+    'lang:Newer posts': 'Newer Posts'
+    'lang:Older posts': 'Older Posts'
     'if:Show Archive': 1
     'if:AskEnabled': 0
 posts:
     - { type: text, permalink: '?type=page&index=1', title: title_test1, body: test1.body }
-    - { type: text, permalink: '?type=page&index=2', body: test2.body }
-    - { type: text, permalink: '?type=page&index=3', title: title_test3 }
-    - { type: link, permalink: '?type=page&index=6', url: 'http://fox21.at', name: link_name1, target: 'target="_blank"', description: 'this is my description' }
-    - { type: link, permalink: '?type=page&index=7', url: 'http://www.fox21.at', name: link_name2 }
+    - { type: text, body: test2.body }
+    - { type: text, title: title_test3 }
+    - { type: link, url: 'http://fox21.at', name: link_name1, target: 'target="_blank"', description: 'this is my description' }
+    - { type: link, url: 'http://www.fox21.at', name: link_name2 }
+    - { type: link, url: 'http://www.fox21.at', name: link_name2 }
 postsPerPage: 50

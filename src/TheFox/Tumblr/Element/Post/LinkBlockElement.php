@@ -1,21 +1,17 @@
 <?php
 
-namespace TheFox\Tumblr\Element;
+namespace TheFox\Tumblr\Element\Post;
 
 use TheFox\Tumblr\Post\LinkPost;
 
-class LinkBlockElement extends BlockElement{
+class LinkBlockElement extends PostBlockElement{
 	
-	public function render(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+	public function setElementsValues(){
+		parent::setElementsValues();
 		
 		$content = $this->getContent();
-		#ve($content);
-		
 		if($content instanceof LinkPost){
-			
 			$hasDescription = (bool)$content->getDescription();
-			
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
@@ -40,7 +36,11 @@ class LinkBlockElement extends BlockElement{
 				}
 			}
 		}
-		
+	}
+	
+	public function render(){
+		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		$this->setElementsValues();
 		return parent::render();
 	}
 	

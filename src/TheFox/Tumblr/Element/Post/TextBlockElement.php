@@ -1,26 +1,17 @@
 <?php
 
-namespace TheFox\Tumblr\Element;
-
-#use RuntimeException;
+namespace TheFox\Tumblr\Element\Post;
 
 use TheFox\Tumblr\Post\TextPost;
 
-class TextBlockElement extends BlockElement{
+class TextBlockElement extends PostBlockElement{
 	
-	public function render(){
-		#print __CLASS__.'->'.__FUNCTION__.''."\n";
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+	public function setElementsValues(){
+		parent::setElementsValues();
 		
 		$content = $this->getContent();
-		#ve($content);
-		
 		if($content instanceof TextPost){
-			#throw new RuntimeException('Wrong type of content: '.get_class($content));
-			
 			$hasTitle = (bool)$content->getTitle();
-			#$hasTitle = false;
-			
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
@@ -39,7 +30,11 @@ class TextBlockElement extends BlockElement{
 				}
 			}
 		}
-		
+	}
+	
+	public function render(){
+		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		$this->setElementsValues();
 		return parent::render();
 	}
 	
