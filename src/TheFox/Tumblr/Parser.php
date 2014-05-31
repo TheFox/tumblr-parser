@@ -55,15 +55,15 @@ class Parser{
 	
 	public function setSettings($settings){
 		if(!isset($settings['vars']) || !is_array($settings['vars'])){
-			throw new RuntimeException('"vars" not set in settings.', 1);
+			throw new RuntimeException(__FUNCTION__.': "vars" not set in settings.', 1);
 		}
 		
 		if(!isset($settings['posts']) || !is_array($settings['posts'])){
-			throw new RuntimeException('"posts" not set in settings.', 2);
+			throw new RuntimeException(__FUNCTION__.': "posts" not set in settings.', 2);
 		}
 		
 		if(!isset($settings['postsPerPage'])){
-			throw new RuntimeException('"postsPerPage" not set in settings.', 3);
+			throw new RuntimeException(__FUNCTION__.': "postsPerPage" not set in settings.', 3);
 		}
 		
 		$this->settings = $settings;
@@ -111,7 +111,7 @@ class Parser{
 		#fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': level='.$level."\n");
 		
 		if($level >= 100){
-			throw new RuntimeException('Maximum level of 100 reached.', 2);
+			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 2);
 		}
 		
 		if(!$rawhtml && $level == 1){
@@ -183,7 +183,7 @@ class Parser{
 							$pos = strpos($temphtml, '{/'.$nameFull.'}');
 							
 							if($pos === false){
-								throw new RuntimeException('Missing closing tag "{/'.$nameFull.'}".', 1);
+								throw new RuntimeException(__FUNCTION__.': Missing closing tag "{/'.$nameFull.'}".', 1);
 							}
 							else{
 								$testhtml = substr($temphtml, 0, $pos);
@@ -233,9 +233,12 @@ class Parser{
 							elseif($name == 'Description'){
 								$element = new DescriptionBlockElement();
 							}
+							elseif($name == 'AskEnabled'){
+								$element = new AskEnabledBlockElement();
+							}
 							else{
 								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'"'."\n");
-								throw new RuntimeException('Unknown block "'.$name.'".', 3);
+								throw new RuntimeException(__FUNCTION__.': Unknown block "'.$name.'".', 3);
 							}
 						}
 						if($element){
@@ -245,7 +248,7 @@ class Parser{
 							$this->parseElements($subhtml, $element, $level + 1);
 						}
 						else{
-							throw new RuntimeException('Can not create element.', 4);
+							throw new RuntimeException(__FUNCTION__.': Can not create element.', 4);
 						}
 						
 					}
@@ -283,7 +286,7 @@ class Parser{
 	
 	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false, $posts = array(), $level = 1){
 		if($level >= 100){
-			throw new RuntimeException('Maximum level of 100 reached.', 1);
+			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 1);
 		}
 		
 		$post = null;
