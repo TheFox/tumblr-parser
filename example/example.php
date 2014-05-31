@@ -25,6 +25,7 @@ $parser->setTemplate($template);
 
 $parser->loadSettingsFromFile(__DIR__.'/example.settings.yml');
 
+/*
 $parser->setTemplate('BEGIN
 {block:Posts}
 	POST_BEGIN
@@ -44,14 +45,19 @@ $parser->setTemplate('BEGIN
 	POST_END
 {/block:Posts}
 END');
+*/
 
+#$parser->setTemplate('{block:IfAskEnabled}OK{/block:IfAskEnabled}{block:IfNotAskEnabled}NOT{/block:IfNotAskEnabled}');
 
-$type = 'post'; $index = 6;
-$type = 'page'; $index = 1;
+if(PHP_SAPI == 'cli'){
+	$type = 'post'; $index = 6;
+	$type = 'page'; $index = 1;
+}
 
 try{
 	$html = $parser->parse($type, $index);
-	print "\n'$html'\n";
+	#print "\n'".$html."'\n";
+	print $html."\n";
 }
 catch(Exception $e){
 	print 'ERROR: '.$e->getMessage()."\n";
