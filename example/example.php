@@ -49,7 +49,13 @@ END');
 $type = 'post'; $index = 6;
 $type = 'page'; $index = 1;
 
-$html = $parser->parse($type, $index);
+try{
+	$html = $parser->parse($type, $index);
+	print "\n'$html'\n";
+}
+catch(Exception $e){
+	print 'ERROR: '.$e->getMessage()."\n";
+	exit(1);
+}
 
-#print "\n'$html'\n";
 
