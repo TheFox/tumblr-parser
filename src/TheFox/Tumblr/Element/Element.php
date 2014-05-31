@@ -52,6 +52,17 @@ class Element{
 		return $this->parent;
 	}
 	
+	public function getPath(){
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		
+		if($this->getParent()){
+			return $this->getParent()->getPath().'/'.$this->getName();
+		}
+		else{
+			return 'ROOT';
+		}
+	}
+	
 	public function setChildren($children){
 		$this->children = $children;
 	}
