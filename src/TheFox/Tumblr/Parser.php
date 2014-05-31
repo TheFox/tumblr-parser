@@ -338,7 +338,7 @@ class Parser{
 				$element->setContent($isPermalinkPage);
 				$setSub = true;
 			}
-			elseif($element instanceof IfBlockElement){
+			elseif($element instanceof BoolBlockElement){
 				$pairName = '';
 				if(substr($elementName, 0, 5) == 'IfNot'){
 					$pairName = 'If'.substr($elementName, 5);
