@@ -4,9 +4,8 @@ namespace TheFox\Tumblr\Post;
 
 class Post{
 	
-	protected $type = '';
-	protected $permalink = '';
-	#protected $elementClassName = '';
+	private $type = '';
+	private $permalink = '';
 	private $title = '';
 	
 	public function __construct(){
@@ -24,10 +23,6 @@ class Post{
 	public function getPermalink(){
 		return $this->permalink;
 	}
-	
-	#public function getElementClassName(){
-	#	return $this->elementClassName;
-	#}
 	
 	public function setTitle($title){
 		$this->title = $title;

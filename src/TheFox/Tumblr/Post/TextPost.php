@@ -7,8 +7,7 @@ class TextPost extends Post{
 	private $body = '';
 	
 	public function __construct(){
-		$this->type = 'text';
-		#$this->elementClassName = 'TheFox\Tumblr\Element\TextBlockElement';
+		$this->setType('text');
 	}
 	
 	public function setBody($body){

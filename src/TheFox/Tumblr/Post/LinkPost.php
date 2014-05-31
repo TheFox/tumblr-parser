@@ -10,7 +10,7 @@ class LinkPost extends Post{
 	private $description = '';
 	
 	public function __construct(){
-		$this->type = 'link';
+		$this->setType('link');
 	}
 	
 	public function setUrl($url){
