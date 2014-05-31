@@ -57,7 +57,11 @@ if(PHP_SAPI == 'cli'){
 try{
 	$html = $parser->parse($type, $index);
 	#print "\n'".$html."'\n";
-	print $html."\n";
+	if(PHP_SAPI == 'cli'){
+	}
+	else{
+		print $html."\n";
+	}
 }
 catch(Exception $e){
 	print 'ERROR: '.$e->getMessage()."\n";

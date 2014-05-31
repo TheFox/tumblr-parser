@@ -1,68 +1,71 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		
 		<title>{block:IndexPage}{Title}{/block:IndexPage}{block:PermalinkPage}{block:PostTitle}{PostTitle} - {/block:PostTitle}{Title}{/block:PermalinkPage}</title>
-		
 	</head>
-	
 	<body>
-		<div id="content">
+		<div>
 			<ul>
 				<li>IndexPage: {block:IndexPage}OK{/block:IndexPage}</li>
 				<li>PermalinkPage: {block:PermalinkPage}OK{/block:PermalinkPage}</li>
-				<li>PostTitle: {block:PostTitle}{PostTitle} - {/block:PostTitle}</li>
-				<li>Title: {block:IndexPage}{Title}{/block:IndexPage}{block:PermalinkPage}{block:PostTitle}{PostTitle} - {/block:PostTitle}{Title}{/block:PermalinkPage}</li>
-				<li>MetaDescription: {block:Description}{MetaDescription}{/block:Description}</li>
-				<li>AskEnabled: {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}</li>
-				<li>HasPages:
+				<li>PostTitle: {block:PostTitle}"{PostTitle}"{/block:PostTitle}</li>
+				<li>Title: {block:IndexPage}"{Title}"{/block:IndexPage}{block:PermalinkPage}{block:PostTitle}"{PostTitle}" - {/block:PostTitle}"{Title}"{/block:PermalinkPage}</li>
+				<li>MetaDescription: {block:Description}"{MetaDescription}"{/block:Description}</li>
+				<li>AskEnabled: {block:AskEnabled}"{AskLabel}"{/block:AskEnabled}</li>
+				<li>HasPages
 					{block:HasPages}
 						<ul>
-							<li>OK</li>
-							{block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}
+							{block:Pages}<li><a href="{URL}">"{Label}"</a></li>{/block:Pages}
 						</ul>
 					{/block:HasPages}
 				</li>
 				
-				<li>Title: <a href="?">{Title}</a></li>
-				<li>Description: {block:Description}{Description}{/block:Description}</li>
+				<li>lang:Newer posts: "{lang:Newer posts}"</li>
+				<li>lang:Older posts: "{lang:Older posts}"</li>
+				
+				<li>PreviousPage: {block:PreviousPage}<a href="{PreviousPage}">"{PreviousPage}"</a>{/block:PreviousPage}</li>
+				<li>Page CurrentPage of TotalPages: "{lang:Page CurrentPage of TotalPages}"</li>
+				<li>NextPage: {block:NextPage}<a href="{NextPage}">"{NextPage}"</a>{/block:NextPage}</li>
+				<li>IfGoogleAnalyticsID: {block:IfGoogleAnalyticsID}My Google Analytics ID: {text:Google Analytics ID}{/block:IfGoogleAnalyticsID}</li>
+				
+				<li>Title: <a href="?">"{Title}"</a></li>
+				<li>Description: {block:Description}"{Description}"{/block:Description}</li>
 				{block:Posts}
 					<li>
 						POST
 						<ul>
-							<li>Permalink: <a href="{Permalink}">{Permalink}</a></li>
+							<li>Permalink: <a href="{Permalink}">"{Permalink}"</a></li>
 							
 							{block:Text}
 								<li>Block: Text</li>
 								<li>Title: {block:Title}"{Title}"{/block:Title}</li>
-								<li>Body: {Body}</li>
+								<li>Body: "{Body}"</li>
 							{/block:Text}
 							
 							{block:Link}
 								<li>Block: Link</li>
-								<li>Name: {Name}</li>
-								<li>URL: {URL}</li>
+								<li>Name: "{Name}"</li>
+								<li>URL: "{URL}"</li>
 								<li>Description: {block:Description}"{Description}"{/block:Description}</li>
 							{/block:Link}
 							
 							{block:Photo}
 								<li>Block: Photo</li>
-								<li>PhotoURL-500: {PhotoURL-500}</li>
-								<li>PhotoAlt: {PhotoAlt}</li>
+								<li>PhotoURL-500: "{PhotoURL-500}"</li>
+								<li>PhotoAlt: "{PhotoAlt}"</li>
 								<li>LinkOpenTag: {LinkOpenTag}OK{LinkCloseTag}</li>
-								<li>Caption: {block:Caption}{Caption}{/block:Caption}</li>
+								<li>Caption: {block:Caption}"{Caption}"{/block:Caption}</li>
 							{/block:Photo}
 							
 							{block:Photoset}
 								<li>Block: Photoset</li>
 								<li>Photos: {block:Photos}"{PhotoURL-500}" "{PhotoAlt}"{/block:Photos}</li>
-								<li>Caption: {block:Caption}{Caption}{/block:Caption}</li>
+								<li>Caption: {block:Caption}"{Caption}"{/block:Caption}</li>
 							{/block:Photoset}
 							
 							{block:Quote}
 								<li>Block: Quote</li>
-								<li>Quote: {Quote}</li>
-								<li>Source: {block:Source}{Source}{/block:Source}</li>
+								<li>Quote: "{Quote}"</li>
+								<li>Source: {block:Source}"{Source}"{/block:Source}</li>
 							{/block:Quote}
 							
 							{block:Chat}
@@ -71,7 +74,7 @@
 								<li>
 									<ol>
 										{block:Lines}
-											<li class="">Line: "{Alt}" "{block:Label}{Label}{/block:Label}" "{Line}"</li>
+											<li class="">Line: "{Alt}" "{block:Label}"{Label}"{/block:Label}" "{Line}"</li>
 										{/block:Lines}
 									</ol>
 								</li>
@@ -79,58 +82,51 @@
 							
 							{block:Video}
 								<li>Block: Video</li>
-								<li>Video-500: {Video-500}</li>
+								<li>Video-500: "{Video-500}"</li>
 								<li>Caption: {block:Caption}"{Caption}"{/block:Caption}</li>
 							{/block:Video}
 							
 							{block:Answer}
 								<li>Block: Answer</li>
-								<li>Asker asked: {lang:Asker asked}</li>
-								<li>Asker asked 2: {lang:Asker asked 2}</li>
-								<li>Question: {Question}</li>
-								<li>Answer: {Answer}</li>
+								<li>Asker asked: "{lang:Asker asked}"</li>
+								<li>Asker asked 2: "{lang:Asker asked 2}"</li>
+								<li>Question: "{Question}"</li>
+								<li>Answer: "{Answer}"</li>
 							{/block:Answer}
 							
 							{block:Date}
 								<li>Date</li>
-								<li>DayOfWeek: {DayOfWeek}</li>
-								<li>DayOfMonth: {DayOfMonth}</li>
-								<li>Month: {Month}</li>
-								<li>Year: {Year}</li>
+								<li>DayOfWeek: "{DayOfWeek}"</li>
+								<li>DayOfMonth: "{DayOfMonth}"</li>
+								<li>Month: "{Month}"</li>
+								<li>Year: "{Year}"</li>
 							{/block:Date}
 							
 							<li>
 								<ul>
 									<li>NoteCount: {block:NoteCount}"{NoteCountWithLabel}"{/block:NoteCount}</li>
-									<li>ReblogButton: {ReblogButton}</li>
-									<li>LikeButton: {LikeButton}</li>
+									<li>ReblogButton: "{ReblogButton}"</li>
+									<li>LikeButton: "{LikeButton}"</li>
 								</ul>
 							</li>
 							
 							<li>
 								<ul>
-									<li>PostNotes: {block:PostNotes}{PostNotes}{/block:PostNotes}</li>
-									<li>HasTags: {block:HasTags}
-										<ul>
-											{block:Tags}
-												<li>Tag: <a href="{TagURL}" class="tag">{Tag}</a></li>
-											{/block:Tags}
-										</ul>
-									{/block:HasTags}</li>
+									<li>PostNotes: {block:PostNotes}"{PostNotes}"{/block:PostNotes}</li>
+									<li>HasTags
+										{block:HasTags}
+											<ul>
+												{block:Tags}
+													<li>Tag: <a href="{TagURL}" class="tag">{Tag}</a></li>
+												{/block:Tags}
+											</ul>
+										{/block:HasTags}
+									</li>
 								</ul>
 							</li>
 						</ul>
 					</li>
 				{/block:Posts}
-				
-				<li>Next page: {block:PreviousPage}<a href="{PreviousPage}">{lang:Newer posts}</a>{/block:PreviousPage}</li>
-				<li>CurrentPage: {block:IndexPage}{lang:Page CurrentPage of TotalPages}{/block:IndexPage}</li>
-				<li>Previous page: {block:NextPage}<a href="{NextPage}">{lang:Older posts} &#187;</a>{/block:NextPage}</li>
-				<li>IfContentOwner: {block:IfContentOwner}OK{/block:IfContentOwner}</li>
-				<li>IfContentOwnerURL: {block:IfContentOwnerURL}OK{/block:IfContentOwnerURL}</li>
-				<li>Content Owner URL: {text:Content Owner URL}</li>
-				<li>Content Owner: {text:Content Owner}</li>
-				<li>IfGoogleAnalyticsID: {block:IfGoogleAnalyticsID}My Google Analytics ID: {text:Google Analytics ID}{/block:IfGoogleAnalyticsID}</li>
 			</ul>
 		</div>
 	</body>
