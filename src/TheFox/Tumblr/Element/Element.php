@@ -69,10 +69,13 @@ class Element{
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		if($this->getParent()){
-			return $this->getParent()->getPath().'/'.$this->getName();
+			$name = $this->getName();
+			$rc = new \ReflectionClass(get_class($this));
+			$className = $rc->getShortName();
+			return $this->getParent()->getPath().'->'.($name ? $name : $className).'['.$this->getId().']';
 		}
 		else{
-			return 'ROOT';
+			return 'ROOT'.'['.$this->getId().']';
 		}
 	}
 	
