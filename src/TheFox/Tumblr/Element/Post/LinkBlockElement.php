@@ -2,16 +2,18 @@
 
 namespace TheFox\Tumblr\Element\Post;
 
+use TheFox\Tumblr\Element\VariableElement;
+use TheFox\Tumblr\Element\DescriptionBlockElement;
 use TheFox\Tumblr\Post\LinkPost;
 
 class LinkBlockElement extends PostBlockElement{
 	
 	public function setElementsValues(){
-		parent::setElementsValues();
+		#parent::setElementsValues();
 		
-		$content = $this->getContent();
-		if($content instanceof LinkPost){
-			$hasDescription = (bool)$content->getDescription();
+		$post = $this->getContent();
+		if($post instanceof LinkPost){
+			$hasDescription = (bool)$post->getDescription();
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
@@ -19,16 +21,16 @@ class LinkBlockElement extends PostBlockElement{
 				
 				if($element instanceof VariableElement){
 					if($elementName == 'url'){
-						$element->setContent($content->getUrl());
+						$element->setContent($post->getUrl());
 					}
 					elseif($elementName == 'name'){
-						$element->setContent($content->getName());
+						$element->setContent($post->getName());
 					}
 					elseif($elementName == 'target'){
-						$element->setContent($content->getTarget());
+						$element->setContent($post->getTarget());
 					}
 					elseif($elementName == 'description'){
-						$element->setContent($content->getDescription());
+						$element->setContent($post->getDescription());
 					}
 				}
 				elseif($element instanceof DescriptionBlockElement){
@@ -38,10 +40,6 @@ class LinkBlockElement extends PostBlockElement{
 		}
 	}
 	
-	public function render(){
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		$this->setElementsValues();
-		return parent::render();
-	}
+	
 	
 }

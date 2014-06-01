@@ -10,51 +10,94 @@ use TheFox\Tumblr\Post\LinkPost;
 class PostsBlockElement extends BlockElement{
 	
 	public function render(){
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$children = array();
+		$html = '';
 		foreach($this->getContent() as $postId => $post){
-			print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
 			
+			// Set all children and subchildren.
+			foreach($this->getChildren(true) as $element){
+				#$newElement = clone $element;
+				$elementName = strtolower($element->getTemplateName());
+				
+				#print '        PostsBlockElement element: "'.get_class($newElement).'", "'.$newElement->getName().'" '.$element->getPath()."\n";
+				
+				if($element instanceof TextBlockElement){
+					if($post instanceof TextPost){
+						$element->setContent($post);
+					}
+				}
+				elseif($element instanceof LinkBlockElement){
+					if($post instanceof LinkPost){
+						$element->setContent($post);
+					}
+				}
+				elseif($element instanceof VariableElement){
+					#print '        PostsBlockElement element: '.$element->getId().', "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+					#print '        PostsBlockElement element: '.$element->getPath().', "'.$element->getName().'"'."\n";
+					
+					if($elementName == 'permalink'){
+						$element->setContent($post->getPermalink());
+						#ve($element);
+					}
+					elseif($elementName == 'postid'){
+						$element->setContent($post->getPostId());
+					}
+				}
+			}
+			
+			// Collect level 1 children for rendering.
 			foreach($this->getChildren() as $element){
-				$newElement = clone $element;
-				print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
+				$rc = new \ReflectionClass(get_class($element));
+				
+				#$newElement = clone $element;
+				
+				#print '        PostsBlockElement element: "'.get_class($newElement).'", "'.$newElement->getName().'" '.$element->getPath()."\n";
+				#print '        PostsBlockElement element: '.$element->getPath().', "'.get_class($newElement).'", "'.$newElement->getName().'"'."\n";
+				#print '        element: '.$rc->getShortName().', '.$element->getPath().', "'.$element->getName().'"  '."\n";
+				#print '        element: '.$element->getPath().'  '."\n";
 				
 				$add = false;
-				if($newElement instanceof TextBlockElement){
+				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
-						#print '            set'."\n";
-						print '        TextBlockElement: "'.$newElement->getName().'"'."\n";
-						$newElement->setContent($post);
+						#print '        TextBlockElement: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 				}
-				elseif($newElement instanceof LinkBlockElement){
+				elseif($element instanceof LinkBlockElement){
 					if($post instanceof LinkPost){
-						#print '            set'."\n";
-						print '        LinkBlockElement: "'.$newElement->getName().'"'."\n";
-						$newElement->setContent($post);
+						#print '        LinkBlockElement: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 				}
-				elseif($newElement instanceof HtmlElement){
-					#print '            set'."\n";
-					print '        HtmlElement: "'.$newElement->getName().'"'."\n";
+				elseif($element instanceof VariableElement){
+					#print '        HtmlElement: "'.$element->getName().'"'."\n";
+					$add = true;
+				}
+				elseif($element instanceof HtmlElement){
+					#print '        HtmlElement: "'.$element->getName().'"'."\n";
 					$add = true;
 				}
 				else{
-					print '        element: "'.get_class($newElement).'", '.$newElement->getName()."\n";
+					#$add = true;
+					#print '        element: "'.get_class($element).'", '.$element->getName()."\n";
 				}
 				
 				if($add){
-					$children[] = $newElement;
+					#print '            add'."\n";
+					#$children[] = $newElement;
+					#$children[] = $element;
+					$html .= $element->render();
 				}
 				
 			}
 			
 		}
 		
-		return $this->renderChildren($children);
+		#return $this->renderChildren($children);
+		return $html;
 	}
 	
 }

@@ -2,27 +2,34 @@
 
 namespace TheFox\Tumblr\Element\Post;
 
+use TheFox\Tumblr\Element\VariableElement;
+use TheFox\Tumblr\Element\TitleBlockElement;
 use TheFox\Tumblr\Post\TextPost;
 
 class TextBlockElement extends PostBlockElement{
 	
 	public function setElementsValues(){
-		parent::setElementsValues();
+		#parent::setElementsValues();
 		
-		$content = $this->getContent();
-		if($content instanceof TextPost){
-			$hasTitle = (bool)$content->getTitle();
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		
+		$post = $this->getContent();
+		#ve($post);
+		
+		if($post instanceof TextPost){
+			$hasTitle = (bool)$post->getTitle();
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
-				#print '    element: '.get_class($element).', '.$element->getName()."\n";
-				
+				#print '    element: '.$element->getPath().', '.$elementName.PHP_EOL;
 				if($element instanceof VariableElement){
 					if($elementName == 'title'){
-						$element->setContent($content->getTitle());
+						#print '        title: '.$element->getPath().''.PHP_EOL;
+						$element->setContent($post->getTitle());
 					}
 					elseif($elementName == 'body'){
-						$element->setContent($content->getBody());
+						#print '        body: '.$element->getPath().''.PHP_EOL;
+						$element->setContent($post->getBody());
 					}
 				}
 				elseif($element instanceof TitleBlockElement){
@@ -30,12 +37,6 @@ class TextBlockElement extends PostBlockElement{
 				}
 			}
 		}
-	}
-	
-	public function render(){
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		$this->setElementsValues();
-		return parent::render();
 	}
 	
 }
