@@ -75,6 +75,7 @@ class Parser{
 	private $templateChanged = false;
 	private $variables = array();
 	private $rootElement = null;
+	private $elementsId = 0;
 	
 	public function __construct($template = ''){
 		$this->template = $template;
@@ -166,7 +167,9 @@ class Parser{
 			if($pos === false){
 				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'no { found'."\n");
 				
+				$this->elementsId++;
 				$element = new HtmlElement();
+				$element->setId($this->elementsId);
 				$element->setContent($rawhtml);
 				$parentElement->addChild($element);
 				
@@ -179,7 +182,9 @@ class Parser{
 					$content = substr($rawhtml, 0, $pos);
 					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$content.'"'."\n");
 					
+					$this->elementsId++;
 					$element = new HtmlElement();
+					$element->setId($this->elementsId);
 					$element->setContent($content);
 					$parentElement->addChild($element);
 				}
@@ -340,6 +345,8 @@ class Parser{
 							}
 						}
 						if($element){
+							$this->elementsId++;
+							$element->setId($this->elementsId);
 							$element->setName($name);
 							$parentElement->addChild($element);
 							
@@ -356,7 +363,9 @@ class Parser{
 						if(in_array($nameFull, static::$variableNames) || substr($nameFull, 0, 5) == 'text:' || substr($nameFull, 0, 5) == 'lang:'){
 							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'."\n");
 							
+							$this->elementsId++;
 							$element = new VariableElement();
+							$element->setId($this->elementsId);
 							$element->setName($nameFull);
 							$parentElement->addChild($element);
 						}
@@ -364,7 +373,9 @@ class Parser{
 							$content = '{'.$nameFull.'}';
 							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$content.'"'."\n");
 							
+							$this->elementsId++;
 							$element = new HtmlElement();
+							$element->setId($this->elementsId);
 							$element->setName($nameFull);
 							$element->setContent($content);
 							$parentElement->addChild($element);

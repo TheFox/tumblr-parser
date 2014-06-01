@@ -6,6 +6,7 @@ namespace TheFox\Tumblr\Element;
 
 class Element{
 	
+	private $id = 0;
 	#private $type = '';
 	private $name = '';
 	private $content = null;
@@ -18,6 +19,14 @@ class Element{
 	
 	public function __destruct(){
 		#print __CLASS__.'->'.__FUNCTION__.''."\n";
+	}
+	
+	public function setId($id){
+		$this->id = $id;
+	}
+	
+	public function getId(){
+		return $this->id;
 	}
 	
 	/*public function setType($type){
