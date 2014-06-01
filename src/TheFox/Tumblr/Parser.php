@@ -151,7 +151,9 @@ class Parser{
 			$rawhtml = $this->template;
 		}
 		if(!$parentElement){
+			$this->elementsId++;
 			$parentElement = $this->rootElement = new Element();
+			$parentElement->setId($this->elementsId);
 		}
 		
 		$fuse = 0;
