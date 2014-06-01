@@ -7,7 +7,7 @@ vars:
     'if:Show Archive': 1
     'if:AskEnabled': 0
 posts:
-    - { type: text, permalink: '?type=page&index=1', title: title_test1, body: test1.body }
+    - { type: text, permalink: '?type=post&index=1', title: title_test1, body: test1.body }
     - { type: text, body: test2.body }
     - { type: text, title: title_test3 }
     - { type: link, url: 'http://fox21.at', name: link_name1, target: 'target="_blank"', description: 'this is my description' }
