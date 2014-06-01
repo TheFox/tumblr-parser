@@ -51,24 +51,23 @@ use TheFox\Tumblr\Post\LinkPost;
 class Parser{
 	
 	public static $variableNames = array(
-		'Title',
-		'PostTitle',
+		'AskLabel',
 		'Body',
-		'URL',
-		'Target',
-		'Name',
-		'Description',
-		'Permalink',
 		'CustomCSS',
-		'MetaDescription',
-		'AskLabel',
+		'Description',
 		'Label',
-		'PreviousPage',
-		'NextPage',
-		'AskLabel',
-		'PostID',
-		'ReblogButton',
 		'LikeButton',
+		'MetaDescription',
+		'Name',
+		'NextPage',
+		'Permalink',
+		'PostID',
+		'PostTitle',
+		'PreviousPage',
+		'ReblogButton',
+		'Target',
+		'Title',
+		'URL',
 	);
 	
 	private $settings = array();
