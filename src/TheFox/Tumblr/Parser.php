@@ -484,7 +484,7 @@ class Parser{
 	
 	private function makePostFromIndex($id){
 		$htmlId = $id + 1;
-		fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId."\n");
+		#fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId."\n");
 		
 		$postObj = null;
 		
@@ -523,7 +523,7 @@ class Parser{
 				}
 				else{
 					$postObj->setPermalink('?type=post&id='.$htmlId);
-					fwrite(STDOUT, 'makePostFromIndex: '.$postObj->getPermalink()."\n");
+					#fwrite(STDOUT, 'makePostFromIndex: '.$postObj->getPermalink()."\n");
 				}
 				
 				$postObj->setPostId($htmlId);
@@ -553,7 +553,7 @@ class Parser{
 		if($isIndexPage){
 			$postIdMin = ($id - 1) * $this->settings['postsPerPage'];
 			$postIdMax = $postIdMin + $this->settings['postsPerPage'];
-			fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax."\n");
+			#fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax."\n");
 			
 			for($id = $postIdMin; $id < $postIdMax; $id++){
 				if(isset($this->settings['posts'][$id])){
@@ -579,7 +579,7 @@ class Parser{
 				$this->variables['PostTitle'] = $variable;
 			}
 			
-			ve($postObj);
+			#ve($postObj);
 		}
 		
 		#ve($posts);
