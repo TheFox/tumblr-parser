@@ -15,6 +15,7 @@ class Element{
 	
 	public function __construct(){
 		#print __CLASS__.'->'.__FUNCTION__.''."\n";
+		$this->setContent($this->getDefaultContent());
 	}
 	
 	public function __destruct(){
@@ -47,6 +48,10 @@ class Element{
 	
 	public function getTemplateName(){
 		return $this->getName();
+	}
+	
+	public function getDefaultContent(){
+		return null;
 	}
 	
 	public function setContent($content){

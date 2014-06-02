@@ -426,7 +426,7 @@ class Parser{
 					$element->setContent($this->variables[$elementName]->getValue());
 				}
 				else{
-					$element->setContent(null);
+					$element->setContent($element->getDefaultContent());
 				}
 			}
 			elseif($element instanceof IndexPageBlockElement){
@@ -472,7 +472,7 @@ class Parser{
 					$element->setContent(true);
 				}
 				else{
-					$element->setContent(false);
+					$element->setContent($element->getDefaultContent());
 				}
 				
 				$setSub = true;
@@ -485,7 +485,7 @@ class Parser{
 					$element->setContent(true);
 				}
 				else{
-					$element->setContent(false);
+					$element->setContent($element->getDefaultContent());
 				}
 				
 				$setSub = true;

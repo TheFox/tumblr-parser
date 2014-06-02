@@ -4,10 +4,8 @@ namespace TheFox\Tumblr\Element;
 
 class BoolBlockElement extends BlockElement{
 	
-	public function __construct(){
-		#print __CLASS__.'->'.__FUNCTION__.''."\n";
-		
-		$this->setContent(false);
+	public function getDefaultContent(){
+		return false;
 	}
 	
 	public function render(){
