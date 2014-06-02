@@ -411,9 +411,12 @@ class Parser{
 				$elementNameOut = ', "'.$elementName.'"';
 			}
 			
-			$className = str_replace('TheFox\Tumblr\Element\\', '', get_class($element));
+			$rc = new \ReflectionClass(get_class($element));
+			$className = $rc->getShortName();
 			
 			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
+			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$element->getPath().PHP_EOL);
+			#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
 			
 			$setSub = false;
 			if($element instanceof VariableElement){
