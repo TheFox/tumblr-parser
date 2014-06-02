@@ -2,9 +2,7 @@
 
 namespace TheFox\Tumblr;
 
-#use Exception;
 use RuntimeException;
-#use InvalidArgumentException;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -44,7 +42,6 @@ use TheFox\Tumblr\Element\VideoBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 
-#use TheFox\Tumblr\Post\Post;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 
