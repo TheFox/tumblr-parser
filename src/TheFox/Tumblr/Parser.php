@@ -37,8 +37,12 @@ use TheFox\Tumblr\Element\QuoteBlockElement;
 use TheFox\Tumblr\Element\SourceBlockElement;
 use TheFox\Tumblr\Element\TagsBlockElement;
 use TheFox\Tumblr\Element\TitleBlockElement;
-use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\VideoBlockElement;
+
+use TheFox\Tumblr\Element\VariableElement;
+use TheFox\Tumblr\Element\TextVariableElement;
+use TheFox\Tumblr\Element\LangVariableElement;
+
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 
@@ -359,11 +363,29 @@ class Parser{
 					else{
 						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'.PHP_EOL);
 						
-						if(in_array($nameFull, static::$variableNames) || substr($nameFull, 0, 5) == 'text:' || substr($nameFull, 0, 5) == 'lang:'){
+						if(in_array($nameFull, static::$variableNames)){
 							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'.PHP_EOL);
 							
 							$this->elementsId++;
 							$element = new VariableElement();
+							$element->setId($this->elementsId);
+							$element->setName($nameFull);
+							$parentElement->addChild($element);
+						}
+						elseif(substr($nameFull, 0, 5) == 'text:'){
+							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok text'.PHP_EOL);
+							
+							$this->elementsId++;
+							$element = new TextVariableElement();
+							$element->setId($this->elementsId);
+							$element->setName($nameFull);
+							$parentElement->addChild($element);
+						}
+						elseif(substr($nameFull, 0, 5) == 'lang:'){
+							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok lang'.PHP_EOL);
+							
+							$this->elementsId++;
+							$element = new LangVariableElement();
 							$element->setId($this->elementsId);
 							$element->setName($nameFull);
 							$parentElement->addChild($element);
