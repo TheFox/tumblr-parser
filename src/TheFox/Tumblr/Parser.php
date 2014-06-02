@@ -459,6 +459,19 @@ class Parser{
 				
 				$setSub = true;
 			}
+			elseif($element instanceof AskEnabledBlockElement){
+				$elementName = 'IfAskEnabled';
+				#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
+				if(isset($this->variables[$elementName])){
+					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue().PHP_EOL);
+					$element->setContent(true);
+				}
+				else{
+					$element->setContent(false);
+				}
+				
+				$setSub = true;
+			}
 			elseif($element instanceof PostsBlockElement){
 				#fwrite(STDOUT, "    PostsBlockElement".PHP_EOL);
 				$element->setContent($posts);
