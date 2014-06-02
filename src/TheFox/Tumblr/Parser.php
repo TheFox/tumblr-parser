@@ -446,7 +446,9 @@ class Parser{
 				if(substr($elementName, 0, 5) == 'IfNot'){
 					$ifNotName = 'If'.substr($elementName, 5);
 				}
-				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName]).', "'.$pairName.'"'.PHP_EOL);
+				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName]).', "'.$ifNotName.'"'.PHP_EOL);
+				
+				fwrite(STDOUT, 'element: '.$element->getPath().', '.$ifNotName.PHP_EOL);
 				
 				if(isset($this->variables[$elementName])){
 					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue().PHP_EOL);
