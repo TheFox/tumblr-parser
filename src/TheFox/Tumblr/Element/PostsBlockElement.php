@@ -5,9 +5,11 @@ namespace TheFox\Tumblr\Element;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\PhotoBlockElement;
+use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
+use TheFox\Tumblr\Post\PhotosetPost;
 
 class PostsBlockElement extends BlockElement{
 	
@@ -24,7 +26,7 @@ class PostsBlockElement extends BlockElement{
 				#$newElement = clone $element;
 				$elementName = strtolower($element->getTemplateName());
 				
-				#print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
@@ -41,9 +43,15 @@ class PostsBlockElement extends BlockElement{
 						$element->setContent($post);
 					}
 				}
+				elseif($element instanceof PhotosetBlockElement){
+					if($post instanceof PhotosetPost){
+						#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						$element->setContent($post);
+					}
+				}
 				elseif($element instanceof VariableElement){
-					#print '        PostsBlockElement element: '.$element->getId().', "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
-					#print '        PostsBlockElement element: '.$element->getPath().', "'.$element->getName().'"'."\n";
+					#print '        element: '.$element->getId().', "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+					#print '        element: '.$element->getPath().', "'.$element->getName().'"'."\n";
 					
 					if($elementName == 'permalink'){
 						$element->setContent($post->getPermalink());
@@ -59,24 +67,30 @@ class PostsBlockElement extends BlockElement{
 			foreach($this->getChildren() as $element){
 				$rc = new \ReflectionClass(get_class($element));
 				
-				#print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				$add = false;
 				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
-						#print '        TextBlockElement: "'.$element->getName().'"'."\n";
+						#print '        element: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 				}
 				elseif($element instanceof LinkBlockElement){
 					if($post instanceof LinkPost){
-						#print '        LinkBlockElement: "'.$element->getName().'"'."\n";
+						#print '        element: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 				}
 				elseif($element instanceof PhotoBlockElement){
 					if($post instanceof PhotoPost){
-						#print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						$add = true;
+					}
+				}
+				elseif($element instanceof PhotosetBlockElement){
+					if($post instanceof PhotosetPost){
+						#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 						$add = true;
 					}
 				}

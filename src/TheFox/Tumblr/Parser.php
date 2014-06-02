@@ -28,8 +28,6 @@ use TheFox\Tumblr\Element\NextPageBlockElement;
 use TheFox\Tumblr\Element\NoteCountBlockElement;
 use TheFox\Tumblr\Element\PagesBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
-use TheFox\Tumblr\Element\PhotosBlockElement;
-use TheFox\Tumblr\Element\PhotosetBlockElement;
 use TheFox\Tumblr\Element\PostNotesBlockElement;
 use TheFox\Tumblr\Element\PostsBlockElement;
 use TheFox\Tumblr\Element\PostTitleBlockElement;
@@ -47,10 +45,14 @@ use TheFox\Tumblr\Element\LangVariableElement;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\PhotoBlockElement;
+use TheFox\Tumblr\Element\Post\PhotosBlockElement;
+use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
 
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
+#use TheFox\Tumblr\Post\PhotosPost;
+use TheFox\Tumblr\Post\PhotosetPost;
 
 class Parser{
 	
@@ -295,6 +297,12 @@ class Parser{
 							elseif($name == 'Photo'){
 								$element = new PhotoBlockElement();
 							}
+							elseif($name == 'Photos'){
+								$element = new PhotosBlockElement();
+							}
+							elseif($name == 'Photoset'){
+								$element = new PhotosetBlockElement();
+							}
 							elseif($name == 'IndexPage'){
 								$element = new IndexPageBlockElement();
 							}
@@ -318,12 +326,6 @@ class Parser{
 							}
 							elseif($name == 'Pages'){
 								$element = new PagesBlockElement();
-							}
-							elseif($name == 'Photos'){
-								$element = new PhotosBlockElement();
-							}
-							elseif($name == 'Photoset'){
-								$element = new PhotosetBlockElement();
 							}
 							elseif($name == 'Caption'){
 								$element = new CaptionBlockElement();
@@ -577,6 +579,24 @@ class Parser{
 		return $element->render();
 	}
 	
+	private function makePhoto($post){
+		$postObj = new PhotoPost();
+		if(isset($post['url'])){
+			$postObj->setUrl($post['url']);
+		}
+		if(isset($post['alt'])){
+			$postObj->setAlt($post['alt']);
+		}
+		if(isset($post['link'])){
+			$postObj->setLinkUrl($post['link']);
+		}
+		if(isset($post['caption'])){
+			$postObj->setCaption($post['caption']);
+		}
+		
+		return $postObj;
+	}
+	
 	private function makePostFromIndex($id){
 		$htmlId = $id + 1;
 		#fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId.PHP_EOL);
@@ -612,18 +632,23 @@ class Parser{
 				}
 			}
 			elseif($type == 'photo'){
-				$postObj = new PhotoPost();
-				if(isset($post['url'])){
-					$postObj->setUrl($post['url']);
-				}
-				if(isset($post['alt'])){
-					$postObj->setAlt($post['alt']);
-				}
-				if(isset($post['link'])){
-					$postObj->setLinkUrl($post['link']);
-				}
+				$postObj = $this->makePhoto($post);
+			}
+			elseif($type == 'photoset'){
+				$postObj = new PhotosetPost();
 				if(isset($post['caption'])){
 					$postObj->setCaption($post['caption']);
+				}
+				if(isset($post['photos'])){
+					$photos = array();
+					foreach($post['photos'] as $photo){
+						$photoObj = $this->makePhoto($photo);
+						if($photoObj){
+							$photos[] = $photoObj;
+							#ve($photoObj);
+						}
+					}
+					$postObj->setPhotos($photos);
 				}
 			}
 			

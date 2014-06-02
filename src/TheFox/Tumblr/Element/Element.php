@@ -113,7 +113,6 @@ class Element{
 		$html = '';
 		foreach($children as $element){
 			#print '       element: "'.get_class($element).'"'."\n";
-			
 			$html .= $element->render();
 		}
 		return $html;
@@ -121,6 +120,7 @@ class Element{
 	
 	public function render(){
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getPath().'"'."\n";
 		
 		return $this->renderChildren($this->children);
 	}

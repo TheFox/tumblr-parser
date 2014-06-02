@@ -14,6 +14,8 @@ A Tumblr Theme parser in PHP.
 - `{block:Posts}`
 - `{block:Text}`
 - `{block:Link}`
+- `{block:Photo}`
+- `{block:Photoset}`
 - `{Permalink}`
 
 ### [Text Posts](http://www.tumblr.com/docs/en/custom_themes#text-posts) [complete]
@@ -27,6 +29,11 @@ A Tumblr Theme parser in PHP.
 - `{LinkOpenTag}`
 - `{LinkCloseTag}`
 - `{PhotoURL-500}`
+
+### [Photoset Posts](http://www.tumblr.com/docs/en/custom_themes#photoset-posts) [complete]
+- `{block:Caption}`
+- `{Caption}`
+- `{block:Photos}`
 
 ### [Link Posts](http://www.tumblr.com/docs/en/custom_themes#link-posts) [incomplete]
 - `{URL}`
