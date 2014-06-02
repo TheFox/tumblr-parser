@@ -66,6 +66,8 @@ class Parser{
 		'Name',
 		'NextPage',
 		'Permalink',
+		'PhotoAlt',
+		'PhotoURL-500',
 		'PostID',
 		'PostTitle',
 		'PreviousPage',

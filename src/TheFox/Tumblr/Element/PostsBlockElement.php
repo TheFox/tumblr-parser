@@ -24,7 +24,7 @@ class PostsBlockElement extends BlockElement{
 				#$newElement = clone $element;
 				$elementName = strtolower($element->getTemplateName());
 				
-				print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
@@ -59,7 +59,7 @@ class PostsBlockElement extends BlockElement{
 			foreach($this->getChildren() as $element){
 				$rc = new \ReflectionClass(get_class($element));
 				
-				print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				$add = false;
 				if($element instanceof TextBlockElement){
@@ -76,7 +76,8 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof PhotoBlockElement){
 					if($post instanceof PhotoPost){
-						$element->setContent($post);
+						print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						$add = true;
 					}
 				}
 				elseif($element instanceof VariableElement){

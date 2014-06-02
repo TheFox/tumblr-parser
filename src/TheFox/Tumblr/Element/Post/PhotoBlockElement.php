@@ -11,24 +11,27 @@ class PhotoBlockElement extends PostBlockElement{
 	public function setElementsValues(){
 		$post = $this->getContent();
 		if($post instanceof PhotoPost){
-			$hasDescription = (bool)$post->getDescription();
+			$hasUrl = (bool)$post->getUrl();
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
 				print '    element: '.get_class($element).', '.$element->getName()."\n";
 				
 				if($element instanceof VariableElement){
-					if($elementName == 'url'){
+					if($elementName == 'photourl-500'){
 						$element->setContent($post->getUrl());
 					}
-					elseif($elementName == 'name'){
-						$element->setContent($post->getName());
+					elseif($elementName == 'photoalt'){
+						$element->setContent($post->getAlt());
 					}
-					elseif($elementName == 'target'){
-						$element->setContent($post->getTarget());
+					elseif($elementName == 'caption'){
+						$element->setContent($post->getCaption());
 					}
-					elseif($elementName == 'description'){
-						$element->setContent($post->getDescription());
+					elseif($elementName == 'linkopentag' && $hasUrl){
+						$element->setContent('<a href="'.$post->getUrl().'">');
+					}
+					elseif($elementName == 'linkclosetag' && $hasUrl){
+						$element->setContent('</a>');
 					}
 				}
 			}
