@@ -79,56 +79,77 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array('if:Show Test' => 0), 'posts' => array(), 'postsPerPage' => 15));
 		
-		$parser->setTemplate('BEGIN {block:IfShowTest}IfShowTest1tTitle{/block:IfShowTest} END');
+		$parser->setTemplate('BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('BEGIN  END', $parser->parse());
+		
+		$parser->setTemplate('BEGIN {block:IfNotShowTest}NOT_OK{/block:IfNotShowTest} END');
+		$this->assertEquals('BEGIN NOT_OK END', $parser->parse());
 	}
 	
 	public function testParseIf2(){
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
 		
-		$parser->setTemplate('BEGIN {block:IfShowTest}IfShowTest1tTitle{/block:IfShowTest} END');
+		$parser->setTemplate('BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('BEGIN  END', $parser->parse());
+		
+		$parser->setTemplate('BEGIN {block:IfNotShowTest}NOT_OK{/block:IfNotShowTest} END');
+		$this->assertEquals('BEGIN NOT_OK END', $parser->parse());
 	}
 	
 	public function testParseIf3(){
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array('if:Show Test' => 1), 'posts' => array(), 'postsPerPage' => 15));
 		
-		$parser->setTemplate('BEGIN {block:IfShowTest}IfShowTest1tTitle{/block:IfShowTest} END');
-		$this->assertEquals('BEGIN IfShowTest1tTitle END', $parser->parse());
+		$parser->setTemplate('BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
+		$this->assertEquals('BEGIN OK END', $parser->parse());
+		
+		$parser->setTemplate('BEGIN {block:IfNotShowTest}NOT_OK{/block:IfNotShowTest} END');
+		$this->assertEquals('BEGIN  END', $parser->parse());
 	}
 	
 	public function testParseIf4(){
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array('if:Show Test' => 1), 'posts' => array(), 'postsPerPage' => 15));
 		
-		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}IfShowTest1tTitle{/block:IfShowTest} END');
-		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN IfShowTest1tTitle END', $parser->parse());
+		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
+		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN OK END', $parser->parse());
+		
+		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfNotShowTest}NOT_OK{/block:IfNotShowTest} END');
+		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN  END', $parser->parse());
 	}
 	
 	public function testParseIf5(){
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array('if:Show Test' => 0), 'posts' => array(), 'postsPerPage' => 15));
 		
-		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}IfShowTest1tTitle{/block:IfShowTest} END');
+		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN  END', $parser->parse());
+		
+		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfNotShowTest}NOT_OK{/block:IfNotShowTest} END');
+		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN NOT_OK END', $parser->parse());
 	}
 	
 	public function testParseIf6(){
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
 		
-		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}IfShowTest1tTitle{/block:IfShowTest} END');
+		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN  END', $parser->parse());
+		
+		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfNotShowTest}NOT_OK{/block:IfNotShowTest} END');
+		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN NOT_OK END', $parser->parse());
 	}
 	
 	public function testParseIf7(){
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
 		
-		$parser->setTemplate('<meta name="if:Show Test" content="1" />BEGIN {block:IfShowTest}IfShowTest1tTitle{/block:IfShowTest} END');
-		$this->assertEquals('<meta name="if:Show Test" content="1" />BEGIN IfShowTest1tTitle END', $parser->parse());
+		$parser->setTemplate('<meta name="if:Show Test" content="1" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
+		$this->assertEquals('<meta name="if:Show Test" content="1" />BEGIN OK END', $parser->parse());
+		
+		$parser->setTemplate('<meta name="if:Show Test" content="1" />BEGIN {block:IfNotShowTest}OK{/block:IfNotShowTest} END');
+		$this->assertEquals('<meta name="if:Show Test" content="1" />BEGIN  END', $parser->parse());
 	}
 	
 }

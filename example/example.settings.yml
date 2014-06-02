@@ -7,6 +7,7 @@ vars:
     AskLabel: 'my ask label'
     'lang:Newer posts': 'Newer Posts'
     'lang:Older posts': 'Older Posts'
+    'text:Google Analytics ID': 1234
 posts:
     - { type: text, permalink: '?type=post&index=1', title: title_test1, body: test1.body }
     - { type: text, body: test2.body }

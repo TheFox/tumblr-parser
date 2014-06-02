@@ -19,6 +19,7 @@ use TheFox\Tumblr\Element\HasPagesBlockElement;
 use TheFox\Tumblr\Element\HasTagsBlockElement;
 use TheFox\Tumblr\Element\HtmlElement;
 use TheFox\Tumblr\Element\IfBlockElement;
+use TheFox\Tumblr\Element\IfNotBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\LabelBlockElement;
 use TheFox\Tumblr\Element\LinesBlockElement;
@@ -74,6 +75,7 @@ class Parser{
 	private $settings = array();
 	private $template = '';
 	private $templateChanged = false;
+	private $variablesId = 0;
 	private $variables = array();
 	private $rootElement = null;
 	private $elementsId = 0;
@@ -110,35 +112,55 @@ class Parser{
 		$this->setSettings($settings);
 	}
 	
-	private function parseSettingsVars(){
-		#ve($this->settings['vars']);
-		foreach($this->settings['vars'] as $key => $val){
+	private function fillVariables($variables, $overwrite = false){
+		foreach($variables as $key => $val){
+			$this->variablesId++;
 			$variable = new Variable();
+			$variable->setId($this->variablesId);
 			$variable->setName($key);
 			$variable->setValue($val);
 			
-			$this->variables[$variable->getTemplateName()] = $variable;
+			$tmpName = $variable->getTemplateName();
+			$ifName = $variable->getIfName();
+			$ifNotName = $variable->getIfNotName();
+			
+			#fwrite(STDOUT, "settings: '".$key."' '".$tmpName."' '".$ifName."' => '".$val."'\n");
+			
+			if($overwrite || !$overwrite && !isset($this->variables[$tmpName])){
+				$this->variables[$tmpName] = $variable;
+				
+				$variableIf = clone $variable;
+				if($tmpName != $ifName){
+					#$variableIf->setReference($variable);
+					$this->variablesId++;
+					$variableIf->setId($this->variablesId);
+					$variableIf->setValue((bool)$val);
+					$this->variables[$ifName] = $variableIf;
+				}
+				
+				$variableIfNot = clone $variableIf;
+				#$variableIfNot->setReference($variableIf);
+				$this->variablesId++;
+				$variableIfNot->setId($this->variablesId);
+				$variableIfNot->setValue(!$variableIfNot->getValue());
+				$this->variables[$ifNotName] = $variableIfNot;
+				
+				
+			}
 		}
+	}
+	
+	private function parseSettingsVars(){
+		$this->fillVariables($this->settings['vars'], true);
 	}
 	
 	private function parseMetaSettings(){
 		foreach(array('if', 'text') as $type){
 			preg_match_all('/<meta name="('.$type.':[^"]+)" content="([^"]+)"/i', $this->template, $matches);
-			
-			foreach(array_combine($matches[1], $matches[2]) as $key => $val){
-				$variable = new Variable();
-				$variable->setName($key);
-				$variable->setValue($val);
-				
-				$tmpname = $variable->getTemplateName();
-				
-				#print "'$key' [$tmpname] => '$val'\n";
-				
-				if(!isset($this->variables[$tmpname])){
-					$this->variables[$tmpname] = $variable;
-				}
-			}
+			$this->fillVariables(array_combine($matches[1], $matches[2]));
 		}
+		
+		#ve($this->variables);
 	}
 	
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
@@ -245,7 +267,11 @@ class Parser{
 						
 						$element = null;
 						if($type == 'block'){
-							if(strtolower(substr($name, 0, 2)) == 'if'){
+							if(strtolower(substr($name, 0, 5)) == 'ifnot'){
+								$name = substr($name, 5);
+								$element = new IfNotBlockElement();
+							}
+							elseif(strtolower(substr($name, 0, 2)) == 'if'){
 								$name = substr($name, 2);
 								$element = new IfBlockElement();
 							}
@@ -463,25 +489,33 @@ class Parser{
 				$element->setContent($isPermalinkPage);
 				$setSub = true;
 			}
-			elseif($element instanceof IfBlockElement){
-				$ifNotName = '';
-				if(substr($elementName, 0, 5) == 'IfNot'){
-					$ifNotName = 'If'.substr($elementName, 5);
-				}
-				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName]).', "'.$ifNotName.'"'.PHP_EOL);
-				
-				fwrite(STDOUT, 'element: '.$element->getPath().', '.$ifNotName.PHP_EOL);
+			elseif($element instanceof IfNotBlockElement){
+				#fwrite(STDOUT, 'element not:  '.$element->getPath().' "'.$elementName.'"'.PHP_EOL);
 				
 				if(isset($this->variables[$elementName])){
-					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue().PHP_EOL);
-					$element->setContent((bool)$this->variables[$elementName]->getValue());
-				}
-				elseif($ifNotName && isset($this->variables[$ifNotName])){
-					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- pair: '.$this->variables[$ifNotName]->getValue().PHP_EOL);
-					$element->setContent(!(bool)$this->variables[$ifNotName]->getValue());
+					#$val = !(bool)$this->variables[$elementName]->getValue();
+					$val = (bool)$this->variables[$elementName]->getValue();
+					#fwrite(STDOUT, 'element not:  '.$element->getPath().'    - val: '.(int)$val.PHP_EOL);
+					$element->setContent((bool)$val);
 				}
 				else{
-					$element->setContent(false);
+					#fwrite(STDOUT, 'element not:  '.$element->getPath().'    - default: '.(int)$element->getDefaultContent().PHP_EOL);
+					$element->setContent($element->getDefaultContent());
+				}
+				
+				$setSub = true;
+			}
+			elseif($element instanceof IfBlockElement){
+				#fwrite(STDOUT, 'element if:   '.$element->getPath().' "'.$elementName.'"'.PHP_EOL);
+				
+				if(isset($this->variables[$elementName])){
+					$val = (bool)$this->variables[$elementName]->getValue();
+					#fwrite(STDOUT, 'element if:   '.$element->getPath().'    - val: '.(int)$val.PHP_EOL);
+					$element->setContent((bool)$val);
+				}
+				else{
+					#fwrite(STDOUT, 'element if:   '.$element->getPath().'    - default: '.(int)$element->getDefaultContent().PHP_EOL);
+					$element->setContent($element->getDefaultContent());
 				}
 				
 				$setSub = true;
