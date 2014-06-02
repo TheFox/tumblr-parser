@@ -1,12 +1,12 @@
 vars:
     Title: 'my example page'
     CustomCSS: 'my custom css'
+    Description: 'my description'
     MetaDescription: 'my meta description'
     'if:AskEnabled': 1
     AskLabel: 'my ask label'
     'lang:Newer posts': 'Newer Posts'
     'lang:Older posts': 'Older Posts'
-    'if:Show Archive': 1
 posts:
     - { type: text, permalink: '?type=post&index=1', title: title_test1, body: test1.body }
     - { type: text, body: test2.body }

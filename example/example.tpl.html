@@ -7,10 +7,15 @@
 			<ul>
 				<li>IndexPage: {block:IndexPage}OK{/block:IndexPage}</li>
 				<li>PermalinkPage: {block:PermalinkPage}OK{/block:PermalinkPage}</li>
-				<li>PostTitle: {block:PostTitle}"{PostTitle}"{/block:PostTitle}</li>
-				<li>Title: {block:IndexPage}"{Title}"{/block:IndexPage}{block:PermalinkPage}"{Title}" - {block:PostTitle}"{PostTitle}"{/block:PostTitle}{/block:PermalinkPage}</li>
-				<li>MetaDescription: {block:Description}"{MetaDescription}"{/block:Description}</li>
-				<li>AskEnabled: {block:AskEnabled}"{AskLabel}"{/block:AskEnabled}</li>
+				<li>block PostTitle: {block:PostTitle}"{PostTitle}"{/block:PostTitle}</li>
+				<li>PostTitle: "{PostTitle}"</li>
+				<li>block Title: {block:IndexPage}"{Title}"{/block:IndexPage}{block:PermalinkPage}"{Title}" - {block:PostTitle}"{PostTitle}"{/block:PostTitle}{/block:PermalinkPage}</li>
+				<li>Title: <a href="?">"{Title}"</a></li>
+				<li>block MetaDescription: {block:Description}"{MetaDescription}"{/block:Description}</li>
+				<li>MetaDescription: "{MetaDescription}"</li>
+				<li>Description: "{Description}"</li>
+				<li>block AskEnabled: {block:AskEnabled}"{AskLabel}"{/block:AskEnabled}</li>
+				<li>AskLabel: "{AskLabel}"</li>
 				<li>HasPages
 					{block:HasPages}
 						<ul>
@@ -27,8 +32,6 @@
 				<li>NextPage: {block:NextPage}<a href="{NextPage}">"{NextPage}"</a>{/block:NextPage}</li>
 				<li>IfGoogleAnalyticsID: {block:IfGoogleAnalyticsID}My Google Analytics ID: {text:Google Analytics ID}{/block:IfGoogleAnalyticsID}</li>
 				
-				<li>Title: <a href="?">"{Title}"</a></li>
-				<li>Description: {block:Description}"{Description}"{/block:Description}</li>
 				{block:Posts}
 					<li>
 						POST
