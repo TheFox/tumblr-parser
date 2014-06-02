@@ -3,7 +3,7 @@
 namespace TheFox\Tumblr\Element\Post;
 
 use TheFox\Tumblr\Element\VariableElement;
-#use TheFox\Tumblr\Element\DescriptionBlockElement;
+use TheFox\Tumblr\Element\LinkUrlBlockElement;
 use TheFox\Tumblr\Post\PhotoPost;
 
 class PhotoBlockElement extends PostBlockElement{
@@ -12,6 +12,7 @@ class PhotoBlockElement extends PostBlockElement{
 		$post = $this->getContent();
 		if($post instanceof PhotoPost){
 			$hasUrl = (bool)$post->getUrl();
+			$hasLink = (bool)$post->getLinkUrl();
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
@@ -24,15 +25,31 @@ class PhotoBlockElement extends PostBlockElement{
 					elseif($elementName == 'photoalt'){
 						$element->setContent($post->getAlt());
 					}
+					elseif($elementName == 'linkurl'){
+						if($hasLink){
+							$element->setContent($post->getLinkUrl());
+						}
+						else{
+							$element->setContent($post->getPermalink());
+						}
+					}
 					elseif($elementName == 'caption'){
 						$element->setContent($post->getCaption());
 					}
-					elseif($elementName == 'linkopentag' && $hasUrl){
-						$element->setContent('<a href="'.$post->getUrl().'">');
+					elseif($elementName == 'linkopentag'){
+						if($hasLink){
+							$element->setContent('<a href="'.$post->getLinkUrl().'">');
+						}
+						else{
+							$element->setContent('<a href="'.$post->getPermalink().'">');
+						}
 					}
-					elseif($elementName == 'linkclosetag' && $hasUrl){
+					elseif($elementName == 'linkclosetag'){
 						$element->setContent('</a>');
 					}
+				}
+				elseif($element instanceof LinkUrlBlockElement){
+					$element->setContent($hasLink);
 				}
 			}
 		}

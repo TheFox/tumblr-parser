@@ -6,6 +6,7 @@ class PhotoPost extends Post{
 	
 	private $url = '';
 	private $alt = '';
+	private $link = '';
 	private $caption = '';
 	
 	public function __construct(){
@@ -26,6 +27,14 @@ class PhotoPost extends Post{
 	
 	public function getAlt(){
 		return $this->alt;
+	}
+	
+	public function setLinkUrl($link){
+		$this->link = $link;
+	}
+	
+	public function getLinkUrl(){
+		return $this->link;
 	}
 	
 	public function setCaption($caption){

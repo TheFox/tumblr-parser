@@ -15,5 +15,6 @@ posts:
     - { type: link, url: 'http://fox21.at', name: link_name1, target: 'target="_blank"', description: 'this is my description' }
     - { type: link, url: 'http://www.fox21.at', name: link_name2 }
     - { type: link, url: 'http://www.fox21.at', name: link_name2 }
+    - { type: photo, url: https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg, link: https://en.wikipedia.org/wiki/Halloumi, alt: 'my alt text', caption: 'my caption text' }
     - { type: photo, url: https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg, alt: 'my alt text', caption: 'my caption text' }
 postsPerPage: 50

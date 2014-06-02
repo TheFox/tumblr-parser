@@ -23,6 +23,7 @@ use TheFox\Tumblr\Element\IfNotBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\LabelBlockElement;
 use TheFox\Tumblr\Element\LinesBlockElement;
+use TheFox\Tumblr\Element\LinkUrlBlockElement;
 use TheFox\Tumblr\Element\NextPageBlockElement;
 use TheFox\Tumblr\Element\NoteCountBlockElement;
 use TheFox\Tumblr\Element\PagesBlockElement;
@@ -60,8 +61,9 @@ class Parser{
 		'Description',
 		'Label',
 		'LikeButton',
-		'LinkOpenTag',
 		'LinkCloseTag',
+		'LinkOpenTag',
+		'LinkURL',
 		'MetaDescription',
 		'Name',
 		'NextPage',
@@ -373,6 +375,9 @@ class Parser{
 							elseif($name == 'Tags'){
 								$element = new TagsBlockElement();
 							}
+							elseif($name == 'LinkURL'){
+								$element = new LinkUrlBlockElement();
+							}
 							else{
 								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'". Path: '.$parentElement->getPath().''.PHP_EOL);
 								throw new RuntimeException(__FUNCTION__.': Unknown block "'.$name.'". Path: '.$parentElement->getPath(), 3);
@@ -612,6 +617,9 @@ class Parser{
 				}
 				if(isset($post['alt'])){
 					$postObj->setAlt($post['alt']);
+				}
+				if(isset($post['link'])){
+					$postObj->setLinkUrl($post['link']);
 				}
 				if(isset($post['caption'])){
 					$postObj->setCaption($post['caption']);
