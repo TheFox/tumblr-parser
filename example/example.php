@@ -53,6 +53,7 @@ if(PHP_SAPI == 'cli'){
 	$type = 'post'; $id = 6;
 	$type = 'post'; $id = 2;
 	$type = 'post'; $id = 1;
+	$type = 'post'; $id = 7;
 	#$type = 'page'; $id = 1;
 }
 

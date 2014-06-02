@@ -4,25 +4,27 @@ namespace TheFox\Tumblr\Element;
 
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
+use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
+use TheFox\Tumblr\Post\PhotoPost;
 
 class PostsBlockElement extends BlockElement{
 	
 	public function render(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$children = array();
 		$html = '';
 		foreach($this->getContent() as $postId => $post){
-			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
 			
 			// Set all children and subchildren.
 			foreach($this->getChildren(true) as $element){
 				#$newElement = clone $element;
 				$elementName = strtolower($element->getTemplateName());
 				
-				#print '        PostsBlockElement element: "'.get_class($newElement).'", "'.$newElement->getName().'" '.$element->getPath()."\n";
+				print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
@@ -31,6 +33,11 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof LinkBlockElement){
 					if($post instanceof LinkPost){
+						$element->setContent($post);
+					}
+				}
+				elseif($element instanceof PhotoBlockElement){
+					if($post instanceof PhotoPost){
 						$element->setContent($post);
 					}
 				}
@@ -52,12 +59,7 @@ class PostsBlockElement extends BlockElement{
 			foreach($this->getChildren() as $element){
 				$rc = new \ReflectionClass(get_class($element));
 				
-				#$newElement = clone $element;
-				
-				#print '        PostsBlockElement element: "'.get_class($newElement).'", "'.$newElement->getName().'" '.$element->getPath()."\n";
-				#print '        PostsBlockElement element: '.$element->getPath().', "'.get_class($newElement).'", "'.$newElement->getName().'"'."\n";
-				#print '        element: '.$rc->getShortName().', '.$element->getPath().', "'.$element->getName().'"  '."\n";
-				#print '        element: '.$element->getPath().'  '."\n";
+				print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				$add = false;
 				if($element instanceof TextBlockElement){
@@ -70,6 +72,11 @@ class PostsBlockElement extends BlockElement{
 					if($post instanceof LinkPost){
 						#print '        LinkBlockElement: "'.$element->getName().'"'."\n";
 						$add = true;
+					}
+				}
+				elseif($element instanceof PhotoBlockElement){
+					if($post instanceof PhotoPost){
+						$element->setContent($post);
 					}
 				}
 				elseif($element instanceof VariableElement){

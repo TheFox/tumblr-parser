@@ -27,7 +27,6 @@ use TheFox\Tumblr\Element\NextPageBlockElement;
 use TheFox\Tumblr\Element\NoteCountBlockElement;
 use TheFox\Tumblr\Element\PagesBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
-use TheFox\Tumblr\Element\PhotoBlockElement;
 use TheFox\Tumblr\Element\PhotosBlockElement;
 use TheFox\Tumblr\Element\PhotosetBlockElement;
 use TheFox\Tumblr\Element\PostNotesBlockElement;
@@ -44,11 +43,13 @@ use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\TextVariableElement;
 use TheFox\Tumblr\Element\LangVariableElement;
 
-use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
+use TheFox\Tumblr\Element\Post\LinkBlockElement;
+use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
+use TheFox\Tumblr\Post\PhotoPost;
 
 class Parser{
 	
@@ -59,6 +60,8 @@ class Parser{
 		'Description',
 		'Label',
 		'LikeButton',
+		'LinkOpenTag',
+		'LinkCloseTag',
 		'MetaDescription',
 		'Name',
 		'NextPage',
@@ -284,6 +287,9 @@ class Parser{
 							elseif($name == 'Link'){
 								$element = new LinkBlockElement();
 							}
+							elseif($name == 'Photo'){
+								$element = new PhotoBlockElement();
+							}
 							elseif($name == 'IndexPage'){
 								$element = new IndexPageBlockElement();
 							}
@@ -307,9 +313,6 @@ class Parser{
 							}
 							elseif($name == 'Pages'){
 								$element = new PagesBlockElement();
-							}
-							elseif($name == 'Photo'){
-								$element = new PhotoBlockElement();
 							}
 							elseif($name == 'Photos'){
 								$element = new PhotosBlockElement();
@@ -446,7 +449,7 @@ class Parser{
 		}
 		
 		$post = null;
-		if($isPermalinkPage){
+		if($isPermalinkPage && $posts){
 			$post = $posts[0];
 		}
 		
@@ -598,6 +601,18 @@ class Parser{
 				}
 				if(isset($post['description'])){
 					$postObj->setDescription($post['description']);
+				}
+			}
+			elseif($type == 'photo'){
+				$postObj = new PhotoPost();
+				if(isset($post['url'])){
+					$postObj->setUrl($post['url']);
+				}
+				if(isset($post['alt'])){
+					$postObj->setAlt($post['alt']);
+				}
+				if(isset($post['caption'])){
+					$postObj->setCaption($post['caption']);
 				}
 			}
 			
