@@ -138,7 +138,7 @@ class Parser{
 	}
 	
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
-		#fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': level='.$level."\n");
+		#fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': level='.$level.PHP_EOL);
 		
 		if($level >= 100){
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 2);
@@ -157,14 +157,14 @@ class Parser{
 		while($rawhtml && $fuse <= 1000){
 			$fuse++;
 			
-			#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'parse: "'.$rawhtml.'"'."\n");
+			#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'parse: "'.$rawhtml.'"'.PHP_EOL);
 			
 			$content = '';
 			$element = null;
 			
 			$pos = strpos($rawhtml, '{');
 			if($pos === false){
-				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'no { found'."\n");
+				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'no { found'.PHP_EOL);
 				
 				$this->elementsId++;
 				$element = new HtmlElement();
@@ -175,11 +175,11 @@ class Parser{
 				$rawhtml = '';
 			}
 			else{
-				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'found {: '.$pos."\n");
+				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'found {: '.$pos.PHP_EOL);
 				
 				if($pos >= 1){
 					$content = substr($rawhtml, 0, $pos);
-					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$content.'"'."\n");
+					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$content.'"'.PHP_EOL);
 					
 					$this->elementsId++;
 					$element = new HtmlElement();
@@ -192,7 +192,7 @@ class Parser{
 				$pos = strpos($rawhtml, '}');
 				if($pos === false){
 					$content .= '{'.$rawhtml;
-					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'no } found: "'.$content.'"'."\n");
+					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'no } found: "'.$content.'"'.PHP_EOL);
 					
 					$element->setContent($content);
 				}
@@ -201,14 +201,14 @@ class Parser{
 					$nameFullLen = strlen($nameFull);
 					$rawhtml = substr($rawhtml, $pos + 1);
 					
-					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'found }: '.$pos.', "'.$nameFull.'" '.$nameFullLen."\n");
+					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'found }: '.$pos.', "'.$nameFull.'" '.$nameFullLen.PHP_EOL);
 					
 					if(strtolower(substr($nameFull, 0, 6)) == 'block:'){
 						$nameFullPos = strpos($nameFull, ':');
 						$name = substr($nameFull, $nameFullPos + 1);
 						$type = strtolower(substr($nameFull, 0, $nameFullPos));
 						
-						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'block|text: '.$nameFullPos.', "'.$type.'", "'.$name.'"'."\n");
+						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'block|text: '.$nameFullPos.', "'.$type.'", "'.$name.'"'.PHP_EOL);
 						
 						$offset = 0;
 						$newoffset = 0;
@@ -225,7 +225,7 @@ class Parser{
 								$testhtml = substr($temphtml, 0, $pos);
 								$newoffset = $offset + $pos + 2 + $nameFullLen + 1;
 								
-								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 2)).'found: o='.$offset.' ('.$newoffset.'), p='.$pos.': "'.$temphtml.'", "'.$testhtml.'"'."\n");
+								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 2)).'found: o='.$offset.' ('.$newoffset.'), p='.$pos.': "'.$temphtml.'", "'.$testhtml.'"'.PHP_EOL);
 								
 								$offset = $newoffset;
 							}
@@ -237,7 +237,7 @@ class Parser{
 						$subhtml = substr($rawhtml, 0, $offset - 2 - $nameFullLen - 1);
 						$rawhtml = substr($rawhtml, $offset);
 						
-						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'name: "'.$name.'", "'.$nameFull.'", '.$offset.''."\n");
+						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'name: "'.$name.'", "'.$nameFull.'", '.$offset.''.PHP_EOL);
 						
 						$element = null;
 						if($type == 'block'){
@@ -339,7 +339,7 @@ class Parser{
 								$element = new TagsBlockElement();
 							}
 							else{
-								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'". Path: '.$parentElement->getPath().''."\n");
+								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'". Path: '.$parentElement->getPath().''.PHP_EOL);
 								throw new RuntimeException(__FUNCTION__.': Unknown block "'.$name.'". Path: '.$parentElement->getPath(), 3);
 							}
 						}
@@ -357,10 +357,10 @@ class Parser{
 						
 					}
 					else{
-						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'."\n");
+						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'.PHP_EOL);
 						
 						if(in_array($nameFull, static::$variableNames) || substr($nameFull, 0, 5) == 'text:' || substr($nameFull, 0, 5) == 'lang:'){
-							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'."\n");
+							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'.PHP_EOL);
 							
 							$this->elementsId++;
 							$element = new VariableElement();
@@ -370,7 +370,7 @@ class Parser{
 						}
 						else{
 							$content = '{'.$nameFull.'}';
-							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$content.'"'."\n");
+							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$content.'"'.PHP_EOL);
 							
 							$this->elementsId++;
 							$element = new HtmlElement();
@@ -413,11 +413,11 @@ class Parser{
 			
 			$className = str_replace('TheFox\Tumblr\Element\\', '', get_class($element));
 			
-			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut."\n");
+			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
 			
 			$setSub = false;
 			if($element instanceof VariableElement){
-				#fwrite(STDOUT, str_repeat('    |', ($level)).'-    var has var: '.(int)isset($this->variables[$elementName])."\n");
+				#fwrite(STDOUT, str_repeat('    |', ($level)).'-    var has var: '.(int)isset($this->variables[$elementName]).PHP_EOL);
 				if(isset($this->variables[$elementName])){
 					#fwrite(STDOUT, str_repeat('    |', ($level + 1))."    val: '".$this->variables[$elementName]->getValue()."'\n");
 					$element->setContent($this->variables[$elementName]->getValue());
@@ -443,14 +443,14 @@ class Parser{
 				if(substr($elementName, 0, 5) == 'IfNot'){
 					$pairName = 'If'.substr($elementName, 5);
 				}
-				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName]).', "'.$pairName.'"'."\n");
+				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName]).', "'.$pairName.'"'.PHP_EOL);
 				
 				if(isset($this->variables[$elementName])){
-					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue()."\n");
+					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue().PHP_EOL);
 					$element->setContent((bool)$this->variables[$elementName]->getValue());
 				}
 				elseif($pairName && isset($this->variables[$pairName])){
-					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- pair: '.$this->variables[$pairName]->getValue()."\n");
+					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- pair: '.$this->variables[$pairName]->getValue().PHP_EOL);
 					$element->setContent(!(bool)$this->variables[$pairName]->getValue());
 				}
 				else{
@@ -460,13 +460,13 @@ class Parser{
 				$setSub = true;
 			}
 			elseif($element instanceof PostsBlockElement){
-				#fwrite(STDOUT, "    PostsBlockElement"."\n");
+				#fwrite(STDOUT, "    PostsBlockElement".PHP_EOL);
 				$element->setContent($posts);
 			}
 			else{
 				$setSub = true;
 				
-				#fwrite(STDOUT, ''.str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut."\n");
+				#fwrite(STDOUT, ''.str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
 			}
 			
 			if($setSub){
@@ -481,7 +481,7 @@ class Parser{
 	
 	private function makePostFromIndex($id){
 		$htmlId = $id + 1;
-		#fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId."\n");
+		#fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId.PHP_EOL);
 		
 		$postObj = null;
 		
@@ -520,7 +520,7 @@ class Parser{
 				}
 				else{
 					$postObj->setPermalink('?type=post&id='.$htmlId);
-					#fwrite(STDOUT, 'makePostFromIndex: '.$postObj->getPermalink()."\n");
+					#fwrite(STDOUT, 'makePostFromIndex: '.$postObj->getPermalink().PHP_EOL);
 				}
 				
 				$postObj->setPostId($htmlId);
@@ -531,7 +531,7 @@ class Parser{
 	}
 	
 	public function parse($type = 'page', $id = 1){
-		#fwrite(STDOUT, 'parse: '.$type.', '.$id."\n");
+		#fwrite(STDOUT, 'parse: '.$type.', '.$id.PHP_EOL);
 		
 		$this->parseMetaSettings();
 		
@@ -550,7 +550,7 @@ class Parser{
 		if($isIndexPage){
 			$postIdMin = ($id - 1) * $this->settings['postsPerPage'];
 			$postIdMax = $postIdMin + $this->settings['postsPerPage'];
-			#fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax."\n");
+			#fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax.PHP_EOL);
 			
 			for($id = $postIdMin; $id < $postIdMax; $id++){
 				if(isset($this->settings['posts'][$id])){
@@ -574,6 +574,8 @@ class Parser{
 				$variable->setValue($postObj->getTitle());
 				
 				$this->variables['PostTitle'] = $variable;
+				
+				#fwrite(STDOUT, 'PostTitle: '.$postObj->getTitle().PHP_EOL);
 			}
 			
 			#ve($postObj);
