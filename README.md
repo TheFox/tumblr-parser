@@ -18,6 +18,14 @@ A Tumblr Theme parser in PHP.
 
 ### [Text Posts](http://www.tumblr.com/docs/en/custom_themes#text-posts) [complete]
 
+### [Photo Posts](http://www.tumblr.com/docs/en/custom_themes#photo-posts) [incomplete]
+- `{PhotoAlt}`
+- `{block:LinkURL}`
+- `{LinkURL}`
+- `{LinkOpenTag}`
+- `{LinkCloseTag}`
+- `{PhotoURL-500}`
+
 ### [Link Posts](http://www.tumblr.com/docs/en/custom_themes#link-posts) [incomplete]
 - `{URL}`
 - `{Name}`

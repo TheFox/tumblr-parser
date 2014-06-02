@@ -12,12 +12,12 @@ use TheFox\Tumblr\Post\PhotoPost;
 class PostsBlockElement extends BlockElement{
 	
 	public function render(){
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$children = array();
 		$html = '';
 		foreach($this->getContent() as $postId => $post){
-			print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
 			
 			// Set all children and subchildren.
 			foreach($this->getChildren(true) as $element){
@@ -76,7 +76,7 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof PhotoBlockElement){
 					if($post instanceof PhotoPost){
-						print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						#print '        PostsBlockElement element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 						$add = true;
 					}
 				}

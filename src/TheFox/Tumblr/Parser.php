@@ -57,6 +57,7 @@ class Parser{
 	public static $variableNames = array(
 		'AskLabel',
 		'Body',
+		'Caption',
 		'CustomCSS',
 		'Description',
 		'Label',
