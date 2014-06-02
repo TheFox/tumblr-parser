@@ -20,6 +20,8 @@ A Tumblr Theme parser in PHP.
 
 ### [Photo Posts](http://www.tumblr.com/docs/en/custom_themes#photo-posts) [incomplete]
 - `{PhotoAlt}`
+- `{block:Caption}`
+- `{Caption}`
 - `{block:LinkURL}`
 - `{LinkURL}`
 - `{LinkOpenTag}`
