@@ -442,9 +442,9 @@ class Parser{
 				$setSub = true;
 			}
 			elseif($element instanceof IfBlockElement){
-				$pairName = '';
+				$ifNotName = '';
 				if(substr($elementName, 0, 5) == 'IfNot'){
-					$pairName = 'If'.substr($elementName, 5);
+					$ifNotName = 'If'.substr($elementName, 5);
 				}
 				#fwrite(STDOUT, ''.str_repeat('    |', $level).'- if has var: '.(int)isset($this->variables[$elementName]).', "'.$pairName.'"'.PHP_EOL);
 				
@@ -452,9 +452,9 @@ class Parser{
 					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue().PHP_EOL);
 					$element->setContent((bool)$this->variables[$elementName]->getValue());
 				}
-				elseif($pairName && isset($this->variables[$pairName])){
-					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- pair: '.$this->variables[$pairName]->getValue().PHP_EOL);
-					$element->setContent(!(bool)$this->variables[$pairName]->getValue());
+				elseif($ifNotName && isset($this->variables[$ifNotName])){
+					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- pair: '.$this->variables[$ifNotName]->getValue().PHP_EOL);
+					$element->setContent(!(bool)$this->variables[$ifNotName]->getValue());
 				}
 				else{
 					$element->setContent(false);
