@@ -466,11 +466,6 @@ class Parser{
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 1);
 		}
 		
-		$post = null;
-		if($isPermalinkPage && $posts){
-			$post = $posts[0];
-		}
-		
 		$elemtents = $element->getChildren();
 		foreach($elemtents as $elementId => $element){
 			$elementName = $element->getTemplateName();
@@ -487,7 +482,7 @@ class Parser{
 			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$element->getPath().PHP_EOL);
 			#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
 			
-			$setSub = false;
+			$setSub = true;
 			if($element instanceof VariableElement){
 				#fwrite(STDOUT, str_repeat('    |', ($level)).'-    var has var: '.(int)isset($this->variables[$elementName]).PHP_EOL);
 				if(isset($this->variables[$elementName])){
@@ -497,18 +492,16 @@ class Parser{
 				else{
 					$element->setContent($element->getDefaultContent());
 				}
+				$setSub = false;
 			}
 			elseif($element instanceof IndexPageBlockElement){
 				$element->setContent($isIndexPage);
-				$setSub = true;
 			}
 			elseif($element instanceof PermalinkPageBlockElement){
 				$element->setContent($isPermalinkPage);
-				$setSub = true;
 			}
 			elseif($element instanceof PostTitleBlockElement){
 				$element->setContent($isPermalinkPage);
-				$setSub = true;
 			}
 			elseif($element instanceof IfNotBlockElement){
 				#fwrite(STDOUT, 'element not:  '.$element->getPath().' "'.$elementName.'"'.PHP_EOL);
@@ -523,8 +516,6 @@ class Parser{
 					#fwrite(STDOUT, 'element not:  '.$element->getPath().'    - default: '.(int)$element->getDefaultContent().PHP_EOL);
 					$element->setContent($element->getDefaultContent());
 				}
-				
-				$setSub = true;
 			}
 			elseif($element instanceof IfBlockElement){
 				#fwrite(STDOUT, 'element if:   '.$element->getPath().' "'.$elementName.'"'.PHP_EOL);
@@ -538,8 +529,6 @@ class Parser{
 					#fwrite(STDOUT, 'element if:   '.$element->getPath().'    - default: '.(int)$element->getDefaultContent().PHP_EOL);
 					$element->setContent($element->getDefaultContent());
 				}
-				
-				$setSub = true;
 			}
 			elseif($element instanceof AskEnabledBlockElement){
 				$elementName = 'IfAskEnabled';
@@ -551,8 +540,6 @@ class Parser{
 				else{
 					$element->setContent($element->getDefaultContent());
 				}
-				
-				$setSub = true;
 			}
 			elseif($element instanceof DescriptionBlockElement){
 				$elementName = 'MetaDescription';
@@ -564,17 +551,11 @@ class Parser{
 				else{
 					$element->setContent($element->getDefaultContent());
 				}
-				
-				$setSub = true;
 			}
 			elseif($element instanceof PostsBlockElement){
 				#fwrite(STDOUT, "    PostsBlockElement".PHP_EOL);
 				$element->setContent($posts);
-			}
-			else{
-				$setSub = true;
-				
-				#fwrite(STDOUT, ''.str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
+				$setSub = false;
 			}
 			
 			if($setSub){
