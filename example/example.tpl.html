@@ -108,19 +108,21 @@
 								<li>Answer: "{Answer}"</li>
 							{/block:Answer}
 							
-							{block:Date}
-								<li>Date</li>
-								<li>DayOfWeek: "{DayOfWeek}"</li>
-								<li>DayOfMonth: "{DayOfMonth}"</li>
-								<li>Month: "{Month}"</li>
-								<li>Year: "{Year}"</li>
-							{/block:Date}
-							
 							<li>
 								<ul>
 									<li>NoteCount: {block:NoteCount}"{NoteCountWithLabel}"{/block:NoteCount}</li>
 									<li>ReblogButton: "{ReblogButton}"</li>
 									<li>LikeButton: "{LikeButton}"</li>
+									<li>Date
+										<ul>
+											{block:Date}
+												<li>DayOfWeek: "{DayOfWeek}"</li>
+												<li>DayOfMonth: "{DayOfMonth}"</li>
+												<li>Month: "{Month}"</li>
+												<li>Year: "{Year}"</li>
+											{/block:Date}
+										</ul>
+									</li>
 								</ul>
 							</li>
 							

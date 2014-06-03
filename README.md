@@ -42,6 +42,13 @@ A Tumblr Theme parser in PHP.
 - `{block:Description}`
 - `{Description}`
 
+### [Dates](https://www.tumblr.com/docs/en/custom_themes#dates) [incomplete]
+- `{block:Date}`
+- `{DayOfMonth}`
+- `{DayOfMonth}`
+- `{Month}`
+- `{Year}`
+
 ### [Theme Options](http://www.tumblr.com/docs/en/custom_themes#theme-options) [incomplete]
 - Enabling Booleans [complete]
 - Enabling Custom Text [complete]

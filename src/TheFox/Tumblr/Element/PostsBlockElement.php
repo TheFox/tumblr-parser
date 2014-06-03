@@ -20,6 +20,18 @@ class PostsBlockElement extends BlockElement{
 		$html = '';
 		foreach($this->getContent() as $postId => $post){
 			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			$dateDayOfWeek = '';
+			$dateDayOfMonth = '';
+			$dateMonth = '';
+			$dateYear = '';
+			
+			$postDateTime = $post->getDateTime();
+			if($postDateTime){
+				$dateDayOfWeek = $postDateTime->format('l');
+				$dateDayOfMonth = $postDateTime->format('j');
+				$dateMonth = $postDateTime->format('n');
+				$dateYear = $postDateTime->format('Y');
+			}
 			
 			// Set all children and subchildren.
 			foreach($this->getChildren(true) as $element){
@@ -57,10 +69,23 @@ class PostsBlockElement extends BlockElement{
 						$element->setContent($post->getPermalink());
 						#ve($element);
 					}
+					elseif($elementName == 'dayofweek'){
+						$element->setContent($dateDayOfWeek);
+					}
+					elseif($elementName == 'dayofmonth'){
+						$element->setContent($dateDayOfMonth);
+					}
+					elseif($elementName == 'month'){
+						$element->setContent($dateMonth);
+					}
+					elseif($elementName == 'year'){
+						$element->setContent($dateYear);
+					}
 					elseif($elementName == 'postid'){
 						$element->setContent($post->getPostId());
 					}
 				}
+				
 			}
 			
 			// Collect level 1 children for rendering.
@@ -96,6 +121,9 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof VariableElement){
 					#print '        HtmlElement: "'.$element->getName().'"'."\n";
+					$add = true;
+				}
+				elseif($element instanceof DateBlockElement){
 					$add = true;
 				}
 				elseif($element instanceof HtmlElement){

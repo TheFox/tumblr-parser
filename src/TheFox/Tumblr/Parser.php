@@ -3,6 +3,7 @@
 namespace TheFox\Tumblr;
 
 use RuntimeException;
+use DateTime;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -61,6 +62,8 @@ class Parser{
 		'Body',
 		'Caption',
 		'CustomCSS',
+		'DayOfMonth',
+		'DayOfWeek',
 		'Description',
 		'Label',
 		'LikeButton',
@@ -68,6 +71,7 @@ class Parser{
 		'LinkOpenTag',
 		'LinkURL',
 		'MetaDescription',
+		'Month',
 		'Name',
 		'NextPage',
 		'Permalink',
@@ -80,6 +84,7 @@ class Parser{
 		'Target',
 		'Title',
 		'URL',
+		'Year',
 	);
 	
 	private $settings = array();
@@ -659,6 +664,10 @@ class Parser{
 				else{
 					$postObj->setPermalink('?type=post&id='.$htmlId);
 					#fwrite(STDOUT, 'makePostFromIndex: '.$postObj->getPermalink().PHP_EOL);
+				}
+				if(isset($post['date'])){
+					$postDateTime = new DateTime($post['date']);
+					$postObj->setDateTime($postDateTime);
 				}
 				
 				$postObj->setPostId($htmlId);

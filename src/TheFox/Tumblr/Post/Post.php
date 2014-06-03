@@ -2,12 +2,15 @@
 
 namespace TheFox\Tumblr\Post;
 
+use DateTime;
+
 class Post{
 	
 	private $type = '';
 	private $permalink = '';
-	private $postId = 0;
+	private $dateTime = null;
 	
+	private $postId = 0;
 	private $title = '';
 	
 	public function __construct(){
@@ -28,6 +31,14 @@ class Post{
 	
 	public function getPermalink(){
 		return $this->permalink;
+	}
+	
+	public function setDateTime($dateTime){
+		$this->dateTime = $dateTime;
+	}
+	
+	public function getDateTime(){
+		return $this->dateTime;
 	}
 	
 	public function setPostId($postId){
