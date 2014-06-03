@@ -15,11 +15,13 @@ class PostsBlockElement extends BlockElement{
 	
 	public function render(){
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
+		#print str_repeat(' ', 0 * 4).'render: "'.$this->getName().'"'."\n";
 		
 		$children = array();
 		$html = '';
 		foreach($this->getContent() as $postId => $post){
-			#print '    post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			#print str_repeat(' ', 1 * 4).'post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
+			
 			$dateDayOfWeek = '';
 			$dateDayOfMonth = '';
 			$dateMonth = '';
@@ -38,7 +40,7 @@ class PostsBlockElement extends BlockElement{
 				#$newElement = clone $element;
 				$elementName = strtolower($element->getTemplateName());
 				
-				#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
@@ -57,13 +59,13 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof PhotosetBlockElement){
 					if($post instanceof PhotosetPost){
-						#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 						$element->setContent($post);
 					}
 				}
 				elseif($element instanceof VariableElement){
-					#print '        element: '.$element->getId().', "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
-					#print '        element: '.$element->getPath().', "'.$element->getName().'"'."\n";
+					#print str_repeat(' ', 2 * 4).'element: '.$element->getId().', "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+					#print str_repeat(' ', 2 * 4).'element: '.$element->getPath().', "'.$element->getName().'"'."\n";
 					
 					if($elementName == 'permalink'){
 						$element->setContent($post->getPermalink());
@@ -92,51 +94,51 @@ class PostsBlockElement extends BlockElement{
 			foreach($this->getChildren() as $element){
 				$rc = new \ReflectionClass(get_class($element));
 				
-				#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 				
 				$add = false;
 				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
-						#print '        element: "'.$element->getName().'"'."\n";
+						#print str_repeat(' ', 2 * 4).'element: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 				}
 				elseif($element instanceof LinkBlockElement){
 					if($post instanceof LinkPost){
-						#print '        element: "'.$element->getName().'"'."\n";
+						#print str_repeat(' ', 2 * 4).'element: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 				}
 				elseif($element instanceof PhotoBlockElement){
 					if($post instanceof PhotoPost){
-						#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 						$add = true;
 					}
 				}
 				elseif($element instanceof PhotosetBlockElement){
 					if($post instanceof PhotosetPost){
-						#print '        element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 						$add = true;
 					}
 				}
 				elseif($element instanceof VariableElement){
-					#print '        HtmlElement: "'.$element->getName().'"'."\n";
+					#print str_repeat(' ', 2 * 4).'HtmlElement: "'.$element->getName().'"'."\n";
 					$add = true;
 				}
 				elseif($element instanceof DateBlockElement){
 					$add = true;
 				}
 				elseif($element instanceof HtmlElement){
-					#print '        HtmlElement: "'.$element->getName().'"'."\n";
+					#print str_repeat(' ', 2 * 4).'HtmlElement: "'.$element->getName().'"'."\n";
 					$add = true;
 				}
 				else{
 					#$add = true;
-					#print '        element: "'.get_class($element).'", '.$element->getName()."\n";
+					#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", '.$element->getName()."\n";
 				}
 				
 				if($add){
-					#print '            add'."\n";
+					#print str_repeat(' ', 3 * 4).'add'."\n";
 					#$children[] = $newElement;
 					#$children[] = $element;
 					$html .= $element->render();
