@@ -11,6 +11,7 @@ class Post{
 	private $isPermalinkPage = false;
 	private $dateTime = null;
 	private $notes = array();
+	private $tags = array();
 	
 	private $postId = 0;
 	private $title = '';
@@ -57,6 +58,14 @@ class Post{
 	
 	public function getNotes(){
 		return $this->notes;
+	}
+	
+	public function setTags($tags){
+		$this->tags = $tags;
+	}
+	
+	public function getTags(){
+		return $this->tags;
 	}
 	
 	public function setPostId($postId){

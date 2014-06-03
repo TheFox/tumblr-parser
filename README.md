@@ -55,6 +55,12 @@ A Tumblr Theme parser in PHP.
 - `{NoteCount}`
 - `{NoteCountWithLabel}`
 
+### [Tags](https://www.tumblr.com/docs/en/custom_themes#tags) [incomplete]
+- `{block:HasTags}`
+- `{block:Tags}`
+- `{Tag}`
+- `{TagURL}`
+
 ### [Like and Reblog buttons](https://www.tumblr.com/docs/en/custom_themes#like_and_reblog_buttons) [incomplete]
 - `{LikeButton}`
 - `{NoteCount}`

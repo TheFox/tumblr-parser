@@ -84,6 +84,8 @@ class Parser{
 		'PostTitle',
 		'PreviousPage',
 		'ReblogButton',
+		'Tag',
+		'TagURL',
 		'Target',
 		'Title',
 		'URL',
@@ -655,6 +657,9 @@ class Parser{
 				}
 				if(isset($post['notes'])){
 					$postObj->setNotes($post['notes']);
+				}
+				if(isset($post['tags'])){
+					$postObj->setTags($post['tags']);
 				}
 				
 				$postObj->setIsPermalinkPage($isPermalinkPage);

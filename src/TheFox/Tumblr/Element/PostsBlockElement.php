@@ -36,7 +36,8 @@ class PostsBlockElement extends BlockElement{
 			
 			$notes = $post->getNotes();
 			$notesCount = count($notes);
-			#ve($notes);
+			$tags = $post->getTags();
+			$tagsCount = count($tags);
 			
 			// Set all children and subchildren.
 			foreach($this->getChildren(true) as $element){
@@ -115,6 +116,12 @@ class PostsBlockElement extends BlockElement{
 				elseif($element instanceof NoteCountBlockElement){
 					$element->setContent($notes ? true : false);
 				}
+				elseif($element instanceof HasTagsBlockElement){
+					$element->setContent($tags ? true : false);
+				}
+				elseif($element instanceof TagsBlockElement){
+					$element->setContent($tags);
+				}
 				
 			}
 			
@@ -160,6 +167,12 @@ class PostsBlockElement extends BlockElement{
 					$add = true;
 				}
 				elseif($element instanceof NoteCountBlockElement){
+					$add = true;
+				}
+				elseif($element instanceof HasTagsBlockElement){
+					$add = true;
+				}
+				elseif($element instanceof TagsBlockElement){
 					$add = true;
 				}
 				elseif($element instanceof HtmlElement){
