@@ -152,4 +152,15 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals('<meta name="if:Show Test" content="1" />BEGIN  END', $parser->parse());
 	}
 	
+	public function testParseLang(){
+		$parser = new Parser();
+		$parser->setSettings(array('vars' => array('lang:Newer posts' => 'Newer Posts', 'lang:Older posts' => 'Older Posts',), 'posts' => array(), 'postsPerPage' => 15));
+		
+		$parser->setTemplate('BEGIN "{lang:Newer posts}" "{lang:Older posts}" END');
+		$this->assertEquals('BEGIN "Newer Posts" "Older Posts" END', $parser->parse());
+		
+		$parser->setTemplate('BEGIN "{lang:x}" "{lang:y}" END');
+		$this->assertEquals('BEGIN "" "" END', $parser->parse());
+	}
+	
 }
