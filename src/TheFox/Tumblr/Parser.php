@@ -114,11 +114,9 @@ class Parser{
 		if(!isset($settings['vars']) || !is_array($settings['vars'])){
 			throw new RuntimeException(__FUNCTION__.': "vars" not set in settings.', 1);
 		}
-		
 		if(!isset($settings['posts']) || !is_array($settings['posts'])){
 			throw new RuntimeException(__FUNCTION__.': "posts" not set in settings.', 2);
 		}
-		
 		if(!isset($settings['postsPerPage'])){
 			throw new RuntimeException(__FUNCTION__.': "postsPerPage" not set in settings.', 3);
 		}
