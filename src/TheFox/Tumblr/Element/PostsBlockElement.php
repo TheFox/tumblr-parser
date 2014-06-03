@@ -99,7 +99,7 @@ class PostsBlockElement extends BlockElement{
 					elseif($elementName == 'postnotes'){
 						$element->setContent('<ol class="notes"><!-- START NOTES --><li class="note reblog tumblelog_thefox21 original_post without_commentary"><a rel="nofollow" class="avatar_frame" target="_blank" href="http://blog.fox21.at/" title="thefox21"><img src="http://37.media.tumblr.com/avatar_3c795f47b134_16.png" class="avatar " alt="" /></a><span class="action" data-post-url="http://blog.fox21.at/post/13835148295/hello-world">'.join('<div class="clear"></div></li><li class="note reblog tumblelog_thefox21 original_post without_commentary"><a rel="nofollow" class="avatar_frame" target="_blank" href="http://blog.fox21.at/" title="thefox21"><img src="http://37.media.tumblr.com/avatar_3c795f47b134_16.png" class="avatar " alt="" /></a><span class="action" data-post-url="http://blog.fox21.at/post/13835148295/hello-world">', $notes).'</span><div class="clear"></div></li><!-- END NOTES --></ol>');
 					}
-					elseif($elementName == 'notecount'){
+					elseif($elementName == 'notecount' && $post->getIsPermalinkPage()){
 						$element->setContent($notesCount);
 					}
 					elseif($elementName == 'notecountwithlabel'){
@@ -110,7 +110,7 @@ class PostsBlockElement extends BlockElement{
 					$element->setContent((bool)$postDateTime);
 				}
 				elseif($element instanceof PostNotesBlockElement){
-					$element->setContent($notes ? true : false);
+					$element->setContent($notes && $post->getIsPermalinkPage() ? true : false);
 				}
 				elseif($element instanceof NoteCountBlockElement){
 					$element->setContent($notes ? true : false);
