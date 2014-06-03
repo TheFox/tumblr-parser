@@ -91,5 +91,8 @@ The preferred method of installation is via [Packagist](https://packagist.org/pa
 - Enabling Booleans [complete]
 - Enabling Custom Text [complete]
 
+## Contribute
+You're welcome to contribute to this project. Fork this project at <https://github.com/TheFox/tumblnizer>. You should read GitHub's [How to Fork a Repo](https://help.github.com/articles/fork-a-repo).
+
 ## License
 See [LICENSE.md](LICENSE.md) file.
