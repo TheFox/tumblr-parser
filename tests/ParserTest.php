@@ -49,9 +49,18 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 		$parser->setSettings(array('vars' => array(), 'posts' => array()));
 	}
 	
+	/**
+	 * @expectedException RuntimeException
+	 * @expectedExceptionCode 4
+	 */
+	public function testSetSettings6(){
+		$parser = new Parser();
+		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
+	}
+	
 	public function testParseVariable(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array('Title' => 'my_title'), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array('Title' => 'my_title'), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('');
 		$this->assertEquals('', $parser->parse());
@@ -77,7 +86,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseIf1(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array('if:Show Test' => 0), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array('if:Show Test' => 0), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('BEGIN  END', $parser->parse());
@@ -88,7 +97,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseIf2(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('BEGIN  END', $parser->parse());
@@ -99,7 +108,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseIf3(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array('if:Show Test' => 1), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array('if:Show Test' => 1), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('BEGIN OK END', $parser->parse());
@@ -110,7 +119,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseIf4(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array('if:Show Test' => 1), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array('if:Show Test' => 1), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN OK END', $parser->parse());
@@ -121,7 +130,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseIf5(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array('if:Show Test' => 0), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array('if:Show Test' => 0), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN  END', $parser->parse());
@@ -132,7 +141,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseIf6(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('<meta name="if:Show Test" content="0" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('<meta name="if:Show Test" content="0" />BEGIN  END', $parser->parse());
@@ -143,7 +152,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseIf7(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('<meta name="if:Show Test" content="1" />BEGIN {block:IfShowTest}OK{/block:IfShowTest} END');
 		$this->assertEquals('<meta name="if:Show Test" content="1" />BEGIN OK END', $parser->parse());
@@ -154,7 +163,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 	
 	public function testParseLang(){
 		$parser = new Parser();
-		$parser->setSettings(array('vars' => array('lang:Newer posts' => 'Newer Posts', 'lang:Older posts' => 'Older Posts',), 'posts' => array(), 'postsPerPage' => 15));
+		$parser->setSettings(array('vars' => array('lang:Newer posts' => 'Newer Posts', 'lang:Older posts' => 'Older Posts',), 'posts' => array(), 'postsPerPage' => 15, 'pages' => array()));
 		
 		$parser->setTemplate('BEGIN "{lang:Newer posts}" "{lang:Older posts}" END');
 		$this->assertEquals('BEGIN "Newer Posts" "Older Posts" END', $parser->parse());

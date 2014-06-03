@@ -122,6 +122,9 @@ class Parser{
 		if(!isset($settings['postsPerPage'])){
 			throw new RuntimeException(__FUNCTION__.': "postsPerPage" not set in settings.', 3);
 		}
+		if(!isset($settings['pages'])){
+			throw new RuntimeException(__FUNCTION__.': "pages" not set in settings.', 4);
+		}
 		
 		$this->settings = $settings;
 		
@@ -467,7 +470,7 @@ class Parser{
 		#if($level == 1){ ve($this->rootElement); }
 	}
 	
-	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false, $posts = array(), $id = 1, $totalPages = 1, $level = 1){
+	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false, $posts = array(), $id = 1, $totalPages = 1, $pages = array(), $level = 1){
 		if($level >= 100){
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 1);
 		}
@@ -603,6 +606,12 @@ class Parser{
 					$element->setContent(true);
 				}
 			}
+			elseif($element instanceof HasPagesBlockElement){
+				$element->setContent(count($pages) > 0);
+			}
+			elseif($element instanceof PagesBlockElement){
+				$element->setContent($pages);
+			}
 			elseif($element instanceof PostsBlockElement){
 				#fwrite(STDOUT, "    PostsBlockElement".PHP_EOL);
 				$element->setContent($posts);
@@ -610,7 +619,7 @@ class Parser{
 			}
 			
 			if($setSub){
-				$this->setElementsValues($element, $isIndexPage, $isPermalinkPage, $posts, $id, $totalPages, $level + 1);
+				$this->setElementsValues($element, $isIndexPage, $isPermalinkPage, $posts, $id, $totalPages, $pages, $level + 1);
 			}
 		}
 	}
@@ -775,7 +784,7 @@ class Parser{
 		#ve($posts);
 		#ve($this->variables);
 		
-		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage, $posts, $id, $totalPages);
+		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage, $posts, $id, $totalPages, $this->settings['pages']);
 		return $this->renderElements($this->rootElement);
 	}
 	

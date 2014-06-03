@@ -20,6 +20,10 @@ A Tumblr Theme parser in PHP.
 - `{TotalPages}`
 - `{block:AskEnabled}`
 - `{AskLabel}`
+- `{block:HasPages}`
+- `{block:Pages}`
+- `{URL}`
+- `{Label}`
 
 ### [Posts](http://www.tumblr.com/docs/en/custom_themes#posts) [incomplete]
 - `{block:Posts}`

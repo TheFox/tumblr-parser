@@ -18,8 +18,9 @@
 				<li>AskLabel: "{AskLabel}"</li>
 				<li>HasPages
 					{block:HasPages}
+						OK
 						<ul>
-							{block:Pages}<li><a href="{URL}">"{Label}"</a></li>{/block:Pages}
+							{block:Pages}<li>"{Label}" "{URL}"</li>{/block:Pages}
 						</ul>
 					{/block:HasPages}
 				</li>
