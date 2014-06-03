@@ -73,14 +73,16 @@ class Element{
 	public function getPath(){
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
+		$name = $this->getName();
+		$rc = new \ReflectionClass(get_class($this));
+		$className = $rc->getShortName();
+		
 		if($this->getParent()){
-			$name = $this->getName();
-			$rc = new \ReflectionClass(get_class($this));
-			$className = $rc->getShortName();
 			return $this->getParent()->getPath().'->'.($name ? $name : $className).'['.$this->getId().']';
 		}
 		else{
-			return 'ROOT'.'['.$this->getId().']';
+			#return 'ROOT'.'['.$this->getId().']';
+			return ''.($name ? $name : $className).'['.$this->getId().']';
 		}
 	}
 	
@@ -120,7 +122,7 @@ class Element{
 	
 	public function render(){
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		print __CLASS__.'->'.__FUNCTION__.': "'.$this->getPath().'"'."\n";
+		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getPath().'"'."\n";
 		
 		return $this->renderChildren($this->children);
 	}
