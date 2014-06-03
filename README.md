@@ -1,6 +1,8 @@
 # Tumblr Parser
 A Tumblr Theme parser in PHP.
 
+Tired of getting sick of Tumblrs online HTML editor for custom themes? With Tumblr Parser you can edit a theme in your favourite HTML editor and render the output in your browser on your own/local server. So you can create themes for Tumblr without editing the HTML in Tumblr's online HTML editor.
+
 ## [Tumblr Custom Theme](http://www.tumblr.com/docs/en/custom_themes) Implementation
 ### [Basic Variables](http://www.tumblr.com/docs/en/custom_themes#basic_variables) [incomplete]
 - `{Title}`
