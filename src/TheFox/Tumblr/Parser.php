@@ -74,10 +74,13 @@ class Parser{
 		'Month',
 		'Name',
 		'NextPage',
+		'NoteCount',
+		'NoteCountWithLabel',
 		'Permalink',
 		'PhotoAlt',
 		'PhotoURL-500',
 		'PostID',
+		'PostNotes',
 		'PostTitle',
 		'PreviousPage',
 		'ReblogButton',
@@ -668,6 +671,9 @@ class Parser{
 				if(isset($post['date'])){
 					$postDateTime = new DateTime($post['date']);
 					$postObj->setDateTime($postDateTime);
+				}
+				if(isset($post['notes'])){
+					$postObj->setNotes($post['notes']);
 				}
 				
 				$postObj->setPostId($htmlId);

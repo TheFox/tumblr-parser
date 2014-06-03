@@ -49,9 +49,15 @@ A Tumblr Theme parser in PHP.
 - `{Month}`
 - `{Year}`
 
+### [Notes](https://www.tumblr.com/docs/en/custom_themes#notes) [incomplete]
+- `{block:PostNotes}`
+- `{PostNotes}`
+- `{NoteCount}`
+- `{NoteCountWithLabel}`
+
 ### [Like and Reblog buttons](https://www.tumblr.com/docs/en/custom_themes#like_and_reblog_buttons) [incomplete]
 - `{LikeButton}`
-- `{ReblogButton}`
+- `{NoteCount}`
 
 ### [Theme Options](http://www.tumblr.com/docs/en/custom_themes#theme-options) [incomplete]
 - Enabling Booleans [complete]

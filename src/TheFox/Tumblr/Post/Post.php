@@ -9,6 +9,7 @@ class Post{
 	private $type = '';
 	private $permalink = '';
 	private $dateTime = null;
+	private $notes = array();
 	
 	private $postId = 0;
 	private $title = '';
@@ -39,6 +40,14 @@ class Post{
 	
 	public function getDateTime(){
 		return $this->dateTime;
+	}
+	
+	public function setNotes($notes){
+		$this->notes = $notes;
+	}
+	
+	public function getNotes(){
+		return $this->notes;
 	}
 	
 	public function setPostId($postId){
