@@ -10,6 +10,17 @@ A Tumblr Theme parser in PHP.
 - `{block:IndexPage}`
 - `{block:PostTitle}`, `{PostTitle}`
 
+### [Navigation](https://www.tumblr.com/docs/en/custom_themes#navigation) [incomplete]
+- `{block:Pagination}`
+- `{block:PreviousPage}`
+- `{block:NextPage}`
+- `{PreviousPage}`
+- `{NextPage}`
+- `{CurrentPage}`
+- `{TotalPages}`
+- `{block:AskEnabled}`
+- `{AskLabel}`
+
 ### [Posts](http://www.tumblr.com/docs/en/custom_themes#posts) [incomplete]
 - `{block:Posts}`
 - `{block:Text}`

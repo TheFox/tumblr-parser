@@ -24,15 +24,35 @@
 					{/block:HasPages}
 				</li>
 				
-				<li>lang:Newer posts: "{lang:Newer posts}"</li>
-				<li>lang:Older posts: "{lang:Older posts}"</li>
+				<li>
+					<ul>
+						<li>lang:Newer posts: "{lang:Newer posts}"</li>
+						<li>lang:Older posts: "{lang:Older posts}"</li>
+					</ul>
+				</li>
 				
-				<li>PreviousPage: {block:PreviousPage}<a href="{PreviousPage}">"{PreviousPage}"</a>{/block:PreviousPage}</li>
-				<li>Page CurrentPage of TotalPages: "{lang:Page CurrentPage of TotalPages}"</li>
-				<li>NextPage: {block:NextPage}<a href="{NextPage}">"{NextPage}"</a>{/block:NextPage}</li>
-				<li>IfGoogleAnalyticsID: {block:IfGoogleAnalyticsID}My Google Analytics ID: {text:Google Analytics ID}{/block:IfGoogleAnalyticsID}</li>
-				<li>text:Google Analytics ID: {text:Google Analytics ID}</li>
-				<li>IfNotGoogleAnalyticsID: {block:IfNotGoogleAnalyticsID}OK{/block:IfNotGoogleAnalyticsID}</li>
+				<li>
+					<ul>
+						<li>block:Pagination: {block:Pagination}OK{/block:Pagination}</li>
+						
+						<li>block PreviousPage: {block:PreviousPage}<a href="{PreviousPage}">"{PreviousPage}"</a>{/block:PreviousPage}</li>
+						<li>PreviousPage: {PreviousPage}</li>
+						
+						<li>block NextPage: {block:NextPage}OK <a href="{NextPage}">"{NextPage}"</a>{/block:NextPage}</li>
+						<li>NextPage: {NextPage}</li>
+						
+						<li>Page CurrentPage of TotalPages: "{lang:Page CurrentPage of TotalPages}"</li>
+					</ul>
+				</li>
+				
+				<li>
+					<ul>
+						<li>IfGoogleAnalyticsID: {block:IfGoogleAnalyticsID}My Google Analytics ID: {text:Google Analytics ID}{/block:IfGoogleAnalyticsID}</li>
+						<li>text:Google Analytics ID: {text:Google Analytics ID}</li>
+						<li>IfNotGoogleAnalyticsID: {block:IfNotGoogleAnalyticsID}OK{/block:IfNotGoogleAnalyticsID}</li>
+					</ul>
+				</li>
+				
 				
 				{block:Posts}
 					<li>

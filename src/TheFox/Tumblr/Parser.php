@@ -28,6 +28,7 @@ use TheFox\Tumblr\Element\LinkUrlBlockElement;
 use TheFox\Tumblr\Element\NextPageBlockElement;
 use TheFox\Tumblr\Element\NoteCountBlockElement;
 use TheFox\Tumblr\Element\PagesBlockElement;
+use TheFox\Tumblr\Element\PaginationBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
 use TheFox\Tumblr\Element\PostNotesBlockElement;
 use TheFox\Tumblr\Element\PostsBlockElement;
@@ -379,6 +380,9 @@ class Parser{
 							elseif($name == 'PostNotes'){
 								$element = new PostNotesBlockElement();
 							}
+							elseif($name == 'Pagination'){
+								$element = new PaginationBlockElement();
+							}
 							elseif($name == 'PreviousPage'){
 								$element = new PreviousPageBlockElement();
 							}
@@ -463,7 +467,7 @@ class Parser{
 		#if($level == 1){ ve($this->rootElement); }
 	}
 	
-	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false, $posts = array(), $level = 1){
+	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false, $posts = array(), $id = 1, $totalPages = 1, $level = 1){
 		if($level >= 100){
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 1);
 		}
@@ -486,14 +490,43 @@ class Parser{
 			
 			$setSub = true;
 			if($element instanceof VariableElement){
-				#fwrite(STDOUT, str_repeat('    |', ($level)).'-    var has var: '.(int)isset($this->variables[$elementName]).PHP_EOL);
-				if(isset($this->variables[$elementName])){
-					#fwrite(STDOUT, str_repeat('    |', ($level + 1))."    val: '".$this->variables[$elementName]->getValue()."'\n");
-					$element->setContent($this->variables[$elementName]->getValue());
+				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
+				
+				$content = $element->getDefaultContent();
+				if($element instanceof LangVariableElement){
+					#fwrite(STDOUT, '    lang "'.$elementName.'"'.PHP_EOL);
+					
+					if($isIndexPage && $elementName == 'lang:Page CurrentPage of TotalPages'){
+						$content = 'Page '.$id.' of '.$totalPages;
+					}
+					else{
+						if(isset($this->variables[$elementName])){
+							$content = $this->variables[$elementName]->getValue();
+						}
+					}
 				}
-				else{
-					$element->setContent($element->getDefaultContent());
+				elseif($elementName == 'PreviousPage'){
+					#fwrite(STDOUT, '    PreviousPage '.(int)$isIndexPage.', '.$id.', '.$totalPages.PHP_EOL);
+					if($isIndexPage && $id > 1){
+						$content = '?type=page&id='.($id - 1);
+						#fwrite(STDOUT, '        url "'.$content.'"'.PHP_EOL);
+						#$element->setContent($url);
+					}
 				}
+				elseif($elementName == 'NextPage'){
+					#fwrite(STDOUT, '    NextPage '.(int)$isIndexPage.', '.$id.', '.$totalPages.PHP_EOL);
+					if($isIndexPage && $id < $totalPages){
+						$content = '?type=page&id='.($id + 1);
+						#fwrite(STDOUT, '        url "'.$content.'"'.PHP_EOL);
+						#$element->setContent($url);
+					}
+				}
+				
+				if(!$content && isset($this->variables[$elementName])){
+					$content = $this->variables[$elementName]->getValue();
+				}
+				
+				$element->setContent($content);
 				$setSub = false;
 			}
 			elseif($element instanceof IndexPageBlockElement){
@@ -554,6 +587,22 @@ class Parser{
 					$element->setContent($element->getDefaultContent());
 				}
 			}
+			elseif($element instanceof PaginationBlockElement){
+				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
+				$element->setContent($isIndexPage);
+			}
+			elseif($element instanceof PreviousPageBlockElement){
+				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
+				if($isIndexPage && $id > 1){
+					$element->setContent(true);
+				}
+			}
+			elseif($element instanceof NextPageBlockElement){
+				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
+				if($isIndexPage && $id < $totalPages){
+					$element->setContent(true);
+				}
+			}
 			elseif($element instanceof PostsBlockElement){
 				#fwrite(STDOUT, "    PostsBlockElement".PHP_EOL);
 				$element->setContent($posts);
@@ -561,7 +610,7 @@ class Parser{
 			}
 			
 			if($setSub){
-				$this->setElementsValues($element, $isIndexPage, $isPermalinkPage, $posts, $level + 1);
+				$this->setElementsValues($element, $isIndexPage, $isPermalinkPage, $posts, $id, $totalPages, $level + 1);
 			}
 		}
 	}
@@ -663,6 +712,7 @@ class Parser{
 				}
 				
 				$postObj->setIsPermalinkPage($isPermalinkPage);
+				#$postObj->setHasNextPage(isset($this->settings['posts'][$id + 1]));
 				$postObj->setPostId($htmlId);
 			}
 		}
@@ -684,6 +734,7 @@ class Parser{
 		
 		$isIndexPage = $type == 'page';
 		$isPermalinkPage = $type == 'post';
+		$totalPages = ceil(count($this->settings['posts']) / $this->settings['postsPerPage']);
 		
 		$posts = array();
 		
@@ -692,9 +743,9 @@ class Parser{
 			$postIdMax = $postIdMin + $this->settings['postsPerPage'];
 			#fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax.PHP_EOL);
 			
-			for($id = $postIdMin; $id < $postIdMax; $id++){
-				if(isset($this->settings['posts'][$id])){
-					$postObj = $this->makePostFromIndex($id, $isPermalinkPage);
+			for($postId = $postIdMin; $postId < $postIdMax; $postId++){
+				if(isset($this->settings['posts'][$postId])){
+					$postObj = $this->makePostFromIndex($postId, $isPermalinkPage);
 					if($postObj){
 						$posts[] = $postObj;
 					}
@@ -724,7 +775,7 @@ class Parser{
 		#ve($posts);
 		#ve($this->variables);
 		
-		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage, $posts);
+		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage, $posts, $id, $totalPages);
 		return $this->renderElements($this->rootElement);
 	}
 	
