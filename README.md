@@ -50,6 +50,7 @@ A Tumblr Theme parser in PHP.
 - `{Year}`
 
 ### [Like and Reblog buttons](https://www.tumblr.com/docs/en/custom_themes#like_and_reblog_buttons) [incomplete]
+- `{LikeButton}`
 - `{ReblogButton}`
 
 ### [Theme Options](http://www.tumblr.com/docs/en/custom_themes#theme-options) [incomplete]
