@@ -8,6 +8,7 @@ class Post{
 	
 	private $type = '';
 	private $permalink = '';
+	private $isPermalinkPage = false;
 	private $dateTime = null;
 	private $notes = array();
 	
@@ -32,6 +33,14 @@ class Post{
 	
 	public function getPermalink(){
 		return $this->permalink;
+	}
+	
+	public function setIsPermalinkPage($isPermalinkPage){
+		$this->isPermalinkPage = $isPermalinkPage;
+	}
+	
+	public function getIsPermalinkPage(){
+		return $this->isPermalinkPage;
 	}
 	
 	public function setDateTime($dateTime){

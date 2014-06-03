@@ -605,7 +605,7 @@ class Parser{
 		return $postObj;
 	}
 	
-	private function makePostFromIndex($id){
+	private function makePostFromIndex($id, $isPermalinkPage = false){
 		$htmlId = $id + 1;
 		#fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId.PHP_EOL);
 		
@@ -676,6 +676,7 @@ class Parser{
 					$postObj->setNotes($post['notes']);
 				}
 				
+				$postObj->setIsPermalinkPage($isPermalinkPage);
 				$postObj->setPostId($htmlId);
 			}
 		}
@@ -707,7 +708,7 @@ class Parser{
 			
 			for($id = $postIdMin; $id < $postIdMax; $id++){
 				if(isset($this->settings['posts'][$id])){
-					$postObj = $this->makePostFromIndex($id);
+					$postObj = $this->makePostFromIndex($id, $isPermalinkPage);
 					if($postObj){
 						$posts[] = $postObj;
 					}
@@ -718,7 +719,7 @@ class Parser{
 			}
 		}
 		elseif($isPermalinkPage){
-			$postObj = $this->makePostFromIndex($id - 1);
+			$postObj = $this->makePostFromIndex($id - 1, $isPermalinkPage);
 			if($postObj){
 				$posts[] = $postObj;
 				
