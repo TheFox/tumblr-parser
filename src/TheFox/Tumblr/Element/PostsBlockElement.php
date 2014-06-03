@@ -87,6 +87,9 @@ class PostsBlockElement extends BlockElement{
 						$element->setContent($post->getPostId());
 					}
 				}
+				elseif($element instanceof DateBlockElement){
+					$element->setContent((bool)$postDateTime);
+				}
 				
 			}
 			
