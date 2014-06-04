@@ -49,6 +49,7 @@ class PostsBlockElement extends BlockElement{
 				$elementName = strtolower($element->getTemplateName());
 				
 				#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print str_repeat(' ', 2 * 4).'element: '.$element->getPath()."\n";
 				
 				if($element instanceof TextBlockElement){
 					if($post instanceof TextPost){
@@ -72,7 +73,6 @@ class PostsBlockElement extends BlockElement{
 					}
 				}
 				elseif($element instanceof VariableElement){
-					#print str_repeat(' ', 2 * 4).'element: '.$element->getId().', "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
 					#print str_repeat(' ', 2 * 4).'element: '.$element->getPath().', "'.$element->getName().'"'."\n";
 					
 					if($elementName == 'permalink'){
@@ -113,6 +113,7 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof DateBlockElement){
 					$element->setContent(true);
+					#print str_repeat(' ', 2 * 4).'element: '.$element->getPath()."\n";
 				}
 				elseif($element instanceof PostNotesBlockElement){
 					$element->setContent($notes && $post->getIsPermalinkPage() ? true : false);
@@ -130,14 +131,14 @@ class PostsBlockElement extends BlockElement{
 					#print str_repeat(' ', 2 * 4).'element: '.$element->getPath().', "'.$element->getName().'" '.(int)$hasTitle."\n";
 					$element->setContent($hasTitle);
 				}
-				
 			}
 			
 			// Collect level 1 children for rendering.
 			foreach($this->getChildren() as $element){
 				$rc = new \ReflectionClass(get_class($element));
 				
-				#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+				#print str_repeat(' ', 2 * 4).'element: '.$element->getPath()."\n";
+				#ve($element->getContent());
 				
 				$add = false;
 				if($element instanceof TextBlockElement){
@@ -194,8 +195,7 @@ class PostsBlockElement extends BlockElement{
 					$add = true;
 				}
 				else{
-					#$add = true;
-					#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", '.$element->getName()."\n";
+					#ve($element->getContent());
 				}
 				
 				if($add){

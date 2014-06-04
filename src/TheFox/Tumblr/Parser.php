@@ -531,9 +531,11 @@ class Parser{
 				$setSub = false;
 			}
 			elseif($element instanceof IndexPageBlockElement){
+				#fwrite(STDOUT, 'element index:  '.$element->getPath().' "'.$elementName.'" '.(int)$isIndexPage.PHP_EOL);
 				$element->setContent($isIndexPage);
 			}
 			elseif($element instanceof PermalinkPageBlockElement){
+				#fwrite(STDOUT, 'element perm:  '.$element->getPath().' "'.$elementName.'" '.(int)$isPermalinkPage.PHP_EOL);
 				$element->setContent($isPermalinkPage);
 			}
 			elseif($element instanceof PostTitleBlockElement){
