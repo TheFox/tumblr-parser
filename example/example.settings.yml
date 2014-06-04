@@ -8,16 +8,16 @@ vars:
     'lang:Newer posts': 'Newer Posts'
     'lang:Older posts': 'Older Posts'
     'text:Google Analytics ID': 1234
-postsPerPage: 3
+postsPerPage: 10
 posts:
     - { type: text, permalink: '?type=post&index=1', date: '1987-02-21 09:58:00', notes: [text_1, text2], tags: [tag1, tag_2], title: title_test1, body: test1.body }
-    - { type: text, body: test2.body }
+    - { type: text, date: '1987-02-21 09:58:00', body: test2.body }
     - { type: text, date: '1987-02-21 09:58:00', title: title_test3 }
     - { type: link, date: '1987-02-21 09:58:00', url: 'http://fox21.at', name: link_name1, target: 'target="_blank"', description: 'this is my description' }
     - { type: link, date: '1987-02-21 09:58:00', url: 'http://www.fox21.at', name: link_name2 }
     - { type: photo, date: '1987-02-21 09:58:00', url: 'https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg', link: 'https://en.wikipedia.org/wiki/Halloumi', alt: 'my alt text', caption: 'my caption text' }
     - { type: photo, date: '1987-02-21 09:58:00', url: 'https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg', alt: 'my alt text' }
-    - { type: photoset, date: '1987-02-21 09:58:00', caption: 'my super fancy caption', photos: [{ url: 'https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg', link: 'https://en.wikipedia.org/wiki/Halloumi', alt: 'my alt text3', caption: 'my caption text3' }, { url: 'https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg', alt: 'my alt text4' }] }
+    - { type: photoset, date: '1987-02-21 09:58:00', caption: 'my super fancy caption', photos: [{ url: 'https://farm3.staticflickr.com/2856/9816324626_63726c6fdd.jpg', link: 'https://en.wikipedia.org/wiki/Halloumi', alt: 'my alt text3', caption: 'my caption text3' }, { url: 'https://farm4.staticflickr.com/3057/2494697235_7617067bca.jpg', alt: 'my alt text4' }] }
 pages:
     - { url: 'http://fox21.at', label: FOX21.at }
     - { url: 'http://tools.fox21.at', label: Tools }
