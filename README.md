@@ -39,6 +39,7 @@ The preferred method of installation is via [Packagist](https://packagist.org/pa
 - `{block:Photo}`
 - `{block:Photoset}`
 - `{Permalink}`
+- `{PostID}`
 
 ### [Text Posts](http://www.tumblr.com/docs/en/custom_themes#text-posts) [complete]
 
