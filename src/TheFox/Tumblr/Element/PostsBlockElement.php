@@ -21,6 +21,8 @@ class PostsBlockElement extends BlockElement{
 		foreach($this->getContent() as $postId => $post){
 			#print str_repeat(' ', 1 * 4).'post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
 			
+			$hasTitle = (bool)$post->getTitle();
+			
 			$dateDayOfWeek = '';
 			$dateDayOfMonth = '';
 			$dateMonth = '';
@@ -121,6 +123,10 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof TagsBlockElement){
 					$element->setContent($tags);
+				}
+				elseif($element instanceof TitleBlockElement){
+					#print str_repeat(' ', 2 * 4).'element: '.$element->getPath().', "'.$element->getName().'" '.(int)$hasTitle."\n";
+					$element->setContent($hasTitle);
 				}
 				
 			}
