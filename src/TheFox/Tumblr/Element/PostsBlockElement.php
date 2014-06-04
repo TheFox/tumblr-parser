@@ -34,7 +34,7 @@ class PostsBlockElement extends BlockElement{
 			if($postDateTime){
 				$dateDayOfWeek = $postDateTime->format('l');
 				$dateDayOfMonth = $postDateTime->format('j');
-				$dateMonth = $postDateTime->format('n');
+				$dateMonth = $postDateTime->format('F');
 				$dateYear = $postDateTime->format('Y');
 			}
 			
