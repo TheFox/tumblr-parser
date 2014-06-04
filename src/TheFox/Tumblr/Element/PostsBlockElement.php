@@ -6,6 +6,8 @@ use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
+use TheFox\Tumblr\Element\IndexPageBlockElement;
+use TheFox\Tumblr\Element\PermalinkPageBlockElement;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
@@ -183,6 +185,12 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof HtmlElement){
 					#print str_repeat(' ', 2 * 4).'HtmlElement: "'.$element->getName().'"'."\n";
+					$add = true;
+				}
+				elseif($element instanceof IndexPageBlockElement){
+					$add = true;
+				}
+				elseif($element instanceof PermalinkPageBlockElement){
 					$add = true;
 				}
 				else{

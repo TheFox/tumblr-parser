@@ -613,7 +613,6 @@ class Parser{
 			elseif($element instanceof PostsBlockElement){
 				#fwrite(STDOUT, "    PostsBlockElement".PHP_EOL);
 				$element->setContent($posts);
-				$setSub = false;
 			}
 			
 			if($setSub){

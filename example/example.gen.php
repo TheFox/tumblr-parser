@@ -18,10 +18,10 @@ $settings = array(
 		'lang:Older posts' => 'Older Posts',
 		'text:Google Analytics ID' => 1234,
 	),
-	'postsPerPage' => 3,
+	'postsPerPage' => 10,
 	'posts' => array(
 		array('type' => 'text', 'permalink' => '?type=post&index=1', 'date' => '1987-02-21 09:58:00', 'notes' => array('text_1', 'text2'), 'tags' => array('tag1', 'tag_2'), 'title' => 'title_test1', 'body' => 'test1.body'),
-		array('type' => 'text', 'body' => 'test2.body'),
+		array('type' => 'text', 'date' => '1987-02-21 09:58:00', 'body' => 'test2.body'),
 		array('type' => 'text', 'date' => '1987-02-21 09:58:00', 'title' => 'title_test3'),
 		array('type' => 'link', 'date' => '1987-02-21 09:58:00', 'url' => 'http://fox21.at', 'name' => 'link_name1', 'target' => 'target="_blank"', 'description' => 'this is my description'),
 		array('type' => 'link', 'date' => '1987-02-21 09:58:00', 'url' => 'http://www.fox21.at', 'name' => 'link_name2'),
