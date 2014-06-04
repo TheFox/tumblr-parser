@@ -108,7 +108,7 @@ class PostsBlockElement extends BlockElement{
 					}
 				}
 				elseif($element instanceof DateBlockElement){
-					$element->setContent((bool)$postDateTime);
+					$element->setContent(true);
 				}
 				elseif($element instanceof PostNotesBlockElement){
 					$element->setContent($notes && $post->getIsPermalinkPage() ? true : false);
