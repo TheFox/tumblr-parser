@@ -7,6 +7,7 @@ use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
 use TheFox\Tumblr\Element\Post\QuoteBlockElement;
+use TheFox\Tumblr\Element\Post\ChatBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
 use TheFox\Tumblr\Post\TextPost;
@@ -14,6 +15,7 @@ use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
 use TheFox\Tumblr\Post\PhotosetPost;
 use TheFox\Tumblr\Post\QuotePost;
+use TheFox\Tumblr\Post\ChatPost;
 
 class PostsBlockElement extends BlockElement{
 	
@@ -76,6 +78,11 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof QuoteBlockElement){
 					if($post instanceof QuotePost){
+						$element->setContent($post);
+					}
+				}
+				elseif($element instanceof ChatBlockElement){
+					if($post instanceof ChatPost){
 						$element->setContent($post);
 					}
 				}
@@ -174,6 +181,11 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof QuoteBlockElement){
 					if($post instanceof QuotePost){
+						$add = true;
+					}
+				}
+				elseif($element instanceof ChatBlockElement){
+					if($post instanceof ChatPost){
 						$add = true;
 					}
 				}

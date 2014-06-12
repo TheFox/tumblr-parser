@@ -13,7 +13,6 @@ use TheFox\Tumblr\Element\AskEnabledBlockElement;
 use TheFox\Tumblr\Element\AudioBlockElement;
 use TheFox\Tumblr\Element\AudioEmbedBlockElement;
 use TheFox\Tumblr\Element\CaptionBlockElement;
-use TheFox\Tumblr\Element\ChatBlockElement;
 use TheFox\Tumblr\Element\DateBlockElement;
 use TheFox\Tumblr\Element\DescriptionBlockElement;
 use TheFox\Tumblr\Element\HasPagesBlockElement;
@@ -23,7 +22,6 @@ use TheFox\Tumblr\Element\IfBlockElement;
 use TheFox\Tumblr\Element\IfNotBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\LabelBlockElement;
-use TheFox\Tumblr\Element\LinesBlockElement;
 use TheFox\Tumblr\Element\LinkUrlBlockElement;
 use TheFox\Tumblr\Element\NextPageBlockElement;
 use TheFox\Tumblr\Element\NoteCountBlockElement;
@@ -49,6 +47,8 @@ use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
 use TheFox\Tumblr\Element\Post\QuoteBlockElement;
+use TheFox\Tumblr\Element\Post\ChatBlockElement;
+use TheFox\Tumblr\Element\Post\LinesBlockElement;
 
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
@@ -56,10 +56,12 @@ use TheFox\Tumblr\Post\PhotoPost;
 #use TheFox\Tumblr\Post\PhotosPost;
 use TheFox\Tumblr\Post\PhotosetPost;
 use TheFox\Tumblr\Post\QuotePost;
+use TheFox\Tumblr\Post\ChatPost;
 
 class Parser{
 	
 	public static $variableNames = array(
+		'Alt',
 		'AskLabel',
 		'Body',
 		'Caption',
@@ -70,6 +72,7 @@ class Parser{
 		'Label',
 		'Length',
 		'LikeButton',
+		'Line',
 		'LinkCloseTag',
 		'LinkOpenTag',
 		'LinkURL',
@@ -94,6 +97,7 @@ class Parser{
 		'Target',
 		'Title',
 		'URL',
+		'UserNumber',
 		'Year',
 	);
 	
@@ -713,6 +717,15 @@ class Parser{
 				}
 				if(isset($post['length'])){
 					$postObj->setLength($post['length']);
+				}
+			}
+			elseif($type == 'chat'){
+				$postObj = new ChatPost();
+				if(isset($post['title'])){
+					$postObj->setTitle($post['title']);
+				}
+				if(isset($post['chats'])){
+					$postObj->setChats($post['chats']);
 				}
 			}
 			
