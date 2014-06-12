@@ -6,7 +6,7 @@ Tired of getting sick of Tumblrs online HTML editor for custom themes? With Tumb
 ## Installation
 The preferred method of installation is via [Packagist](https://packagist.org/packages/thefox/tumblr-parser) and [Composer](https://getcomposer.org/). Run the following command to install the package and add it as a requirement to composer.json:
 
-`composer.phar require "thefox/tumblr-parser=0.3.*"`
+`composer.phar require "thefox/tumblr-parser=0.4.*"`
 
 ## [Tumblr Custom Theme](http://www.tumblr.com/docs/en/custom_themes) Implementation
 ### [Basic Variables](http://www.tumblr.com/docs/en/custom_themes#basic_variables) [incomplete]
