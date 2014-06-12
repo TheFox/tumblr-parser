@@ -39,6 +39,5 @@ $settings = array(
 
 file_put_contents(__DIR__.'/example.settings.yml', Yaml::dump($settings));
 
-print ''.count($settings['posts']).' posts'."\n";
+print ''.count($settings['posts']).' posts ('.$settings['postsPerPage'].'/page)'."\n";
 print ''.count($settings['pages']).' pages'."\n";
-print ''.$settings['postsPerPage'].' posts per page'."\n";
