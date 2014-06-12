@@ -22,7 +22,7 @@ posts:
     - { type: photoset, date: '1987-02-21 09:58:00', caption: 'my super fancy caption', photos: [{ url: 'https://farm3.staticflickr.com/2856/9816324626_63726c6fdd.jpg', link: 'https://en.wikipedia.org/wiki/Halloumi', alt: 'my alt text3', caption: 'my caption text3' }, { url: 'https://farm4.staticflickr.com/3057/2494697235_7617067bca.jpg', alt: 'my alt text4' }] }
     - { type: quote, date: '1987-02-22 10:00:00', notes: [text_1, text2], tags: [tag1, tag_2], quote: 'I''m gonna taste like heaven.', source: 'The Sausage', length: short }
     - { type: chat, date: '1987-02-23 10:00:00', notes: [text_1, text2], tags: [tag1, tag_2], title: 'my chat title', chats: [{ label: 'Johnny Cash', line: 'Dear God, give us Freddie Mercury back and we will send you Justin Bieber.' }, { label: 'Freddie Mercury', line: 'I will rock you.' }, { label: God, line: Mkay. }, { label: 'Justin Bieber', line: 'Aw maaan. :(' }, { label: God, line: Done. }] }
-    - { type: answer, date: '1987-02-24 10:00:00', notes: [text_1, text2], tags: [tag1, tag_2], asker: 'A Asker', question: 'The question is what is the question?', answer: 'The answer might be similar.' }
+    - { type: answer, date: '1987-03-01 09:08:07', notes: [text_1, text2], tags: [tag1, tag_2], asker: 'A Asker', question: 'The question is what is the question?', answer: 'The answer might be similar.' }
 pages:
     - { url: 'http://fox21.at', label: FOX21.at }
     - { url: 'http://tools.fox21.at', label: Tools }

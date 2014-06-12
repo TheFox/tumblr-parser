@@ -31,17 +31,55 @@ class PostsBlockElement extends BlockElement{
 			
 			$hasTitle = (bool)$post->getTitle();
 			
-			$dateDayOfWeek = '';
 			$dateDayOfMonth = '';
+			$dateDayOfMonthWithZero = '';
+			$dateDayOfWeek = '';
+			$dateShortDayOfWeek = '';
+			$dateDayOfWeekNumber = '';
+			$dateDayOfMonthSuffix = '';
+			$dateDayOfYear = '';
+			$dateWeekOfYear = '';
 			$dateMonth = '';
+			$dateShortMonth = '';
+			$dateMonthNumber = '';
+			$dateMonthNumberWithZero = '';
 			$dateYear = '';
+			$dateShortYear = '';
+			$dateAmPm = '';
+			$dateCapitalAmPm = '';
+			$date12Hour = '';
+			$date24Hour = '';
+			$date12HourWithZero = '';
+			$date24HourWithZero = '';
+			$dateMinutes = '';
+			$dateSeconds = '';
+			$dateTimestamp = '';
 			
 			$postDateTime = $post->getDateTime();
 			if($postDateTime){
-				$dateDayOfWeek = $postDateTime->format('l');
 				$dateDayOfMonth = $postDateTime->format('j');
+				$dateDayOfMonthWithZero = $postDateTime->format('d');
+				$dateDayOfWeek = $postDateTime->format('l');
+				$dateShortDayOfWeek = $postDateTime->format('D');
+				$dateDayOfWeekNumber = $postDateTime->format('N');
+				$dateDayOfMonthSuffix = $postDateTime->format('S');
+				$dateDayOfYear = $postDateTime->format('z');
+				$dateWeekOfYear = $postDateTime->format('W');
 				$dateMonth = $postDateTime->format('F');
+				$dateShortMonth = $postDateTime->format('M');
+				$dateMonthNumber = $postDateTime->format('n');
+				$dateMonthNumberWithZero = $postDateTime->format('m');
 				$dateYear = $postDateTime->format('Y');
+				$dateShortYear = $postDateTime->format('y');
+				$dateAmPm = $postDateTime->format('a');
+				$dateCapitalAmPm = $postDateTime->format('A');
+				$date12Hour = $postDateTime->format('g');
+				$date24Hour = $postDateTime->format('G');
+				$date12HourWithZero = $postDateTime->format('h');
+				$date24HourWithZero = $postDateTime->format('H');
+				$dateMinutes = $postDateTime->format('i');
+				$dateSeconds = $postDateTime->format('s');
+				$dateTimestamp = $postDateTime->format('U');
 			}
 			
 			$notes = $post->getNotes();
@@ -100,18 +138,77 @@ class PostsBlockElement extends BlockElement{
 						$element->setContent($post->getPermalink());
 						#ve($element);
 					}
+					
+					elseif($elementName == 'dayofmonth'){
+						$element->setContent($dateDayOfMonth);
+					}
+					elseif($elementName == 'dayofmonthwithzero'){
+						$element->setContent($dateDayOfMonthWithZero);
+					}
 					elseif($elementName == 'dayofweek'){
 						$element->setContent($dateDayOfWeek);
 					}
-					elseif($elementName == 'dayofmonth'){
-						$element->setContent($dateDayOfMonth);
+					elseif($elementName == 'shortdayofweek'){
+						$element->setContent($dateShortDayOfWeek);
+					}
+					elseif($elementName == 'dayofweeknumber'){
+						$element->setContent($dateDayOfWeekNumber);
+					}
+					elseif($elementName == 'dayofmonthsuffix'){
+						$element->setContent($dateDayOfMonthSuffix);
+					}
+					elseif($elementName == 'dayofyear'){
+						$element->setContent($dateDayOfYear);
+					}
+					elseif($elementName == 'weekofyear'){
+						$element->setContent($dateWeekOfYear);
 					}
 					elseif($elementName == 'month'){
 						$element->setContent($dateMonth);
 					}
+					elseif($elementName == 'shortmonth'){
+						$element->setContent($dateShortMonth);
+					}
+					elseif($elementName == 'monthnumber'){
+						$element->setContent($dateMonthNumber);
+					}
+					elseif($elementName == 'monthnumberwithzero'){
+						$element->setContent($dateMonthNumberWithZero);
+					}
 					elseif($elementName == 'year'){
 						$element->setContent($dateYear);
 					}
+					elseif($elementName == 'shortyear'){
+						$element->setContent($dateShortYear);
+					}
+					elseif($elementName == 'ampm'){
+						$element->setContent($dateAmPm);
+					}
+					elseif($elementName == 'capitalampm'){
+						$element->setContent($dateCapitalAmPm);
+					}
+					elseif($elementName == '12hour'){
+						$element->setContent($date12Hour);
+					}
+					elseif($elementName == '24hour'){
+						$element->setContent($date24Hour);
+					}
+					elseif($elementName == '12hourwithzero'){
+						$element->setContent($date12HourWithZero);
+					}
+					elseif($elementName == '24hourwithzero'){
+						$element->setContent($date24HourWithZero);
+					}
+					elseif($elementName == 'minutes'){
+						$element->setContent($dateMinutes);
+					}
+					elseif($elementName == 'seconds'){
+						$element->setContent($dateSeconds);
+					}
+					elseif($elementName == 'timestamp'){
+						$element->setContent($dateTimestamp);
+					}
+					
 					elseif($elementName == 'postid'){
 						$element->setContent($post->getPostId());
 					}

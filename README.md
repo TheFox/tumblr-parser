@@ -77,9 +77,28 @@ The preferred method of installation is via [Packagist](https://packagist.org/pa
 ### [Dates](https://www.tumblr.com/docs/en/custom_themes#dates) [incomplete]
 - `{block:Date}`
 - `{DayOfMonth}`
-- `{DayOfMonth}`
+- `{DayOfMonthWithZero}`
+- `{DayOfWeek}`
+- `{ShortDayOfWeek}`
+- `{DayOfWeekNumber}`
+- `{DayOfMonthSuffix}`
+- `{DayOfYear}`
+- `{WeekOfYear}`
 - `{Month}`
+- `{ShortMonth}`
+- `{MonthNumber}`
+- `{MonthNumberWithZero}`
 - `{Year}`
+- `{ShortYear}`
+- `{AmPm}`
+- `{CapitalAmPm}`
+- `{12Hour}`
+- `{24Hour}`
+- `{12HourWithZero}`
+- `{24HourWithZero}`
+- `{Minutes}`
+- `{Seconds}`
+- `{Timestamp}`
 
 ### [Notes](https://www.tumblr.com/docs/en/custom_themes#notes) [incomplete]
 - `{block:PostNotes}`
