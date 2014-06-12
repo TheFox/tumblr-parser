@@ -1,173 +1,468 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		
 		<title>{block:IndexPage}{Title}{/block:IndexPage}{block:PermalinkPage}{block:PostTitle}{PostTitle} - {/block:PostTitle}{Title}{/block:PermalinkPage}</title>
+		
+		<link rel="icon" href="{Favicon}"/>
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
+		<link rel="apple-touch-icon" href="{PortraitURL-128}"/> 
+		
+		{block:IfMetaLinkAuthorURL}<link rel="author" href="{text:MetaLink Author URL}" />{/block:IfMetaLinkAuthorURL}
+		{block:IfMetaLinkPublisherURL}<link rel="publisher" href="{text:MetaLink Publisher URL}" />{/block:IfMetaLinkPublisherURL}
+		
+		{block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+		<meta name="viewport" content="width=775"/> <!-- iPhone -->
+		
+		<meta name="if:Show Archive" content="1" />
+		<meta name="if:Show Description" content="1" />
+		<meta name="if:Show Notes" content="1" />
+		<meta name="if:Show Reblog Button" content="1" />
+		<meta name="if:Show Like Button" content="1" />
+		<meta name="if:Show Tags" content="1" />
+		<meta name="if:Show Search" content="1" />
+		<meta name="if:Show Dot After Day" content="0" />
+		<meta name="text:Copyright Years" content="2013" />
+		<meta name="text:Content Owner" content="Christian Mayer" />
+		<meta name="text:Content Owner URL" content="http://fox21.at" />
+		<meta name="text:Google Analytics ID" content="" />
+		<meta name="text:MetaLink Author URL" content="" />
+		<meta name="text:MetaLink Publisher URL" content="" />
+		
+		
+		<style type="text/css">
+			
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			body {
+				font-size: 20px;
+				line-height: 150%;
+			}
+			
+			body, a:link, a:visited, a:focus, a:hover, a:active {
+				font-family: "Trebuchet MS", Trebuchet, Verdana, sans-serif;
+				color: #666666;
+			}
+			
+			a, a:link, a:visited, a:focus, a:hover, a:active {
+				text-decoration: underline;
+			}
+			
+			a:hover {
+				background-color: #dddddd;
+				color: #000000;
+			}
+			
+			img {
+				border: 0;
+			}
+			
+			p {
+				padding-top: 10px;
+				padding-bottom: 5px;
+			}
+			
+			ul {
+				list-style-type: disc;
+			}
+			
+			ol {
+				list-style-type: decimal;
+			}
+			
+			ul, ol {
+				margin-left: 10px;
+				padding-top: 10px;
+				padding-bottom: 5px;
+			}
+			
+			li {
+				margin-left: 30px;
+			}
+			
+			blockquote, p {
+				quotes: none;
+			}
+			
+			blockquote > p {
+				padding-top: 0;
+				padding-bottom: 0;
+				margin-top: 10px;
+				margin-bottom: 5px;
+			}
+			
+			blockquote {
+				border-left: 4px solid #e6e6e6;
+				margin-top: 10px;
+				padding-left: 20px;
+			}
+			
+			pre {
+				border-left: 4px solid #e6e6e6;
+				margin-top: 10px;
+				padding-left: 20px;
+			}
+			
+			code {
+				color: #000000;
+				font-family: 'Courier New', Courier;
+				font-size: 22px;
+			}
+			
+			p > code {
+				padding: 2px;
+				/*background-color: #e6e6e6;*/
+			}
+			
+			h2 > strike {
+				font-size: 20px;
+			}
+			
+			hr.seperator {
+				margin-top: 20px;
+			}
+			
+			#content {
+				margin-top: 40px;
+				margin-left: auto;
+				margin-right: auto;
+				margin-bottom: 40px;
+				width: 720px;
+			}
+			
+			#footer {
+				font-size: 14px;
+			}
+			
+			.contentItem {
+				margin-bottom: 30px;
+			}
+			
+			.portrait {
+				float: left;
+				margin-right: 20px;
+				height: auto;
+				
+			}
+			
+			.clear{
+				clear: both;
+			}
+			
+			
+			#header {
+				margin-bottom: 40px;
+			}
+			
+			#sidebar {
+				width: 200px;
+				position: absolute;
+			}
+			
+			#navi {
+				list-style: none;
+				list-style-type: none;
+				padding: 0;
+			}
+			
+			#navi li{
+				margin-left: 0;
+			}
+			
+			#posts {
+				margin-left: 210px;
+				margin-bottom: 70px;
+				min-width: 500px;
+			}
+			
+			.post {
+				margin-bottom: 90px;
+			}
+			.photo {
+				max-width: 500px;
+				height: auto;
+				margin-bottom: 10px;
+				display: block;
+			}
+			.video {
+				border-style: solid;;
+				border-width: 1px;
+			}
+			
+			.date {
+				padding-bottom: 10px;
+			}
+			
+			.permalink {
+				display: block;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				float: left;
+				font-size: 16px;
+			}
+			
+			.tags {
+				padding-bottom: 10px;
+				font-size: 16px;
+			}
+			
+			ol.notes {
+				font-size: 16px;
+				padding: 50px 0 0 0;
+				margin: 0px 0px;
+				list-style-type: none;
+			}
+			
+			ol.notes li.note {
+				padding: 0;
+				margin-left: 0;
+			}
+			
+			ol.notes li.note img.avatar {
+				margin-right: 10px;
+				vertical-align: -4px;
+				width: 16px;
+				height: 16px;
+				text-decoration: none;
+				background-color: inherit;
+			}
+			
+			a.avatar_frame, a.avatar_frame:link, a.avatar_frame:visited, a.avatar_frame:focus, a.avatar_frame:hover, a.avatar_frame:active {
+				text-decoration: none;
+				background-color: inherit;
+			}
+			
+			ol.chat {
+				list-style: none;
+				list-style-type: none;
+				padding: 0;
+				margin-top: 10px;
+			}
+			
+			li.chat_line {
+				margin-top: 10px;
+				margin-left: 0;
+				padding-left: 20px;
+			}
+			
+			li.chat_line.even {
+				border-left: 4px solid #e6e6e6;
+			}
+			
+			li.chat_line.odd {
+				border-left: 4px solid #a6a6a6;
+			}
+			
+			.chat_line_text {
+				font-style: italic;
+				padding-left: 10px;
+			}
+			
+			.like_button, .reblog_button {
+				margin-left: 10px;
+				margin-top: 12px;
+				margin-bottom: 8px;
+				float: left;
+			}
+			
+			a.reblog_button, a.reblog_button:link, a.reblog_button:visited, a.reblog_button:focus, a.reblog_button:hover, a.reblog_button:active {
+				text-decoration: none;
+				background-color: inherit;
+			}
+			
+			em.source {
+				font-size: 16px;
+			}
+			
+			.search{
+				margin-top: 70px;
+			}
+			
+			{CustomCSS}
+		</style>
 	</head>
+	
 	<body>
-		<div>
-			<ul>
-				<li>IndexPage: {block:IndexPage}OK{/block:IndexPage}</li>
-				<li>PermalinkPage: {block:PermalinkPage}OK{/block:PermalinkPage}</li>
-				<li>block PostTitle: {block:PostTitle}"{PostTitle}"{/block:PostTitle}</li>
-				<li>PostTitle: "{PostTitle}"</li>
-				<li>block Title: {block:IndexPage}"{Title}"{/block:IndexPage}{block:PermalinkPage}"{Title}" - {block:PostTitle}"{PostTitle}"{/block:PostTitle}{/block:PermalinkPage}</li>
-				<li>Title: <a href="?">"{Title}"</a></li>
-				<li>block MetaDescription: {block:Description}"{MetaDescription}"{/block:Description}</li>
-				<li>MetaDescription: "{MetaDescription}"</li>
-				<li>Description: "{Description}"</li>
-				<li>block AskEnabled: {block:AskEnabled}"{AskLabel}"{/block:AskEnabled}</li>
-				<li>AskLabel: "{AskLabel}"</li>
-				<li>HasPages
+		
+		<div id="content">
+			
+			<div id="header">
+				<h1><a href="?">{Title}</a></h1>
+				{block:IfShowDescription}{block:Description}<p>{Description}</p>{/block:Description}{/block:IfShowDescription}
+			</div>
+			
+			<div id="sidebar">
+				<ol id="navi">
+					{block:IfShowArchive}<li><a class="page_link" href="/archive">{lang:Archive}</a></li>{/block:IfShowArchive}
+					{block:AskEnabled}<li><a class="page_link" href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
 					{block:HasPages}
-						OK
-						<ul>
-							{block:Pages}<li>"{Label}" "{URL}"</li>{/block:Pages}
-						</ul>
+						{block:Pages}<li><a class="page_link" href="{URL}">{Label}</a></li>{/block:Pages}
 					{/block:HasPages}
-				</li>
-				
-				<li>
-					<ul>
-						<li>lang:Newer posts: "{lang:Newer posts}"</li>
-						<li>lang:Older posts: "{lang:Older posts}"</li>
-					</ul>
-				</li>
-				
-				<li>
-					<ul>
-						<li>block:Pagination: {block:Pagination}OK{/block:Pagination}</li>
-						
-						<li>block PreviousPage: {block:PreviousPage}<a href="{PreviousPage}">"{PreviousPage}"</a>{/block:PreviousPage}</li>
-						<li>PreviousPage: {PreviousPage}</li>
-						
-						<li>block NextPage: {block:NextPage}OK <a href="{NextPage}">"{NextPage}"</a>{/block:NextPage}</li>
-						<li>NextPage: {NextPage}</li>
-						
-						<li>Page CurrentPage of TotalPages: "{lang:Page CurrentPage of TotalPages}"</li>
-					</ul>
-				</li>
-				
-				<li>
-					<ul>
-						<li>IfGoogleAnalyticsID: {block:IfGoogleAnalyticsID}My Google Analytics ID: {text:Google Analytics ID}{/block:IfGoogleAnalyticsID}</li>
-						<li>text:Google Analytics ID: {text:Google Analytics ID}</li>
-						<li>IfNotGoogleAnalyticsID: {block:IfNotGoogleAnalyticsID}OK{/block:IfNotGoogleAnalyticsID}</li>
-					</ul>
-				</li>
-				
-				
+				</ol>
+			</div>
+			
+			<div id="posts">
 				{block:Posts}
-					<li>
-						POST
-						<ul>
-							<li>Permalink: <a href="{Permalink}">"{Permalink}"</a></li>
-							<li>PostID: "{PostID}"</li>
+					
+					<div class="post">
+						
+						{block:Text}
+							{block:Title}
+								{block:IndexPage}<h3><a href="{Permalink}">{Title}</a></h3>{/block:IndexPage}
+								{block:PermalinkPage}<h3>{Title}</h3>{/block:PermalinkPage}
+							{/block:Title}
+								
+							<div class="text">{Body}</div>
+						{/block:Text}
+						
+						{block:Link}
+							<h3><a href="{URL}" class="link" {Target}>{Name}</a></h3>
 							
-							{block:Text}
-								<li>Block: Text</li>
-								<li>Permalink: "{Permalink}"</li>
-								<li>Block Title: {block:Title}"{Title}"{/block:Title}</li>
-								<li>Title: "{Title}"</li>
-								<li>Body: "{Body}"</li>
-							{/block:Text}
+							{block:Description}<div class="description">{Description}</div>{/block:Description}
+						{/block:Link}
+						
+						{block:Photo}
+							{LinkOpenTag}<img src="{PhotoURL-500}" class="photo" alt="{PhotoAlt}" />{LinkCloseTag}
 							
-							{block:Link}
-								<li>Block: Link</li>
-								<li>Name: "{Name}"</li>
-								<li>URL: "{URL}"</li>
-								<li>Description: {block:Description}"{Description}"{/block:Description}</li>
-							{/block:Link}
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						{/block:Photo}
+						
+						{block:Photoset}
+							{block:IndexPage}
+								<a href="{Permalink}">
+									{block:Photos}<img src="{PhotoURL-500}" alt="{PhotoAlt}" class="photo" />{/block:Photos}
+								</a>
+							{/block:IndexPage}
 							
-							{block:Photo}
-								<li>Block: Photo</li>
-								<li>PhotoURL-500: "{PhotoURL-500}"</li>
-								<li>PhotoAlt: "{PhotoAlt}"</li>
-								<li>LinkURL: {LinkURL}</li>
-								<li>block LinkURL: {block:LinkURL}"{LinkURL}"{/block:LinkURL}</li>
-								<li>LinkOpenTag: {LinkOpenTag}OK{LinkCloseTag}</li>
-								<li>Caption: {block:Caption}"{Caption}"{/block:Caption}</li>
-							{/block:Photo}
+							{block:PermalinkPage}
+								{block:Photos}
+									<img src="{PhotoURL-500}" alt="{PhotoAlt}" class="photo" />
+								{/block:Photos}
+							{/block:PermalinkPage}
 							
-							{block:Photoset}
-								<li>Block: Photoset</li>
-								<li>Caption: {block:Caption}"{Caption}"{/block:Caption}</li>
-								<li>Set
-									<ul>
-										{block:Photos}<li>photo: "{PhotoURL-500}" "{PhotoAlt}" Caption: {block:Caption}"{Caption}"{/block:Caption}</li>{/block:Photos}
-									</ul>
-								</li>
-							{/block:Photoset}
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						{/block:Photoset}
+						
+						{block:Quote}
+							<blockquote><p>{Quote}</p></blockquote>
+							{block:Source}<em class="source">&mdash; {Source}</em>{/block:Source}
+						{/block:Quote}
+						
+						{block:Chat}
+							{block:Title}
+								{block:IndexPage}<h3><a href="{Permalink}">{Title}</a></h3>{/block:IndexPage}
+								{block:PermalinkPage}<h3>{Title}</h3>{/block:PermalinkPage}
+							{/block:Title}
 							
-							{block:Quote}
-								<li>Block: Quote</li>
-								<li>Quote: "{Quote}"</li>
-								<li>Source: {block:Source}"{Source}"{/block:Source}</li>
-							{/block:Quote}
+							<ol class="chat">
+								{block:Lines}
+									<li class="chat_line {Alt}">{block:Label}{Label} {/block:Label}<span class="chat_line_text">{Line}</span></li>
+								{/block:Lines}
+							</ol>
+						{/block:Chat}
+						
+						{block:Audio}
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
 							
-							{block:Chat}
-								<li>Block: Chat</li>
-								<li>Title: {block:Title}"{Title}"{/block:Title}</li>
-								<li>
-									<ol>
-										{block:Lines}
-											<li class="">Line: "{Alt}" "{block:Label}"{Label}"{/block:Label}" "{Line}"</li>
-										{/block:Lines}
-									</ol>
-								</li>
-							{/block:Chat}
+							<div class="audio">
+								{block:AudioEmbed}
+									{AudioEmbed color="white"}
+								{/block:AudioEmbed}
+							</div>
+						{/block:Audio}
+						
+						{block:Video}
+							<div class="video">
+								{Video-500}
+							</div>
 							
-							{block:Video}
-								<li>Block: Video</li>
-								<li>Video-500: "{Video-500}"</li>
-								<li>Caption: {block:Caption}"{Caption}"{/block:Caption}</li>
-							{/block:Video}
-							
-							{block:Answer}
-								<li>Block: Answer</li>
-								<li>Asker asked: "{lang:Asker asked}"</li>
-								<li>Asker asked 2: "{lang:Asker asked 2}"</li>
-								<li>Question: "{Question}"</li>
-								<li>Answer: "{Answer}"</li>
-							{/block:Answer}
-							
-							<li>
-								<ul>
-									<li>ReblogButton: "{ReblogButton}"</li>
-									<li>LikeButton: "{LikeButton}"</li>
-									<li>Date
-										{block:Date}
-											OK
-											<ul>
-												<li>DayOfWeek: "{DayOfWeek}"</li>
-												<li>DayOfMonth: "{DayOfMonth}"</li>
-												<li>Month: "{Month}"</li>
-												<li>Year: "{Year}"</li>
-											</ul>
-										{/block:Date}
-									</li>
-								</ul>
-							</li>
-							
-							<li>
-								<ul>
-									<li>block NoteCount: {block:NoteCount}"{NoteCount}" "{NoteCountWithLabel}"{/block:NoteCount}</li>
-									<li>NoteCount: "{NoteCount}" "{NoteCountWithLabel}"</li>
-									<li>PostNotes: {block:PostNotes}"{PostNotes}"{/block:PostNotes}</li>
-									<li>HasTags
-										{block:HasTags}
-											OK
-											<ul>
-												{block:Tags}
-													<li>Tag: "{Tag}" "{TagURL}"</a></li>
-												{/block:Tags}
-											</ul>
-										{/block:HasTags}
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						{/block:Video}
+						
+						{block:Answer}
+							{block:IndexPage}<h3><a href="{Permalink}">{lang:Asker asked}</a></h3>{/block:IndexPage}
+							{block:PermalinkPage}<h3>{lang:Asker asked 2}:</h3>{/block:PermalinkPage}
+								
+							<div class="text">
+								<blockquote><p>{Question}</p></blockquote>
+								{Answer}
+							</div>
+						{/block:Answer}
+						
+						{block:Date}
+							<div class="date">
+								{block:IndexPage}
+									<em class="permalink">// <a href="{Permalink}">{DayOfWeek}, {DayOfMonth}{block:IfShowDotAfterDay}.{/block:IfShowDotAfterDay} {Month} {Year}</a>{block:IfShowNotes}{block:NoteCount} - {NoteCountWithLabel}{/block:NoteCount}{/block:IfShowNotes}</em>
+								{/block:IndexPage}
+								
+								{block:PermalinkPage}
+									<em class="permalink">// {DayOfWeek}, {DayOfMonth}{block:IfShowDotAfterDay}.{/block:IfShowDotAfterDay} {Month} {Year}</em> {block:IfShowReblogButton}{ReblogButton}{/block:IfShowReblogButton} {block:IfShowLikeButton}{LikeButton}{/block:IfShowLikeButton}
+								{/block:PermalinkPage}
+							</div>
+							<div class="clear"></div>
+						{/block:Date}
+						
+						{block:PermalinkPage}
+							{block:HasTags}
+								<div class="tags">
+									Tags: {block:Tags}<a href="{TagURL}" class="tag">&#35;{Tag}</a> {/block:Tags}
+								</div>
+							{/block:HasTags}
+						{/block:PermalinkPage}
+						
+						{block:PostNotes}
+							{PostNotes}
+						{/block:PostNotes}
+						
+						<div class="clear"></div>
+						
+					</div>
 				{/block:Posts}
-			</ul>
+				
+				{block:Pagination}
+					<div class="pages_navi">
+						{block:PreviousPage}<a href="{PreviousPage}">&#171; {lang:Newer posts}</a>{/block:PreviousPage}
+						{block:IndexPage}{lang:Page CurrentPage of TotalPages}{/block:IndexPage}
+						{block:NextPage}<a href="{NextPage}">{lang:Older posts} &#187;</a>{/block:NextPage}
+					</div>
+				{/block:Pagination}
+				
+				{block:IndexPage}
+					{block:IfShowSearch}
+						<div class="search">
+							<form action="/search" method="get">
+								<input type="text" name="q" value="{SearchQuery}" style="width: 400px; font-size: 20px;" /> <br />
+								<input type="submit" value="Search" style="font-size: 20px;" />
+							</form>
+						</div>
+					{/block:IfShowSearch}
+				{/block:IndexPage}
+				
+			</div>
+			
+			<div id="footer">
+				<p>
+					Copyright &copy; {block:IfCopyrightYears}{text:Copyright Years}{/block:IfCopyrightYears}{block:IfContentOwner} by {block:IfContentOwnerURL}<a href="{text:Content Owner URL}" rel="author">{/block:IfContentOwnerURL}{text:Content Owner}{block:IfContentOwnerURL}</a>{/block:IfContentOwnerURL}{/block:IfContentOwner}
+				</p>
+			</div>
 		</div>
+		
+		{block:IfGoogleAnalyticsID}
+			<script type="text/javascript">
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', '{text:Google Analytics ID}']);
+				_gaq.push(['_trackPageview']);
+				
+				setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+				
+				(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+				g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+				s.parentNode.insertBefore(g,s)}(document,'script'));
+			</script>
+		{/block:IfGoogleAnalyticsID}
+		
 	</body>
 </html>
