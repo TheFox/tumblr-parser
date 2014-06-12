@@ -34,7 +34,6 @@ use TheFox\Tumblr\Element\PostNotesBlockElement;
 use TheFox\Tumblr\Element\PostsBlockElement;
 use TheFox\Tumblr\Element\PostTitleBlockElement;
 use TheFox\Tumblr\Element\PreviousPageBlockElement;
-use TheFox\Tumblr\Element\QuoteBlockElement;
 use TheFox\Tumblr\Element\SourceBlockElement;
 use TheFox\Tumblr\Element\TagsBlockElement;
 use TheFox\Tumblr\Element\TitleBlockElement;
@@ -49,12 +48,14 @@ use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
+use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
 #use TheFox\Tumblr\Post\PhotosPost;
 use TheFox\Tumblr\Post\PhotosetPost;
+use TheFox\Tumblr\Post\QuotePost;
 
 class Parser{
 	
@@ -67,6 +68,7 @@ class Parser{
 		'DayOfWeek',
 		'Description',
 		'Label',
+		'Length',
 		'LikeButton',
 		'LinkCloseTag',
 		'LinkOpenTag',
@@ -84,7 +86,9 @@ class Parser{
 		'PostNotes',
 		'PostTitle',
 		'PreviousPage',
+		'Quote',
 		'ReblogButton',
+		'Source',
 		'Tag',
 		'TagURL',
 		'Target',
@@ -697,6 +701,18 @@ class Parser{
 						}
 					}
 					$postObj->setPhotos($photos);
+				}
+			}
+			elseif($type == 'quote'){
+				$postObj = new QuotePost();
+				if(isset($post['quote'])){
+					$postObj->setQuote($post['quote']);
+				}
+				if(isset($post['source'])){
+					$postObj->setSource($post['source']);
+				}
+				if(isset($post['length'])){
+					$postObj->setLength($post['length']);
 				}
 			}
 			

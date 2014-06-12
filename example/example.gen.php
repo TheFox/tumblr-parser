@@ -28,6 +28,7 @@ $settings = array(
 		array('type' => 'photo', 'date' => '1987-02-21 09:58:00', 'url' => 'https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg', 'link' => 'https://en.wikipedia.org/wiki/Halloumi', 'alt' => 'my alt text', 'caption' => 'my caption text'),
 		array('type' => 'photo', 'date' => '1987-02-21 09:58:00', 'url' => 'https://farm3.staticflickr.com/2882/10004722973_1774a72748.jpg', 'alt' => 'my alt text'),
 		array('type' => 'photoset', 'date' => '1987-02-21 09:58:00', 'caption' => 'my super fancy caption', 'photos' => array(array('url' => 'https://farm3.staticflickr.com/2856/9816324626_63726c6fdd.jpg', 'link' => 'https://en.wikipedia.org/wiki/Halloumi', 'alt' => 'my alt text3', 'caption' => 'my caption text3'), array('url' => 'https://farm4.staticflickr.com/3057/2494697235_7617067bca.jpg', 'alt' => 'my alt text4'),)),
+		array('type' => 'quote', 'date' => '1987-02-22 10:00:00', 'notes' => array('text_1', 'text2'), 'tags' => array('tag1', 'tag_2'), 'quote' => 'I\'m gonna taste like heaven.', 'source' => 'The Sausage', 'length' => 'short'),
 	),
 	'pages' => array(
 		array('url' => 'http://fox21.at', 'label' => 'FOX21.at'),

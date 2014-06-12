@@ -58,6 +58,8 @@ The preferred method of installation is via [Packagist](https://packagist.org/pa
 - `{Caption}`
 - `{block:Photos}`
 
+### [Quote Posts](http://www.tumblr.com/docs/en/custom_themes#quote-posts) [complete]
+
 ### [Link Posts](http://www.tumblr.com/docs/en/custom_themes#link-posts) [incomplete]
 - `{URL}`
 - `{Name}`

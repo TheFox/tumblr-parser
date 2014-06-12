@@ -6,12 +6,14 @@ use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
+use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
 use TheFox\Tumblr\Post\PhotosetPost;
+use TheFox\Tumblr\Post\QuotePost;
 
 class PostsBlockElement extends BlockElement{
 	
@@ -69,6 +71,11 @@ class PostsBlockElement extends BlockElement{
 				elseif($element instanceof PhotosetBlockElement){
 					if($post instanceof PhotosetPost){
 						#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						$element->setContent($post);
+					}
+				}
+				elseif($element instanceof QuoteBlockElement){
+					if($post instanceof QuotePost){
 						$element->setContent($post);
 					}
 				}
@@ -162,6 +169,11 @@ class PostsBlockElement extends BlockElement{
 				elseif($element instanceof PhotosetBlockElement){
 					if($post instanceof PhotosetPost){
 						#print str_repeat(' ', 2 * 4).'element: "'.get_class($element).'", "'.$element->getName().'" '.$element->getPath()."\n";
+						$add = true;
+					}
+				}
+				elseif($element instanceof QuoteBlockElement){
+					if($post instanceof QuotePost){
 						$add = true;
 					}
 				}
