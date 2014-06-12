@@ -4,9 +4,18 @@ A Tumblr Theme parser in PHP.
 Tired of getting sick of Tumblr's online HTML editor for custom themes? With Tumblr Parser you can edit a theme in your favourite HTML editor and render the output in your browser on your own/local server. So you can create themes for Tumblr without editing the HTML in Tumblr's online HTML editor.
 
 ## Installation
-The preferred method of installation is via [Packagist](https://packagist.org/packages/thefox/tumblr-parser) and [Composer](https://getcomposer.org/). Run the following command to install the package and add it as a requirement to composer.json:
+The preferred method of installation is via [Packagist](https://packagist.org/packages/thefox/tumblr-parser) and [Composer](https://getcomposer.org/). Run the following command to install the package and add it as a requirement to `composer.json`:
 
 `composer.phar require "thefox/tumblr-parser=0.4.*"`
+
+## Get started
+To get started first look into the [example.php](example/example.php) in the `example` directory. There are several ways to use this tool. You can generate a whole weblog or just a single post. You can do this in your browser or in background in your shell.
+
+## Example files
+- `example.php`: In this basic example the template is loaded from a file. Also the settings are loaded from a `.yml` file. To load the template and the settings from files is optional. You also can do it with a string or in case of the settings with an `array()`.
+- `example.settings.yml`: Optional. Used by `example.php` but not necessary to use Tumblr Parser.
+- `example.tpl.html`: Optional. Used by `example.php` but not necessary to use Tumblr Parser.
+- `example.gen.php`: Optional. Just a generator for settings in `.yml` format. You don't need this script to use Tumblr Parser.
 
 ## [Tumblr Custom Theme](http://www.tumblr.com/docs/en/custom_themes) Implementation
 ### [Basic Variables](http://www.tumblr.com/docs/en/custom_themes#basic_variables) [incomplete]
