@@ -22,38 +22,11 @@ $template = file_get_contents(__DIR__.'/example.tpl.html');
 
 $parser = new Parser();
 $parser->setTemplate($template);
-
 $parser->loadSettingsFromFile(__DIR__.'/example.settings.yml');
 
-/*
-$parser->setTemplate('BEGIN
-{block:Posts}
-	POST_BEGIN
-	{block:Text}
-		--Text--
-		title={Title}
-		{block:Title}titleblock={Title}{/block:Title}
-		body={Body}
-	{/block:Text}
-	{block:Link}
-		--Link--
-		url={URL}
-		target={Target}
-		name={Name}
-		desc={block:Description}block={Description}{/block:Description}
-	{/block:Link}
-	POST_END
-{/block:Posts}
-END');
-*/
-
-#$parser->setTemplate('{block:IfAskEnabled}OK{/block:IfAskEnabled}{block:IfNotAskEnabled}NOT{/block:IfNotAskEnabled}');
 
 if(PHP_SAPI == 'cli'){
-	#$type = 'post'; $id = 6;
-	#$type = 'post'; $id = 2;
 	$type = 'post'; $id = 1;
-	#$type = 'page'; $id = 1;
 }
 
 try{
@@ -69,5 +42,3 @@ catch(Exception $e){
 	print 'ERROR: '.$e->getMessage()."\n";
 	exit(1);
 }
-
-

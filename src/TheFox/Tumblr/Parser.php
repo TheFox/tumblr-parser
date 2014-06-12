@@ -287,8 +287,6 @@ class Parser{
 						$name = substr($nameFull, $nameFullPos + 1);
 						$type = strtolower(substr($nameFull, 0, $nameFullPos));
 						
-						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'block|text: '.$nameFullPos.', "'.$type.'", "'.$name.'"'.PHP_EOL);
-						
 						$offset = 0;
 						$newoffset = 0;
 						$testhtml = '';
@@ -304,19 +302,13 @@ class Parser{
 								$testhtml = substr($temphtml, 0, $pos);
 								$newoffset = $offset + $pos + 2 + $nameFullLen + 1;
 								
-								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 2)).'found: o='.$offset.' ('.$newoffset.'), p='.$pos.': "'.$temphtml.'", "'.$testhtml.'"'.PHP_EOL);
-								
 								$offset = $newoffset;
 							}
-							
-							#usleep(300000);
 						}
 						while(strpos($testhtml, '{'.$nameFull.'}') !== false);
 						
 						$subhtml = substr($rawhtml, 0, $offset - 2 - $nameFullLen - 1);
 						$rawhtml = substr($rawhtml, $offset);
-						
-						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'name: "'.$name.'", "'.$nameFull.'", '.$offset.''.PHP_EOL);
 						
 						$element = null;
 						if($type == 'block'){
@@ -428,8 +420,8 @@ class Parser{
 								$element = new LinkUrlBlockElement();
 							}
 							else{
-								#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'unknown block: "'.$name.'". Path: '.$parentElement->getPath().''.PHP_EOL);
-								throw new RuntimeException(__FUNCTION__.': Unknown block "'.$name.'". Path: '.$parentElement->getPath(), 3);
+								$msg = __FUNCTION__.': Unknown block "'.$name.'". Path: '.$parentElement->getPath();
+								throw new RuntimeException($msg, 3);
 							}
 						}
 						if($element){
@@ -499,7 +491,8 @@ class Parser{
 		#if($level == 1){ ve($this->rootElement); }
 	}
 	
-	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false, $posts = array(), $id = 1, $totalPages = 1, $pages = array(), $level = 1){
+	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false,
+		$posts = array(), $id = 1, $totalPages = 1, $pages = array(), $level = 1){
 		if($level >= 100){
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 1);
 		}
@@ -847,7 +840,8 @@ class Parser{
 		#ve($posts);
 		#ve($this->variables);
 		
-		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage, $posts, $id, $totalPages, $this->settings['pages']);
+		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage,
+			$posts, $id, $totalPages, $this->settings['pages']);
 		return $this->renderElements($this->rootElement);
 	}
 	
