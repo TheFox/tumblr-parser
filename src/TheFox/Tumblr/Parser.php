@@ -8,7 +8,6 @@ use DateTime;
 use Symfony\Component\Yaml\Yaml;
 
 use TheFox\Tumblr\Element\Element;
-use TheFox\Tumblr\Element\AnswerBlockElement;
 use TheFox\Tumblr\Element\AskEnabledBlockElement;
 use TheFox\Tumblr\Element\AudioBlockElement;
 use TheFox\Tumblr\Element\AudioEmbedBlockElement;
@@ -49,6 +48,7 @@ use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
 use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 use TheFox\Tumblr\Element\Post\ChatBlockElement;
 use TheFox\Tumblr\Element\Post\LinesBlockElement;
+use TheFox\Tumblr\Element\Post\AnswerBlockElement;
 
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
@@ -57,11 +57,14 @@ use TheFox\Tumblr\Post\PhotoPost;
 use TheFox\Tumblr\Post\PhotosetPost;
 use TheFox\Tumblr\Post\QuotePost;
 use TheFox\Tumblr\Post\ChatPost;
+use TheFox\Tumblr\Post\AnswerPost;
 
 class Parser{
 	
 	public static $variableNames = array(
 		'Alt',
+		'Answer',
+		'Asker',
 		'AskLabel',
 		'Body',
 		'Caption',
@@ -89,6 +92,7 @@ class Parser{
 		'PostNotes',
 		'PostTitle',
 		'PreviousPage',
+		'Question',
 		'Quote',
 		'ReblogButton',
 		'Source',
@@ -726,6 +730,18 @@ class Parser{
 				}
 				if(isset($post['chats'])){
 					$postObj->setChats($post['chats']);
+				}
+			}
+			elseif($type == 'answer'){
+				$postObj = new AnswerPost();
+				if(isset($post['asker'])){
+					$postObj->setAsker($post['asker']);
+				}
+				if(isset($post['question'])){
+					$postObj->setQuestion($post['question']);
+				}
+				if(isset($post['answer'])){
+					$postObj->setAnswer($post['answer']);
 				}
 			}
 			

@@ -69,6 +69,11 @@ The preferred method of installation is via [Packagist](https://packagist.org/pa
 
 ### [Chat Posts](http://www.tumblr.com/docs/en/custom_themes#chat-posts) [complete]
 
+### [Answer Posts](http://www.tumblr.com/docs/en/custom_themes#answer-posts) [incomplete]
+- `{Question}`
+- `{Answer}`
+- `{Asker}`
+
 ### [Dates](https://www.tumblr.com/docs/en/custom_themes#dates) [incomplete]
 - `{block:Date}`
 - `{DayOfMonth}`

@@ -8,6 +8,7 @@ use TheFox\Tumblr\Element\Post\PhotoBlockElement;
 use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
 use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 use TheFox\Tumblr\Element\Post\ChatBlockElement;
+use TheFox\Tumblr\Element\Post\AnswerBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
 use TheFox\Tumblr\Post\TextPost;
@@ -16,6 +17,7 @@ use TheFox\Tumblr\Post\PhotoPost;
 use TheFox\Tumblr\Post\PhotosetPost;
 use TheFox\Tumblr\Post\QuotePost;
 use TheFox\Tumblr\Post\ChatPost;
+use TheFox\Tumblr\Post\AnswerPost;
 
 class PostsBlockElement extends BlockElement{
 	
@@ -83,6 +85,11 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof ChatBlockElement){
 					if($post instanceof ChatPost){
+						$element->setContent($post);
+					}
+				}
+				elseif($element instanceof AnswerBlockElement){
+					if($post instanceof AnswerPost){
 						$element->setContent($post);
 					}
 				}
@@ -186,6 +193,11 @@ class PostsBlockElement extends BlockElement{
 				}
 				elseif($element instanceof ChatBlockElement){
 					if($post instanceof ChatPost){
+						$add = true;
+					}
+				}
+				elseif($element instanceof AnswerBlockElement){
+					if($post instanceof AnswerPost){
 						$add = true;
 					}
 				}

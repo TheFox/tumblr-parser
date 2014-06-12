@@ -16,6 +16,8 @@ $settings = array(
 		'AskLabel' => 'my ask label',
 		'lang:Newer posts' => 'Newer Posts',
 		'lang:Older posts' => 'Older Posts',
+		'lang:Asker asked' => 'User0 asked',
+		'lang:Asker asked 2' => 'Asked by <a href="http://fox21.at">User0</a>',
 		'text:Google Analytics ID' => 1234,
 	),
 	'postsPerPage' => 10,
@@ -30,6 +32,7 @@ $settings = array(
 		array('type' => 'photoset', 'date' => '1987-02-21 09:58:00', 'caption' => 'my super fancy caption', 'photos' => array(array('url' => 'https://farm3.staticflickr.com/2856/9816324626_63726c6fdd.jpg', 'link' => 'https://en.wikipedia.org/wiki/Halloumi', 'alt' => 'my alt text3', 'caption' => 'my caption text3'), array('url' => 'https://farm4.staticflickr.com/3057/2494697235_7617067bca.jpg', 'alt' => 'my alt text4'),)),
 		array('type' => 'quote', 'date' => '1987-02-22 10:00:00', 'notes' => array('text_1', 'text2'), 'tags' => array('tag1', 'tag_2'), 'quote' => 'I\'m gonna taste like heaven.', 'source' => 'The Sausage', 'length' => 'short'),
 		array('type' => 'chat', 'date' => '1987-02-23 10:00:00', 'notes' => array('text_1', 'text2'), 'tags' => array('tag1', 'tag_2'), 'title' => 'my chat title', 'chats' => array(array('label' => 'Johnny Cash', 'line' => 'Dear God, give us Freddie Mercury back and we will send you Justin Bieber.'), array('label' => 'Freddie Mercury', 'line' => 'I will rock you.'), array('label' => 'God', 'line' => 'Mkay.'), array('label' => 'Justin Bieber', 'line' => 'Aw maaan. :('), array('label' => 'God', 'line' => 'Done.'))),
+		array('type' => 'answer', 'date' => '1987-02-24 10:00:00', 'notes' => array('text_1', 'text2'), 'tags' => array('tag1', 'tag_2'), 'asker' => 'A Asker', 'question' => 'The question is what is the question?', 'answer' => 'The answer might be similar.'),
 	),
 	'pages' => array(
 		array('url' => 'http://fox21.at', 'label' => 'FOX21.at'),
