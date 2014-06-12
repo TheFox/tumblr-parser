@@ -53,7 +53,7 @@ The preferred method of installation is via [Packagist](https://packagist.org/pa
 - `{LinkCloseTag}`
 - `{PhotoURL-500}`
 
-### [Photoset Posts](http://www.tumblr.com/docs/en/custom_themes#photoset-posts) [complete]
+### [Photoset Posts](http://www.tumblr.com/docs/en/custom_themes#photoset-posts) [incomplete]
 - `{block:Caption}`
 - `{Caption}`
 - `{block:Photos}`
