@@ -13,7 +13,7 @@ chdir(__DIR__);
 
 
 if(version_compare(PHP_VERSION, '5.3.0', '<')){
-	print "FATAL ERROR: you need at least PHP 5.3. Your version: ".PHP_VERSION."\n";
+	print 'FATAL ERROR: you need at least PHP 5.3. Your version: '.PHP_VERSION."\n";
 	exit(1);
 }
 

@@ -8,7 +8,7 @@ function ve($v = null){
 	else{
 		print '<pre>';
 		var_export($v);
-		print "</pre>\n";
+		print '</pre>'."\n";
 	}
 }
 
