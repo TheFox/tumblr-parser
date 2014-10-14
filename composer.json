@@ -31,5 +31,11 @@
 		"branch-alias": {
 			"dev-master": "0.5.x-dev"
 		}
+	},
+	"scripts": {
+		"post-update-cmd": [
+			"echo post-update-cmd",
+			"php bootstrap.php"
+		]
 	}
 }
