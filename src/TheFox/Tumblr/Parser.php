@@ -210,7 +210,11 @@ class Parser{
 	private function parseMetaSettings(){
 		foreach(array('if', 'text') as $type){
 			preg_match_all('/<meta name="('.$type.':[^"]+)" content="([^"]+)"/i', $this->template, $matches);
-			$this->fillVariables(array_combine($matches[1], $matches[2]));
+			$variables = array();
+			if($matches[1] && $matches[2]){
+				$variables = array_combine($matches[1], $matches[2]);
+			}
+			$this->fillVariables($variables);
 		}
 		
 		#ve($this->variables);
