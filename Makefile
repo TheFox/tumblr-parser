@@ -17,8 +17,8 @@ update: composer.phar
 
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
-	$(CHMOD) 755 ./composer.phar --prefer-source --no-interaction --dev
-	./composer.phar install
+	$(CHMOD) 755 ./composer.phar
+	./composer.phar install --prefer-source --no-interaction --dev
 	php bootstrap.php
 
 $(PHPCS): composer.phar
