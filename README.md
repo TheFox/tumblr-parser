@@ -132,5 +132,9 @@ To get started first look into the [example.php](example/example.php) in the `ex
 ## Contribute
 You're welcome to contribute to this project. Fork this project at <https://github.com/TheFox/tumblr-parser>. You should read GitHub's [How to Fork a Repo](https://help.github.com/articles/fork-a-repo).
 
+## Links
+- [Packagist Package](https://packagist.org/packages/thefox/tumblr-parser)
+- [Travis CI Repository](https://travis-ci.org/TheFox/tumblr-parser)
+
 ## License
 See [LICENSE.md](LICENSE.md) file.
