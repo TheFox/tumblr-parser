@@ -4,6 +4,7 @@
 	backupGlobals="true"
 	backupStaticAttributes="false"
 	bootstrap="bootstrap.php"
+	checkForUnintentionallyCoveredCode="true"
 	colors="true"
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
@@ -24,4 +25,9 @@
 			<file>tests/ParserTest.php</file>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist addUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">src</directory>
+		</whitelist>
+	</filter>
 </phpunit>
