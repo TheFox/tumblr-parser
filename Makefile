@@ -2,30 +2,34 @@
 RM = rm -rf
 CHMOD = chmod
 PHPCS = vendor/bin/phpcs
+PHPCS_STANDARD = vendor/thefox/phpcsrs/Standards/TheFox
+PHPCS_REPORT = --report=full --report-width=160
 PHPUNIT = vendor/bin/phpunit
+COMPOSER = ./composer.phar
+COMPOSER_DEV ?= --dev
 
 
 .PHONY: all install update test test_phpcs test_phpunit test_phpunit_cc clean
 
 all: install test
 
-install: composer.phar
-	./composer.phar install $(COMPOSER_PREFER_SOURCE) --no-interaction --dev
+install: $(COMPOSER)
+	$(COMPOSER) install $(COMPOSER_PREFER_SOURCE) --no-interaction $(COMPOSER_DEV)
 
-update: composer.phar
-	./composer.phar selfupdate
-	./composer.phar update
+update: $(COMPOSER)
+	$(COMPOSER) selfupdate
+	$(COMPOSER) update
 
-composer.phar:
+$(COMPOSER):
 	curl -sS https://getcomposer.org/installer | php
-	$(CHMOD) 755 ./composer.phar
+	$(CHMOD) 755 $(COMPOSER)
 
-$(PHPCS): composer.phar
+$(PHPCS): $(COMPOSER)
 
 test: test_phpcs test_phpunit
 
 test_phpcs: $(PHPCS) vendor/thefox/phpcsrs/Standards/TheFox
-	$(PHPCS) -v -s --report=full --report-width=160 --standard=vendor/thefox/phpcsrs/Standards/TheFox src tests
+	$(PHPCS) -v -s $(PHPCS_REPORT) --standard=$(PHPCS_STANDARD) src tests
 
 test_phpunit: $(PHPUNIT) phpunit.xml
 	$(PHPUNIT) $(PHPUNIT_COVERAGE_HTML) $(PHPUNIT_COVERAGE_CLOVER)
@@ -34,6 +38,6 @@ test_phpunit_cc:
 	$(MAKE) test_phpunit PHPUNIT_COVERAGE_HTML="--coverage-html build/report"
 
 clean:
-	$(RM) composer.lock composer.phar
+	$(RM) composer.lock $(COMPOSER)
 	$(RM) vendor/*
 	$(RM) vendor
