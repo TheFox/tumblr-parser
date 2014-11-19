@@ -2,10 +2,6 @@
 
 namespace TheFox\Tumblr\Element\Post;
 
-#use TheFox\Tumblr\Element\VariableElement;
-#use TheFox\Tumblr\Element\TitleBlockElement;
-#use TheFox\Tumblr\Post\ChatPost;
-
 class LinesBlockElement extends LineBlockElement{
 	
 	public function render(){
@@ -13,37 +9,41 @@ class LinesBlockElement extends LineBlockElement{
 		
 		$html = '';
 		$lines = $this->getContent();
-		#ve($lines);
+		#\Doctrine\Common\Util\Debug::dump($lines);
 		
-		$usersId = 0;
-		$users = array();
-		
-		$alt = 'even';
-		foreach($lines as $lineId => $line){
-			$line['name'] = 'your_tumblr_username';
+		if($lines && is_array($lines)){
+			$usersId = 0;
+			$users = array();
 			
-			$alt = $alt == 'odd' ? 'even' : 'odd';
-			$line['alt'] = $alt;
-			
-			$userNumber = 0;
-			if(!isset($line['userNumber']) && isset($line['label']) && $line['label']){
-				$labelLower = strtolower($line['label']);
+			$alt = 'even';
+			foreach($lines as $lineId => $line){
+				#$line['name'] = 'your_tumblr_username';
 				
-				$userNumber = array_search($labelLower, $users);
-				if($userNumber === false){
-					$userNumber = array_push($users, $labelLower);
+				$alt = $alt == 'odd' ? 'even' : 'odd';
+				$line['alt'] = $alt;
+				
+				$userNumber = 0;
+				if(!isset($line['userNumber']) && isset($line['label']) && $line['label']){
+					$labelLower = strtolower($line['label']);
+					
+					$userNumber = array_search($labelLower, $users);
+					if($userNumber === false){
+						$userNumber = array_push($users, $labelLower);
+					}
 				}
+				
+				
+				$line['userNumber'] = $userNumber;
+				
+				#\Doctrine\Common\Util\Debug::dump($line);
+				
+				$this->setContent($line);
+				$this->setElementsValues();
+				$html .= parent::render();
 			}
-			
-			
-			$line['userNumber'] = $userNumber;
-			
-			#ve($line);
-			
-			$this->setContent($line);
-			$this->setElementsValues();
-			$html .= parent::render();
 		}
+		
+		#\Doctrine\Common\Util\Debug::dump($html);
 		
 		// Reset original content.
 		$this->setContent($lines);

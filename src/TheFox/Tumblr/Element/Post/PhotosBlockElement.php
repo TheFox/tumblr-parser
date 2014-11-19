@@ -9,10 +9,14 @@ class PhotosBlockElement extends PhotoBlockElement{
 		
 		$html = '';
 		$photos = $this->getContent();
-		foreach($photos as $photoId => $photo){
-			$this->setContent($photo);
-			$this->setElementsValues();
-			$html .= parent::render();
+		#\Doctrine\Common\Util\Debug::dump($photos);
+		
+		if($photos && is_array($photos)){
+			foreach($photos as $photoId => $photo){
+				$this->setContent($photo);
+				$this->setElementsValues();
+				$html .= parent::render();
+			}
 		}
 		
 		// Reset original content.

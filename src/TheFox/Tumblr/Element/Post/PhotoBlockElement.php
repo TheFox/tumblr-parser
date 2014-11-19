@@ -11,7 +11,7 @@ class PhotoBlockElement extends PostBlockElement{
 	
 	public function setElementsValues(){
 		$post = $this->getContent();
-		if($post instanceof PhotoPost){
+		if($post && $post instanceof PhotoPost){
 			$hasUrl = (bool)$post->getUrl();
 			$hasLink = (bool)$post->getLinkUrl();
 			$hasCapation = (bool)$post->getCaption();

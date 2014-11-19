@@ -16,6 +16,11 @@ class LineBlockElement extends PostBlockElement{
 		#ve($post);
 		
 		$hasLabel = isset($post['label']) && $post['label'];
+		$label = $hasLabel ? $post['label'] : '';
+		$line = isset($post['line']) && $post['line'] ? $post['line'] : '';
+		$alt = isset($post['alt']) && $post['alt'] ? $post['alt'] : '';
+		$name = isset($post['name']) && $post['name'] ? $post['name'] : '';
+		$userNumber = isset($post['userNumber']) && $post['userNumber'] ? $post['userNumber'] : '';
 		
 		foreach($this->getChildren(true) as $element){
 			$elementName = strtolower($element->getTemplateName());
@@ -25,24 +30,24 @@ class LineBlockElement extends PostBlockElement{
 				if($elementName == 'label'){
 					#print '        title: '.$element->getPath().''.PHP_EOL;
 					if($hasLabel){
-						$element->setContent($post['label']);
+						$element->setContent($label);
 					}
 				}
 				elseif($elementName == 'line'){
 					#print '        body: '.$element->getPath().''.PHP_EOL;
-					$element->setContent($post['line']);
+					$element->setContent($line);
 				}
 				elseif($elementName == 'alt'){
 					#print '        body: '.$element->getPath().''.PHP_EOL;
-					$element->setContent($post['alt']);
+					$element->setContent($alt);
 				}
 				elseif($elementName == 'name'){
 					#print '        body: '.$element->getPath().''.PHP_EOL;
-					$element->setContent($post['name']);
+					$element->setContent($name);
 				}
 				elseif($elementName == 'usernumber'){
 					#print '        body: '.$element->getPath().''.PHP_EOL;
-					$element->setContent($post['userNumber']);
+					$element->setContent($userNumber);
 				}
 			}
 			elseif($element instanceof LabelBlockElement){

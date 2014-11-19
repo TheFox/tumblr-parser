@@ -14,9 +14,9 @@ class QuoteBlockElement extends PostBlockElement{
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$post = $this->getContent();
-		#ve($post);
+		#\Doctrine\Common\Util\Debug::dump($post);
 		
-		if($post instanceof QuotePost){
+		if($post && $post instanceof QuotePost){
 			$hasSource = (bool)$post->getSource();
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());

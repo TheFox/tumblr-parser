@@ -13,9 +13,9 @@ class ChatBlockElement extends PostBlockElement{
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$post = $this->getContent();
-		#ve($post);
 		
 		if($post instanceof ChatPost){
+			#\Doctrine\Common\Util\Debug::dump($this->getChildren(true));
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
@@ -32,22 +32,6 @@ class ChatBlockElement extends PostBlockElement{
 				}
 			}
 		}
-	}
-	
-	/**
-	 * @codeCoverageIgnore
-	 */
-	public function render1(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		#$this->setElementsValues();
-		#
-		
-		#$content = $this->getContent();
-		#ve($content);
-		
-		
-		
-		return parent::render();
 	}
 	
 }

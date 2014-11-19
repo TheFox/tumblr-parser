@@ -14,9 +14,9 @@ class TextBlockElement extends PostBlockElement{
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		
 		$post = $this->getContent();
-		#ve($post);
+		#\Doctrine\Common\Util\Debug::dump($post);
 		
-		if($post instanceof TextPost){
+		if($post && $post instanceof TextPost){
 			$hasTitle = (bool)$post->getTitle();
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
