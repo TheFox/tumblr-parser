@@ -11,6 +11,13 @@ define('STDOUT', fopen('php://output', 'w'), true);
 
 chdir(__DIR__);
 
+if(getenv('TEST')){
+	define('TEST', true, true);
+}
+else{
+	define('TEST', false, true);
+}
+
 
 if(version_compare(PHP_VERSION, '5.3.0', '<')){
 	print 'FATAL ERROR: you need at least PHP 5.3. Your version: '.PHP_VERSION."\n";

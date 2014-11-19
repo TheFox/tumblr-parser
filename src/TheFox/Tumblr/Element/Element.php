@@ -80,10 +80,8 @@ class Element{
 		if($this->getParent()){
 			return $this->getParent()->getPath().'->'.($name ? $name : $className).'['.$this->getId().']';
 		}
-		else{
-			#return 'ROOT'.'['.$this->getId().']';
-			return ''.($name ? $name : $className).'['.$this->getId().']';
-		}
+		
+		return ''.($name ? $name : $className).'['.$this->getId().']';
 	}
 	
 	public function setChildren($children){

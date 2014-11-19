@@ -3,7 +3,7 @@
 		{
 			"path": ".",
 			"name": "Tumblr Parser",
-			"folder_exclude_patterns": [ ],
+			"folder_exclude_patterns": [ "build" ],
 			"file_exclude_patterns": [ ]
 		}
 	]

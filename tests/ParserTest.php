@@ -58,31 +58,59 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 		$parser->setSettings(array('vars' => array(), 'posts' => array(), 'postsPerPage' => 15));
 	}
 	
-	public function testParseVariable(){
+	public function parseVariableProvider(){
+		$rv = array();
+		
+		$rv[] = array('', '');
+		$rv[] = array('test', 'test');
+		$rv[] = array('{Title}>', 'my_title>');
+		$rv[] = array('<{Title}', '<my_title');
+		$rv[] = array('<{Title}>', '<my_title>');
+		$rv[] = array('BEGIN<{Title}>END', 'BEGIN<my_title>END');
+		$rv[] = array('BEGIN Title1={Title} Title2={Title} END', 'BEGIN Title1=my_title Title2=my_title END');
+		#$rv[] = array('BEGIN Title1=}{Title} END', 'BEGIN Title1=}my_title END');
+		$rv[] = array('{', '{');
+		$rv[] = array('}', '}');
+		$rv[] = array('BEGIN {Title END', 'BEGIN {Title END');
+		$rv[] = array('BEGIN Title} END', 'BEGIN Title} END');
+		$rv[] = array('test', 'test');
+		$rv[] = array('test', 'test');
+		
+		return $rv;
+	}
+	
+	/**
+	 * @dataProvider parseVariableProvider
+	 */
+	public function testParseVariable1($tpl, $expected){
 		$parser = new Parser();
 		$parser->setSettings(array('vars' => array('Title' => 'my_title'), 'posts' => array(), 'postsPerPage' => 15,
 			'pages' => array()));
 		
-		$parser->setTemplate('');
-		$this->assertEquals('', $parser->parse());
+		$parser->setTemplate($tpl);
+		$this->assertEquals($expected, $parser->parse());
+	}
+	
+	public function testParseVariable2(){
+		$parser = new Parser();
+		$parser->setSettings(array('vars' => array('Title' => 'my_title'), 'posts' => array(), 'postsPerPage' => 15,
+			'pages' => array()));
 		
-		$parser->setTemplate('test');
-		$this->assertEquals('test', $parser->parse());
+		/*$parser->setTemplate('{');
+		$this->assertEquals('{', $parser->parse());
 		
-		$parser->setTemplate('{Title}>');
-		$this->assertEquals('my_title>', $parser->parse());
+		$parser->setTemplate('}');
+		$this->assertEquals('}', $parser->parse());
 		
-		$parser->setTemplate('<{Title}');
-		$this->assertEquals('<my_title', $parser->parse());
+		$parser->setTemplate('BEGIN {Title END');
+		$this->assertEquals('BEGIN {Title END', $parser->parse());
 		
-		$parser->setTemplate('<{Title}>');
-		$this->assertEquals('<my_title>', $parser->parse());
+		$parser->setTemplate('BEGIN Title} END');
+		$this->assertEquals('BEGIN Title} END', $parser->parse());
+		*/
 		
-		$parser->setTemplate('BEGIN<{Title}>END');
-		$this->assertEquals('BEGIN<my_title>END', $parser->parse());
-		
-		$parser->setTemplate('BEGIN Title1={Title} Title2={Title} END');
-		$this->assertEquals('BEGIN Title1=my_title Title2=my_title END', $parser->parse());
+		$parser->setTemplate('BEGIN {Title} END');
+		$this->assertEquals('BEGIN my_title END', $parser->parse());
 	}
 	
 	public function testParseIf1(){

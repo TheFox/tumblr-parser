@@ -34,6 +34,9 @@ class ChatBlockElement extends PostBlockElement{
 		}
 	}
 	
+	/**
+	 * @codeCoverageIgnore
+	 */
 	public function render1(){
 		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		#$this->setElementsValues();
