@@ -4,6 +4,7 @@ namespace TheFox\Tumblr;
 
 use RuntimeException;
 use DateTime;
+use ReflectionClass;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -255,6 +256,7 @@ class Parser{
 			$content = '';
 			$element = null;
 			
+			// Find opening bracket.
 			$pos = strpos($rawhtml, '{');
 			if($pos === false){
 				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'no { found'.PHP_EOL);
@@ -283,12 +285,12 @@ class Parser{
 				
 				$rawhtml = substr($rawhtml, $pos + 1);
 				
+				// Find close bracket for the opening one.
 				$pos = strpos($rawhtml, '}');
 				if($pos === false){
 					
 					$content .= '{';
 					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'no } found: "'.$content.'"'.PHP_EOL);
-					#\Doctrine\Common\Util\Debug::dump($element);
 					
 					$element->setContent($content);
 				}
@@ -300,10 +302,13 @@ class Parser{
 					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'found }: '.$pos.', "'.$nameFull.'" '.$nameFullLen.PHP_EOL);
 					
 					if(strtolower(substr($nameFull, 0, 6)) == 'block:'){
+						// Process a block element.
+						
 						$nameFullPos = strpos($nameFull, ':');
 						$name = substr($nameFull, $nameFullPos + 1);
 						$type = strtolower(substr($nameFull, 0, $nameFullPos));
 						
+						// Search close tag for the opened tag.
 						$offset = 0;
 						$newoffset = 0;
 						$testhtml = '';
@@ -449,12 +454,12 @@ class Parser{
 							
 							$this->parseElements($subhtml, $element, $level + 1);
 						}
-						else{
+						/*else{
 							throw new RuntimeException(__FUNCTION__.': Can not create element.', 4);
-						}
-						
+						}*/
 					}
 					else{
+						// Process non-block element.
 						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'.PHP_EOL);
 						
 						if(in_array($nameFull, static::$variableNames)){
@@ -485,6 +490,8 @@ class Parser{
 							$parentElement->addChild($element);
 						}
 						else{
+							// Unknown block. Set the original content.
+							
 							$content = '{'.$nameFull.'}';
 							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$content.'"'.PHP_EOL);
 							
@@ -526,7 +533,7 @@ class Parser{
 				$elementNameOut = ', "'.$elementName.'"';
 			}
 			
-			$rc = new \ReflectionClass(get_class($element));
+			$rc = new ReflectionClass(get_class($element));
 			$className = $rc->getShortName();
 			
 			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
@@ -865,6 +872,9 @@ class Parser{
 		return $this->renderElements($this->rootElement);
 	}
 	
+	/**
+	 * @codeCoverageIgnore
+	 */
 	public function printHtml($type = 'page', $id = 1){
 		$html = $this->parse($type, $id);
 		#print "\n\n\n\n\n\n\n\n\n";
