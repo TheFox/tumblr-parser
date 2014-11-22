@@ -51,7 +51,7 @@
 			<file>tests/PhotoPostTest.php</file>
 			
 			<file>tests/PhotosetBlockElementTest.php</file>
-			<file>tests/PhotosBlockElement.php</file>
+			<file>tests/PhotosBlockElementTest.php</file>
 			<file>tests/PhotosetPostTest.php</file>
 			
 			<file>tests/PostBlockElementTest.php</file>
