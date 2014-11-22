@@ -81,7 +81,7 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 		$rv[] = array('BEGIN {block:IfShowTest2}OK{/block:IfShowTest2} END', 'BEGIN  END');
 		$rv[] = array('BEGIN {block:IfNotShowTest2}NOT_OK{/block:IfNotShowTest2} END', 'BEGIN NOT_OK END');
 		
-		$rv[] = array('BEGIN {block:IfAskEnabled}OK{/block:IfAskEnabled} END', 'BEGIN OK END');
+		$rv[] = array('BEGIN {block:AskEnabled}OK{/block:AskEnabled} END', 'BEGIN OK END');
 		
 		$rv[] = array('BEGIN "{lang:Newer posts}" "{lang:Older posts}" END', 'BEGIN "Newer Posts" "Older Posts" END');
 		$rv[] = array('BEGIN "{lang:x}" "{lang:y}" END', 'BEGIN "" "" END');
@@ -213,13 +213,18 @@ class ParserTest extends PHPUnit_Framework_TestCase{
 		
 		$parser->setTemplate($tpl);
 		$this->assertEquals($expected, $parser->parse('page', 2));
+		
+		$parser->parse('page', 3);
+		$parser->parse('page', 4);
+		$parser->parse('page', 5);
+		$parser->parse('page', 6);
 	}
 	
 	public function parseVariablePostProvider(){
 		$rv = array();
 		
 		$rv[] = array('BEGIN {block:Description}My Descr1: {/block:Description} END', 'BEGIN  END');
-		$rv[] = array('BEGIN {block:IfAskEnabled}OK{/block:IfAskEnabled} END', 'BEGIN  END');
+		$rv[] = array('BEGIN {block:AskEnabled}OK{/block:AskEnabled} END', 'BEGIN  END');
 		
 		return $rv;
 	}
