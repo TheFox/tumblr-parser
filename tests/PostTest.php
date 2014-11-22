@@ -35,8 +35,8 @@ class PostTest extends PHPUnit_Framework_TestCase{
 	public function testSetDateTime(){
 		$post = new Post();
 		
-		$post->setDateTime('dateTime');
-		$this->assertEquals('dateTime', $post->getDateTime());
+		$post->setDateTime('dt1');
+		$this->assertEquals('dt1', $post->getDateTime());
 	}
 	
 	public function testSetNotes(){

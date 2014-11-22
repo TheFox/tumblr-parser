@@ -29,14 +29,15 @@ use TheFox\Tumblr\Post\AnswerPost;
 class PostsBlockElementTest extends PHPUnit_Framework_TestCase{
 	
 	public function testRender(){
-		$dt = new DateTime('2014-11-19 19:16:38');
+		$tz = new DateTimeZone('Europe/Vienna');
+		$dt = new DateTime('2014-11-19 19:16:38', $tz);
 		
 		$posts = array();
 		
 		$post = new TextPost();
 		$post->setPermalink('url1');
 		$post->setIsPermalinkPage(true);
-		$post->setDateTime($dt);
+		$post->setDateTime($dt, $tz);
 		$post->setNotes(array('node1', 'node2'));
 		$post->setTags(array('tag1', 'tag2'));
 		$post->setPostId(1);
@@ -46,7 +47,7 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase{
 		
 		$post = new LinkPost();
 		$post->setPermalink('url2');
-		$post->setDateTime($dt);
+		$post->setDateTime($dt, $tz);
 		$post->setNotes(array());
 		$post->setTags(array());
 		$post->setPostId(2);
@@ -59,7 +60,7 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase{
 		
 		$post = new PhotoPost();
 		$post->setPermalink('url3');
-		$post->setDateTime($dt);
+		$post->setDateTime($dt, $tz);
 		$post->setNotes(array());
 		$post->setTags(array());
 		$post->setPostId(3);
@@ -68,7 +69,7 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase{
 		
 		$post = new PhotosetPost();
 		$post->setPermalink('url4');
-		$post->setDateTime($dt);
+		$post->setDateTime($dt, $tz);
 		$post->setNotes(array());
 		$post->setTags(array());
 		$post->setPostId(4);
@@ -77,7 +78,7 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase{
 		
 		$post = new QuotePost();
 		$post->setPermalink('url5');
-		$post->setDateTime($dt);
+		$post->setDateTime($dt, $tz);
 		$post->setNotes(array());
 		$post->setTags(array());
 		$post->setPostId(5);
@@ -86,7 +87,7 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase{
 		
 		$post = new ChatPost();
 		$post->setPermalink('url6');
-		$post->setDateTime($dt);
+		$post->setDateTime($dt, $tz);
 		$post->setNotes(array());
 		$post->setTags(array());
 		$post->setPostId(6);
@@ -95,7 +96,7 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase{
 		
 		$post = new AnswerPost();
 		$post->setPermalink('url7');
-		$post->setDateTime($dt);
+		$post->setDateTime($dt, $tz);
 		$post->setNotes(array());
 		$post->setTags(array());
 		$post->setPostId(7);
