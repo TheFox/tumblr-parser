@@ -4,7 +4,7 @@ error_reporting(E_ALL | E_STRICT);
 
 if(@date_default_timezone_get() == 'UTC') date_default_timezone_set('UTC');
 
-ini_set('display_errors', true);
+ini_set('display_errors', 'On');
 ini_set('memory_limit', '128M');
 
 define('STDOUT', fopen('php://output', 'w'), true);
