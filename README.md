@@ -6,7 +6,7 @@ Tired of getting sick of Tumblr's online HTML editor for custom themes? With Tum
 ## Installation
 The preferred method of installation is via [Packagist](https://packagist.org/packages/thefox/tumblr-parser) and [Composer](https://getcomposer.org/). Run the following command to install the package and add it as a requirement to `composer.json`:
 
-	composer.phar require "thefox/tumblr-parser=~0.4"
+	composer.phar require "thefox/tumblr-parser=~0.1"
 
 ## Get started
 To get started first look into the [example.php](example/example.php) in the `example` directory. There are several ways to use this tool. You can generate a whole weblog or just a single post. You can do this in your browser or in background in your shell.
