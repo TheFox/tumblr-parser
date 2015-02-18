@@ -326,8 +326,7 @@ class Parser{
 								
 								$offset = $newoffset;
 							}
-						}
-						while(strpos($testhtml, '{'.$nameFull.'}') !== false);
+						}while(strpos($testhtml, '{'.$nameFull.'}') !== false);
 						
 						$subhtml = substr($rawhtml, 0, $offset - 2 - $nameFullLen - 1);
 						$rawhtml = substr($rawhtml, $offset);
