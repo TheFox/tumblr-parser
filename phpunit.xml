@@ -21,52 +21,52 @@
 	
 	<testsuites>
 		<testsuite name="My Test Suite">
-			<file>tests/AnswerBlockElementTest.php</file>
-			<file>tests/AnswerPostTest.php</file>
+			<file>tests/TheFox/Test/AnswerBlockElementTest.php</file>
+			<file>tests/TheFox/Test/AnswerPostTest.php</file>
 			
-			<file>tests/BoolBlockElementTest.php</file>
+			<file>tests/TheFox/Test/BoolBlockElementTest.php</file>
 			
-			<file>tests/ChatBlockElementTest.php</file>
-			<file>tests/ChatPostTest.php</file>
+			<file>tests/TheFox/Test/ChatBlockElementTest.php</file>
+			<file>tests/TheFox/Test/ChatPostTest.php</file>
 			
-			<file>tests/ElementTest.php</file>
+			<file>tests/TheFox/Test/ElementTest.php</file>
 			
-			<file>tests/HtmlElementTest.php</file>
+			<file>tests/TheFox/Test/HtmlElementTest.php</file>
 			
-			<file>tests/IfBlockElementTest.php</file>
-			<file>tests/IfNotBlockElementTest.php</file>
+			<file>tests/TheFox/Test/IfBlockElementTest.php</file>
+			<file>tests/TheFox/Test/IfNotBlockElementTest.php</file>
 			
-			<file>tests/LineBlockElementTest.php</file>
-			<file>tests/LinesBlockElementTest.php</file>
+			<file>tests/TheFox/Test/LineBlockElementTest.php</file>
+			<file>tests/TheFox/Test/LinesBlockElementTest.php</file>
 			
-			<file>tests/LinkBlockElementTest.php</file>
-			<file>tests/LinkPostTest.php</file>
+			<file>tests/TheFox/Test/LinkBlockElementTest.php</file>
+			<file>tests/TheFox/Test/LinkPostTest.php</file>
 			
-			<file>tests/PagesBlockElementTest.php</file>
+			<file>tests/TheFox/Test/PagesBlockElementTest.php</file>
 			
-			<file>tests/ParserTest.php</file>
+			<file>tests/TheFox/Test/ParserTest.php</file>
 			
-			<file>tests/PhotoBlockElementTest.php</file>
-			<file>tests/PhotoPostTest.php</file>
+			<file>tests/TheFox/Test/PhotoBlockElementTest.php</file>
+			<file>tests/TheFox/Test/PhotoPostTest.php</file>
 			
-			<file>tests/PhotosetBlockElementTest.php</file>
-			<file>tests/PhotosBlockElementTest.php</file>
-			<file>tests/PhotosetPostTest.php</file>
+			<file>tests/TheFox/Test/PhotosetBlockElementTest.php</file>
+			<file>tests/TheFox/Test/PhotosBlockElementTest.php</file>
+			<file>tests/TheFox/Test/PhotosetPostTest.php</file>
 			
-			<file>tests/PostBlockElementTest.php</file>
-			<file>tests/PostsBlockElementTest.php</file>
+			<file>tests/TheFox/Test/PostBlockElementTest.php</file>
+			<file>tests/TheFox/Test/PostsBlockElementTest.php</file>
 			
-			<file>tests/PostTest.php</file>
+			<file>tests/TheFox/Test/PostTest.php</file>
 			
-			<file>tests/QuoteBlockElementTest.php</file>
+			<file>tests/TheFox/Test/QuoteBlockElementTest.php</file>
 			
-			<file>tests/TagsBlockElementTest.php</file>
+			<file>tests/TheFox/Test/TagsBlockElementTest.php</file>
 			
-			<file>tests/TextBlockElementTest.php</file>
-			<file>tests/TextPostTest.php</file>
+			<file>tests/TheFox/Test/TextBlockElementTest.php</file>
+			<file>tests/TheFox/Test/TextPostTest.php</file>
 			
-			<file>tests/VariableElementTest.php</file>
-			<file>tests/VariableTest.php</file>
+			<file>tests/TheFox/Test/VariableElementTest.php</file>
+			<file>tests/TheFox/Test/VariableTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>

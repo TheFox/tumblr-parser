@@ -1,5 +1,9 @@
 <?php
 
+namespace TheFox\Test;
+
+use PHPUnit_Framework_TestCase;
+
 use TheFox\Tumblr\Element\Element;
 use TheFox\Tumblr\Element\HtmlElement;
 

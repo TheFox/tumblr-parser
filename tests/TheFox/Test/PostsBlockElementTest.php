@@ -1,5 +1,11 @@
 <?php
 
+namespace TheFox\Test;
+
+use DateTime;
+use DateTimeZone;
+use PHPUnit_Framework_TestCase;
+
 use TheFox\Tumblr\Element\PostsBlockElement;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;

@@ -1,5 +1,9 @@
 <?php
 
+namespace TheFox\Test;
+
+use PHPUnit_Framework_TestCase;
+
 use TheFox\Tumblr\Element\Post\LinesBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\LabelBlockElement;

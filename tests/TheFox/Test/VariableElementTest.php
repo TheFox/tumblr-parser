@@ -1,5 +1,9 @@
 <?php
 
+namespace TheFox\Test;
+
+use PHPUnit_Framework_TestCase;
+
 use TheFox\Tumblr\Element\VariableElement;
 
 class VariableElementTest extends PHPUnit_Framework_TestCase{

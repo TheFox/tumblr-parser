@@ -1,5 +1,9 @@
 <?php
 
+namespace TheFox\Test;
+
+use PHPUnit_Framework_TestCase;
+
 use TheFox\Tumblr\Post\Post;
 
 class PostTest extends PHPUnit_Framework_TestCase{

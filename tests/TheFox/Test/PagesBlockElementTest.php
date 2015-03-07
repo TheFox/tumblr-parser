@@ -1,5 +1,9 @@
 <?php
 
+namespace TheFox\Test;
+
+use PHPUnit_Framework_TestCase;
+
 use TheFox\Tumblr\Element\PagesBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 
