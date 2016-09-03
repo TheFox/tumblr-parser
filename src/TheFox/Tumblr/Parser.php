@@ -161,9 +161,6 @@ class Parser{
 		$this->parseSettingsVars();
 	}
 	
-	/**
-	 * @codeCoverageIgnore
-	 */
 	public function loadSettingsFromFile($file){
 		$settings = Yaml::parse($file);
 		$this->setSettings($settings);
@@ -227,11 +224,9 @@ class Parser{
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
 		#fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': level='.$level.PHP_EOL);
 		
-		// @codeCoverageIgnoreStart
 		if($level >= 100){
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 2);
 		}
-		// @codeCoverageIgnoreEnd
 		
 		if(!$rawhtml && $level == 1){
 			$rawhtml = $this->template;
@@ -245,11 +240,9 @@ class Parser{
 		$fuse = 0;
 		while($rawhtml){
 			$fuse++;
-			// @codeCoverageIgnoreStart
 			if($fuse >= 1000){
 				throw new RuntimeException(__FUNCTION__.': Maximum level of 1000 reached.', 3);
 			}
-			// @codeCoverageIgnoreEnd
 			
 			#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'parse: "'.$rawhtml.'"'.PHP_EOL);
 			
@@ -517,11 +510,9 @@ class Parser{
 	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false,
 		$posts = array(), $id = 1, $totalPages = 1, $pages = array(), $level = 1){
 		
-		// @codeCoverageIgnoreStart
 		if($level >= 100){
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 1);
 		}
-		// @codeCoverageIgnoreEnd
 		
 		$elemtents = $element->getChildren();
 		foreach($elemtents as $elementId => $element){
@@ -871,9 +862,6 @@ class Parser{
 		return $this->renderElements($this->rootElement);
 	}
 	
-	/**
-	 * @codeCoverageIgnore
-	 */
 	public function printHtml($type = 'page', $id = 1){
 		$html = $this->parse($type, $id);
 		#print "\n\n\n\n\n\n\n\n\n";

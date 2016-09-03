@@ -7,9 +7,6 @@ use TheFox\Tumblr\Post\Post;
 
 class PostBlockElement extends BlockElement{
 	
-	/**
-	 * @codeCoverageIgnore
-	 */
 	public function setElementsValues(){
 		
 	}

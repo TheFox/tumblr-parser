@@ -4,12 +4,12 @@
 	"license": "GPL-3.0",
 	"type": "library",
 	"keywords": [ "tumblr", "theme", "parser" ],
-	"homepage": "http://fox21.at",
+	"homepage": "https://fox21.at",
 	"authors": [
 		{
 			"name": "Christian Mayer",
 			"email": "christian@fox21.at",
-			"homepage": "http://fox21.at"
+			"homepage": "https://fox21.at"
 		}
 	],
 	"require": {
@@ -32,11 +32,5 @@
 		"branch-alias": {
 			"dev-master": "1.x.x-dev"
 		}
-	},
-	"scripts": {
-		"post-update-cmd": [
-			"echo post-update-cmd",
-			"php bootstrap.php"
-		]
 	}
 }
