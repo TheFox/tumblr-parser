@@ -57,7 +57,7 @@ use TheFox\Tumblr\Post\AnswerPost;
 
 class Parser{
 	
-	const VERSION = '0.5.1-dev';
+	const VERSION = '0.5.1';
 	
 	public static $variableNames = array(
 		'12Hour',
