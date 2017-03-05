@@ -26,7 +26,7 @@
 		"psr-0": { "TheFox": "src" }
 	},
 	"autoload-dev": {
-		"psr-0": { "TheFox": "src" }
+		"psr-0": { "TheFox": "tests" }
 	},
 	"extra": {
 		"branch-alias": {

@@ -40,10 +40,16 @@ class Post{
 		return $this->isPermalinkPage;
 	}
 	
-	public function setDateTime($dateTime){
+	/**
+	 * @param DateTime $dateTime
+	 */
+	public function setDateTime(DateTime $dateTime){
 		$this->dateTime = $dateTime;
 	}
 	
+	/**
+	 * @return DateTime
+	 */
 	public function getDateTime(){
 		return $this->dateTime;
 	}

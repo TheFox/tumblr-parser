@@ -57,6 +57,8 @@ use TheFox\Tumblr\Post\AnswerPost;
 
 class Parser{
 	
+	const VERSION = '0.5.1-dev';
+	
 	public static $variableNames = array(
 		'12Hour',
 		'12HourWithZero',
@@ -539,7 +541,7 @@ class Parser{
 			elseif($element instanceof IfNotBlockElement){
 				if(isset($this->variables[$elementName])){
 					$val = (bool)$this->variables[$elementName]->getValue();
-					$element->setContent((bool)$val);
+					$element->setContent($val);
 				}
 				else{
 					$element->setContent($element->getDefaultContent());
@@ -548,7 +550,7 @@ class Parser{
 			elseif($element instanceof IfBlockElement){
 				if(isset($this->variables[$elementName])){
 					$val = (bool)$this->variables[$elementName]->getValue();
-					$element->setContent((bool)$val);
+					$element->setContent($val);
 				}
 				else{
 					$element->setContent($element->getDefaultContent());

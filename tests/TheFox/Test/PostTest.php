@@ -2,6 +2,7 @@
 
 namespace TheFox\Test;
 
+use DateTime;
 use PHPUnit_Framework_TestCase;
 use TheFox\Tumblr\Post\Post;
 
@@ -36,10 +37,12 @@ class PostTest extends PHPUnit_Framework_TestCase{
 	}
 	
 	public function testSetDateTime(){
-		$post = new Post();
+		$dt = new DateTime('2001-02-03 04:05:06');
 		
-		$post->setDateTime('dt1');
-		$this->assertEquals('dt1', $post->getDateTime());
+		$post = new Post();
+		$post->setDateTime($dt);
+		
+		$this->assertEquals('2001-02-03 04:05:06', $post->getDateTime()->format('Y-m-d H:i:s'));
 	}
 	
 	public function testSetNotes(){
