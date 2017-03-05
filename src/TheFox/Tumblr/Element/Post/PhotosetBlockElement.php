@@ -15,8 +15,6 @@ class PhotosetBlockElement extends PostBlockElement{
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
-				#print '    element: '.get_class($element).', '.$element->getName()."\n";
-				
 				if($element instanceof VariableElement){
 					if($elementName == 'caption'){
 						$element->setContent($post->getCaption());
@@ -26,9 +24,7 @@ class PhotosetBlockElement extends PostBlockElement{
 					$element->setContent($hasCapation);
 				}
 				elseif($element instanceof PhotosBlockElement){
-					#print '        PhotosBlockElement'."\n";
 					$element->setContent($post->getPhotos());
-					#ve($element->getContent());
 				}
 			}
 		}

@@ -3,7 +3,6 @@
 namespace TheFox\Test;
 
 use PHPUnit_Framework_TestCase;
-
 use TheFox\Tumblr\Element\BoolBlockElement;
 use TheFox\Tumblr\Element\HtmlElement;
 

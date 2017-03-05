@@ -22,17 +22,12 @@ use TheFox\Tumblr\Post\AnswerPost;
 class PostsBlockElement extends BlockElement{
 	
 	public function render(){
-		#print str_repeat(' ', 0 * 4).'render: "'.$this->getName().'"'."\n";
-		
 		$posts = $this->getContent();
-		#\Doctrine\Common\Util\Debug::dump($posts, 10);
 		
 		$children = array();
 		$html = '';
 		if(is_array($posts)){
 			foreach($posts as $postId => $post){
-				#print str_repeat(' ', 1 * 4).'post: '.$postId.', '.get_class($post).', '.$post->getType()."\n";
-				
 				$hasTitle = (bool)$post->getTitle();
 				
 				$dateDayOfMonth = '';
@@ -96,8 +91,6 @@ class PostsBlockElement extends BlockElement{
 					#$newElement = clone $element;
 					$elementName = strtolower($element->getTemplateName());
 					
-					#print str_repeat(' ', 2 * 4).'element: '.$element->getPath()."\n";
-					
 					if($element instanceof TextBlockElement){
 						if($post instanceof TextPost){
 							$element->setContent($post);
@@ -134,11 +127,8 @@ class PostsBlockElement extends BlockElement{
 						}
 					}
 					elseif($element instanceof VariableElement){
-						#print str_repeat(' ', 2 * 4).'element: '.$element->getPath().', "'.$element->getName().'"'."\n";
-						
 						if($elementName == 'permalink'){
 							$element->setContent($post->getPermalink());
-							#ve($element);
 						}
 						
 						elseif($elementName == 'dayofmonth'){
@@ -269,7 +259,6 @@ class PostsBlockElement extends BlockElement{
 					}
 					elseif($element instanceof DateBlockElement){
 						$element->setContent(true);
-						#print str_repeat(' ', 2 * 4).'element: '.$element->getPath()."\n";
 					}
 					elseif($element instanceof PostNotesBlockElement){
 						$element->setContent($notes && $post->getIsPermalinkPage() ? true : false);
@@ -292,19 +281,14 @@ class PostsBlockElement extends BlockElement{
 				foreach($this->getChildren() as $element){
 					$rc = new \ReflectionClass(get_class($element));
 					
-					#print str_repeat(' ', 2 * 4).'element: '.$element->getPath()."\n";
-					#ve($element->getContent());
-					
 					$add = false;
 					if($element instanceof TextBlockElement){
 						if($post instanceof TextPost){
-							#print str_repeat(' ', 2 * 4).'element: "'.$element->getName().'"'."\n";
 							$add = true;
 						}
 					}
 					elseif($element instanceof LinkBlockElement){
 						if($post instanceof LinkPost){
-							#print str_repeat(' ', 2 * 4).'element: "'.$element->getName().'"'."\n";
 							$add = true;
 						}
 					}
@@ -334,7 +318,6 @@ class PostsBlockElement extends BlockElement{
 						}
 					}
 					elseif($element instanceof VariableElement){
-						#print str_repeat(' ', 2 * 4).'HtmlElement: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 					elseif($element instanceof DateBlockElement){
@@ -353,7 +336,6 @@ class PostsBlockElement extends BlockElement{
 						$add = true;
 					}
 					elseif($element instanceof HtmlElement){
-						#print str_repeat(' ', 2 * 4).'HtmlElement: "'.$element->getName().'"'."\n";
 						$add = true;
 					}
 					elseif($element instanceof IndexPageBlockElement){
@@ -364,7 +346,6 @@ class PostsBlockElement extends BlockElement{
 					}
 					
 					if($add){
-						#print str_repeat(' ', 3 * 4).'add'."\n";
 						#$children[] = $newElement;
 						#$children[] = $element;
 						$html .= $element->render();

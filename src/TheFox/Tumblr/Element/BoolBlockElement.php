@@ -9,10 +9,7 @@ class BoolBlockElement extends BlockElement{
 	}
 	
 	public function render(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		
 		if($this->getContent()){
-			#print __CLASS__.'->'.__FUNCTION__.':     render'."\n";
 			return parent::render();
 		}
 		return '';

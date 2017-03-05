@@ -3,7 +3,6 @@
 namespace TheFox\Test;
 
 use PHPUnit_Framework_TestCase;
-
 use TheFox\Tumblr\Element\Element;
 use TheFox\Tumblr\Element\HtmlElement;
 
@@ -109,8 +108,6 @@ class ElementTest extends PHPUnit_Framework_TestCase{
 		$element1->setChildren(array($element2, $element3));
 		$this->assertEquals(array($element2, $element3), $element1->getChildren());
 		$this->assertEquals(array($element2, $element3, $element4), $element1->getChildren(true));
-		
-		#\Doctrine\Common\Util\Debug::dump($element1, 10);
 	}
 	
 	public function testRenderChildren1(){

@@ -16,10 +16,6 @@ class Post{
 	private $postId = 0;
 	private $title = '';
 	
-	public function __construct(){
-		
-	}
-	
 	public function setType($type){
 		$this->type = $type;
 	}

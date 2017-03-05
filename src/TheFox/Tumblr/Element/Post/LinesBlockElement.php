@@ -5,11 +5,8 @@ namespace TheFox\Tumblr\Element\Post;
 class LinesBlockElement extends LineBlockElement{
 	
 	public function render(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getPath().'"'."\n";
-		
 		$html = '';
 		$lines = $this->getContent();
-		#\Doctrine\Common\Util\Debug::dump($lines);
 		
 		if($lines && is_array($lines)){
 			$usersId = 0;
@@ -35,15 +32,11 @@ class LinesBlockElement extends LineBlockElement{
 				
 				$line['userNumber'] = $userNumber;
 				
-				#\Doctrine\Common\Util\Debug::dump($line);
-				
 				$this->setContent($line);
 				$this->setElementsValues();
 				$html .= parent::render();
 			}
 		}
-		
-		#\Doctrine\Common\Util\Debug::dump($html);
 		
 		// Reset original content.
 		$this->setContent($lines);

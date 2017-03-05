@@ -18,8 +18,6 @@ class PhotoBlockElement extends PostBlockElement{
 			foreach($this->getChildren(true) as $element){
 				$elementName = strtolower($element->getTemplateName());
 				
-				#print '    element: '.get_class($element).', '.$element->getName()."\n";
-				
 				if($element instanceof VariableElement){
 					if($elementName == 'photourl-500'){
 						$element->setContent($post->getUrl());

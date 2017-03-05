@@ -3,7 +3,6 @@
 namespace TheFox\Test;
 
 use PHPUnit_Framework_TestCase;
-
 use TheFox\Tumblr\Element\Post\AnswerBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Post\AnswerPost;

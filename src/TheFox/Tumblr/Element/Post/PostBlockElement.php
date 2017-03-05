@@ -12,7 +12,6 @@ class PostBlockElement extends BlockElement{
 	}
 	
 	public function render(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
 		$this->setElementsValues();
 		return parent::render();
 	}

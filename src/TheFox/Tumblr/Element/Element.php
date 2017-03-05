@@ -2,8 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-#use RuntimeException;
-
 class Element{
 	
 	private $id = 0;
@@ -14,12 +12,7 @@ class Element{
 	protected $children = array();
 	
 	public function __construct(){
-		#print __CLASS__.'->'.__FUNCTION__.''."\n";
 		$this->setContent($this->getDefaultContent());
-	}
-	
-	public function __destruct(){
-		#print __CLASS__.'->'.__FUNCTION__.''."\n";
 	}
 	
 	public function setId($id){
@@ -71,8 +64,6 @@ class Element{
 	}
 	
 	public function getPath(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		
 		$name = $this->getName();
 		$rc = new \ReflectionClass(get_class($this));
 		$className = $rc->getShortName();
@@ -108,20 +99,14 @@ class Element{
 	}
 	
 	public function renderChildren($children){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		
 		$html = '';
 		foreach($children as $element){
-			#print '       element: "'.get_class($element).'"'."\n";
 			$html .= $element->render();
 		}
 		return $html;
 	}
 	
 	public function render(){
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getName().'"'."\n";
-		#print __CLASS__.'->'.__FUNCTION__.': "'.$this->getPath().'"'."\n";
-		
 		return $this->renderChildren($this->children);
 	}
 	

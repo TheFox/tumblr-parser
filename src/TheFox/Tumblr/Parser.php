@@ -5,9 +5,7 @@ namespace TheFox\Tumblr;
 use RuntimeException;
 use DateTime;
 use ReflectionClass;
-
 use Symfony\Component\Yaml\Yaml;
-
 use TheFox\Tumblr\Element\Element;
 use TheFox\Tumblr\Element\AskEnabledBlockElement;
 use TheFox\Tumblr\Element\AudioBlockElement;
@@ -36,11 +34,9 @@ use TheFox\Tumblr\Element\SourceBlockElement;
 use TheFox\Tumblr\Element\TagsBlockElement;
 use TheFox\Tumblr\Element\TitleBlockElement;
 use TheFox\Tumblr\Element\VideoBlockElement;
-
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\TextVariableElement;
 use TheFox\Tumblr\Element\LangVariableElement;
-
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\Post\PhotoBlockElement;
@@ -50,7 +46,6 @@ use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 use TheFox\Tumblr\Element\Post\ChatBlockElement;
 use TheFox\Tumblr\Element\Post\LinesBlockElement;
 use TheFox\Tumblr\Element\Post\AnswerBlockElement;
-
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
@@ -178,8 +173,6 @@ class Parser{
 			$ifName = $variable->getIfName();
 			$ifNotName = $variable->getIfNotName();
 			
-			#fwrite(STDOUT, "settings: '".$key."' '".$tmpName."' '".$ifName."' => '".$val."'\n");
-			
 			if($overwrite || !$overwrite && !isset($this->variables[$tmpName])){
 				$this->variables[$tmpName] = $variable;
 				
@@ -217,13 +210,9 @@ class Parser{
 			}
 			$this->fillVariables($variables);
 		}
-		
-		#ve($this->variables);
 	}
 	
 	private function parseElements($rawhtml = '', $parentElement = null, $level = 1){
-		#fwrite(STDOUT, __CLASS__.'->'.__FUNCTION__.': level='.$level.PHP_EOL);
-		
 		if($level >= 100){
 			throw new RuntimeException(__FUNCTION__.': Maximum level of 100 reached.', 2);
 		}
@@ -244,16 +233,12 @@ class Parser{
 				throw new RuntimeException(__FUNCTION__.': Maximum level of 1000 reached.', 3);
 			}
 			
-			#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'parse: "'.$rawhtml.'"'.PHP_EOL);
-			
 			$content = '';
 			$element = null;
 			
 			// Find opening bracket.
 			$pos = strpos($rawhtml, '{');
 			if($pos === false){
-				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'no { found'.PHP_EOL);
-				
 				$this->elementsId++;
 				$element = new HtmlElement();
 				$element->setId($this->elementsId);
@@ -263,11 +248,8 @@ class Parser{
 				$rawhtml = '';
 			}
 			else{
-				#fwrite(STDOUT, str_repeat(' ', 4 * ($level)).'found {: '.$pos.PHP_EOL);
-				
 				if($pos >= 1){
 					$content = substr($rawhtml, 0, $pos);
-					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$content.'"'.PHP_EOL);
 				}
 				
 				$this->elementsId++;
@@ -283,7 +265,6 @@ class Parser{
 				if($pos === false){
 					
 					$content .= '{';
-					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'no } found: "'.$content.'"'.PHP_EOL);
 					
 					$element->setContent($content);
 				}
@@ -292,7 +273,6 @@ class Parser{
 					$nameFullLen = strlen($nameFull);
 					$rawhtml = substr($rawhtml, $pos + 1);
 					
-					#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'found }: '.$pos.', "'.$nameFull.'" '.$nameFullLen.PHP_EOL);
 					
 					if(strtolower(substr($nameFull, 0, 6)) == 'block:'){
 						// Process a block element.
@@ -455,8 +435,6 @@ class Parser{
 						#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'else'.PHP_EOL);
 						
 						if(in_array($nameFull, static::$variableNames)){
-							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok'.PHP_EOL);
-							
 							$this->elementsId++;
 							$element = new VariableElement();
 							$element->setId($this->elementsId);
@@ -464,8 +442,6 @@ class Parser{
 							$parentElement->addChild($element);
 						}
 						elseif(substr($nameFull, 0, 5) == 'text:'){
-							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok text'.PHP_EOL);
-							
 							$this->elementsId++;
 							$element = new TextVariableElement();
 							$element->setId($this->elementsId);
@@ -473,7 +449,6 @@ class Parser{
 							$parentElement->addChild($element);
 						}
 						elseif(substr($nameFull, 0, 5) == 'lang:'){
-							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'ok lang'.PHP_EOL);
 							
 							$this->elementsId++;
 							$element = new LangVariableElement();
@@ -485,7 +460,6 @@ class Parser{
 							// Unknown block. Set the original content.
 							
 							$content = '{'.$nameFull.'}';
-							#fwrite(STDOUT, str_repeat(' ', 4 * ($level + 1)).'content: "'.$nameFull.'", "'.$content.'"'.PHP_EOL);
 							
 							$this->elementsId++;
 							$element = new HtmlElement();
@@ -494,17 +468,11 @@ class Parser{
 							$element->setContent($content);
 							$parentElement->addChild($element);
 						}
-						
-						#$rawhtml = substr($rawhtml, $pos + 1);
 					}
 				}
 				
 			}
-			
-			#usleep(300000);
 		}
-		
-		#if($level == 1){ ve($this->rootElement); }
 	}
 	
 	private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false,
@@ -526,18 +494,10 @@ class Parser{
 			$rc = new ReflectionClass(get_class($element));
 			$className = $rc->getShortName();
 			
-			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
-			#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$element->getPath().PHP_EOL);
-			#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
-			
 			$setSub = true;
 			if($element instanceof VariableElement){
-				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
-				
 				$content = $element->getDefaultContent();
 				if($element instanceof LangVariableElement){
-					#fwrite(STDOUT, '    lang "'.$elementName.'"'.PHP_EOL);
-					
 					if($isIndexPage && $elementName == 'lang:Page CurrentPage of TotalPages'){
 						$content = 'Page '.$id.' of '.$totalPages;
 					}
@@ -548,18 +508,14 @@ class Parser{
 					}
 				}
 				elseif($elementName == 'PreviousPage'){
-					#fwrite(STDOUT, '    PreviousPage '.(int)$isIndexPage.', '.$id.', '.$totalPages.PHP_EOL);
 					if($isIndexPage && $id > 1){
 						$content = '?type=page&id='.($id - 1);
-						#fwrite(STDOUT, '        url "'.$content.'"'.PHP_EOL);
 						#$element->setContent($url);
 					}
 				}
 				elseif($elementName == 'NextPage'){
-					#fwrite(STDOUT, '    NextPage '.(int)$isIndexPage.', '.$id.', '.$totalPages.PHP_EOL);
 					if($isIndexPage && $id < $totalPages){
 						$content = '?type=page&id='.($id + 1);
-						#fwrite(STDOUT, '        url "'.$content.'"'.PHP_EOL);
 						#$element->setContent($url);
 					}
 				}
@@ -572,48 +528,35 @@ class Parser{
 				$setSub = false;
 			}
 			elseif($element instanceof IndexPageBlockElement){
-				#fwrite(STDOUT, 'element index:  '.$element->getPath().' "'.$elementName.'" '.(int)$isIndexPage.PHP_EOL);
 				$element->setContent($isIndexPage);
 			}
 			elseif($element instanceof PermalinkPageBlockElement){
-				#fwrite(STDOUT, 'element perm:  '.$element->getPath().' "'.$elementName.'" '.(int)$isPermalinkPage.PHP_EOL);
 				$element->setContent($isPermalinkPage);
 			}
 			elseif($element instanceof PostTitleBlockElement){
 				$element->setContent($isPermalinkPage);
 			}
 			elseif($element instanceof IfNotBlockElement){
-				#fwrite(STDOUT, 'element not:  '.$element->getPath().' "'.$elementName.'"'.PHP_EOL);
-				
 				if(isset($this->variables[$elementName])){
-					#$val = !(bool)$this->variables[$elementName]->getValue();
 					$val = (bool)$this->variables[$elementName]->getValue();
-					#fwrite(STDOUT, 'element not:  '.$element->getPath().'    - val: '.(int)$val.PHP_EOL);
 					$element->setContent((bool)$val);
 				}
 				else{
-					#fwrite(STDOUT, 'element not:  '.$element->getPath().'    - default: '.(int)$element->getDefaultContent().PHP_EOL);
 					$element->setContent($element->getDefaultContent());
 				}
 			}
 			elseif($element instanceof IfBlockElement){
-				#fwrite(STDOUT, 'element if:   '.$element->getPath().' "'.$elementName.'"'.PHP_EOL);
-				
 				if(isset($this->variables[$elementName])){
 					$val = (bool)$this->variables[$elementName]->getValue();
-					#fwrite(STDOUT, 'element if:   '.$element->getPath().'    - val: '.(int)$val.PHP_EOL);
 					$element->setContent((bool)$val);
 				}
 				else{
-					#fwrite(STDOUT, 'element if:   '.$element->getPath().'    - default: '.(int)$element->getDefaultContent().PHP_EOL);
 					$element->setContent($element->getDefaultContent());
 				}
 			}
 			elseif($element instanceof AskEnabledBlockElement){
 				$elementName = 'IfAskEnabled';
-				#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
 				if(isset($this->variables[$elementName])){
-					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue().PHP_EOL);
 					$element->setContent(true);
 				}
 				else{
@@ -622,9 +565,7 @@ class Parser{
 			}
 			elseif($element instanceof DescriptionBlockElement){
 				$elementName = 'MetaDescription';
-				#fwrite(STDOUT, str_repeat('    |', ($level - 1)).'- element '.$elementId.': '.$className.$elementNameOut.PHP_EOL);
 				if(isset($this->variables[$elementName])){
-					#fwrite(STDOUT, ''.str_repeat('    |', $level + 1).'- val: '.$this->variables[$elementName]->getValue().PHP_EOL);
 					$element->setContent(true);
 				}
 				else{
@@ -632,17 +573,14 @@ class Parser{
 				}
 			}
 			elseif($element instanceof PaginationBlockElement){
-				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
 				$element->setContent($isIndexPage);
 			}
 			elseif($element instanceof PreviousPageBlockElement){
-				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
 				if($isIndexPage && $id > 1){
 					$element->setContent(true);
 				}
 			}
 			elseif($element instanceof NextPageBlockElement){
-				#fwrite(STDOUT, 'element: '.$element->getPath().PHP_EOL);
 				if($isIndexPage && $id < $totalPages){
 					$element->setContent(true);
 				}
@@ -654,7 +592,6 @@ class Parser{
 				$element->setContent($pages);
 			}
 			elseif($element instanceof PostsBlockElement){
-				#fwrite(STDOUT, "    PostsBlockElement".PHP_EOL);
 				$element->setContent($posts);
 			}
 			
@@ -688,7 +625,6 @@ class Parser{
 	
 	private function makePostFromIndex($id, $isPermalinkPage = false){
 		$htmlId = $id + 1;
-		#fwrite(STDOUT, 'makePostFromIndex: '.$id.', '.$htmlId.PHP_EOL);
 		
 		$postObj = null;
 		
@@ -734,7 +670,6 @@ class Parser{
 						$photoObj = $this->makePhoto($photo);
 						if($photoObj){
 							$photos[] = $photoObj;
-							#ve($photoObj);
 						}
 					}
 					$postObj->setPhotos($photos);
@@ -780,7 +715,6 @@ class Parser{
 				}
 				else{
 					$postObj->setPermalink('?type=post&id='.$htmlId);
-					#fwrite(STDOUT, 'makePostFromIndex: '.$postObj->getPermalink().PHP_EOL);
 				}
 				if(isset($post['date'])){
 					$postDateTime = new DateTime($post['date']);
@@ -803,11 +737,7 @@ class Parser{
 	}
 	
 	public function parse($type = 'page', $id = 1){
-		#fwrite(STDOUT, 'parse: '.$type.', '.$id.PHP_EOL);
-		
 		$this->parseMetaSettings();
-		
-		#ve($this->variables);
 		
 		if($this->templateChanged){
 			$this->templateChanged = false;
@@ -823,7 +753,6 @@ class Parser{
 		if($isIndexPage){
 			$postIdMin = ($id - 1) * $this->settings['postsPerPage'];
 			$postIdMax = $postIdMin + $this->settings['postsPerPage'];
-			#fwrite(STDOUT, 'ids: '.$postIdMin.' - '.$postIdMax.PHP_EOL);
 			
 			for($postId = $postIdMin; $postId < $postIdMax; $postId++){
 				if(isset($this->settings['posts'][$postId])){
@@ -847,15 +776,8 @@ class Parser{
 				$variable->setValue($postObj->getTitle());
 				
 				$this->variables['PostTitle'] = $variable;
-				
-				#fwrite(STDOUT, 'PostTitle: '.$postObj->getTitle().PHP_EOL);
 			}
-			
-			#ve($postObj);
 		}
-		
-		#ve($posts);
-		#ve($this->variables);
 		
 		$this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage,
 			$posts, $id, $totalPages, $this->settings['pages']);
@@ -864,9 +786,7 @@ class Parser{
 	
 	public function printHtml($type = 'page', $id = 1){
 		$html = $this->parse($type, $id);
-		#print "\n\n\n\n\n\n\n\n\n";
 		
-		#print "\n'$html'\n";
 		print $html;
 		flush();
 	}

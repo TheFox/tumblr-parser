@@ -9,7 +9,6 @@ class PagesBlockElement extends BlockElement{
 		
 		$html = '';
 		if(is_array($pages)){
-			#\Doctrine\Common\Util\Debug::dump($pages, 10);
 			foreach($pages as $page){
 				foreach($this->getChildren(true) as $element){
 					$elementName = strtolower($element->getTemplateName());
