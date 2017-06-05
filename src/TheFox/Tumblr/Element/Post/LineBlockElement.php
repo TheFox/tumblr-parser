@@ -9,8 +9,12 @@ class LineBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        /** @var array $content */
+        /** @var null|array $content */
         $content = $this->getContent();
+
+        if (!$content || !is_array($content)) {
+            return;
+        }
 
         $hasLabel = isset($content['label']) && $content['label'];
         $label = $hasLabel ? $content['label'] : '';

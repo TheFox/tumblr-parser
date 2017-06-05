@@ -11,43 +11,44 @@ class PhotoBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        /** @var PhotoPost $post */
+        /** @var PhotoPost|null $post */
         $post = $this->getContent();
-        
-        if ($post && $post instanceof PhotoPost) {
-            //$hasUrl = (bool)$post->getUrl();
-            $hasLink = (bool)$post->getLinkUrl();
-            $hasCapation = (bool)$post->getCaption();
-            foreach ($this->getChildren(true) as $element) {
-                $elementName = strtolower($element->getTemplateName());
 
-                if ($element instanceof VariableElement) {
-                    if ($elementName == 'photourl-500') {
-                        $element->setContent($post->getUrl());
-                    } elseif ($elementName == 'photoalt') {
-                        $element->setContent($post->getAlt());
-                    } elseif ($elementName == 'linkurl') {
-                        if ($hasLink) {
-                            $element->setContent($post->getLinkUrl());
-                        } else {
-                            $element->setContent($post->getPermalink());
-                        }
-                    } elseif ($elementName == 'caption') {
-                        $element->setContent($post->getCaption());
-                    } elseif ($elementName == 'linkopentag') {
-                        if ($hasLink) {
-                            $element->setContent('<a href="' . $post->getLinkUrl() . '">');
-                        } else {
-                            $element->setContent('<a href="' . $post->getPermalink() . '">');
-                        }
-                    } elseif ($elementName == 'linkclosetag') {
-                        $element->setContent('</a>');
+        if (!$post || !$post instanceof PhotoPost) {
+            return;
+        }
+
+        $hasLink = (bool)$post->getLinkUrl();
+        $hasCapation = (bool)$post->getCaption();
+        foreach ($this->getChildren(true) as $element) {
+            $elementName = strtolower($element->getTemplateName());
+
+            if ($element instanceof VariableElement) {
+                if ($elementName == 'photourl-500') {
+                    $element->setContent($post->getUrl());
+                } elseif ($elementName == 'photoalt') {
+                    $element->setContent($post->getAlt());
+                } elseif ($elementName == 'linkurl') {
+                    if ($hasLink) {
+                        $element->setContent($post->getLinkUrl());
+                    } else {
+                        $element->setContent($post->getPermalink());
                     }
-                } elseif ($element instanceof LinkUrlBlockElement) {
-                    $element->setContent($hasLink);
-                } elseif ($element instanceof CaptionBlockElement) {
-                    $element->setContent($hasCapation);
+                } elseif ($elementName == 'caption') {
+                    $element->setContent($post->getCaption());
+                } elseif ($elementName == 'linkopentag') {
+                    if ($hasLink) {
+                        $element->setContent('<a href="' . $post->getLinkUrl() . '">');
+                    } else {
+                        $element->setContent('<a href="' . $post->getPermalink() . '">');
+                    }
+                } elseif ($elementName == 'linkclosetag') {
+                    $element->setContent('</a>');
                 }
+            } elseif ($element instanceof LinkUrlBlockElement) {
+                $element->setContent($hasLink);
+            } elseif ($element instanceof CaptionBlockElement) {
+                $element->setContent($hasCapation);
             }
         }
     }

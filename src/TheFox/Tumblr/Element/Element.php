@@ -2,6 +2,8 @@
 
 namespace TheFox\Tumblr\Element;
 
+use ReflectionClass;
+
 class Element
 {
     /**
@@ -130,7 +132,7 @@ class Element
     public function getPath()
     {
         $name = $this->getName();
-        $rc = new \ReflectionClass(get_class($this));
+        $rc = new ReflectionClass(get_class($this));
         $className = $rc->getShortName();
 
         if ($this->getParent()) {
@@ -182,6 +184,7 @@ class Element
     public function renderChildren($children)
     {
         $html = '';
+        /** @var Element $element */
         foreach ($children as $element) {
             $html .= $element->render();
         }

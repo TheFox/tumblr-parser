@@ -13,22 +13,24 @@ class QuoteBlockElement extends PostBlockElement
         /** @var QuotePost $post */
         $post = $this->getContent();
 
-        if ($post && $post instanceof QuotePost) {
-            $hasSource = (bool)$post->getSource();
-            foreach ($this->getChildren(true) as $element) {
-                $elementName = strtolower($element->getTemplateName());
+        if (!$post || !$post instanceof QuotePost) {
+            return;
+        }
+        
+        $hasSource = (bool)$post->getSource();
+        foreach ($this->getChildren(true) as $element) {
+            $elementName = strtolower($element->getTemplateName());
 
-                if ($element instanceof VariableElement) {
-                    if ($elementName == 'quote') {
-                        $element->setContent($post->getQuote());
-                    } elseif ($elementName == 'source') {
-                        $element->setContent($post->getSource());
-                    } elseif ($elementName == 'length') {
-                        $element->setContent($post->getLength());
-                    }
-                } elseif ($element instanceof SourceBlockElement) {
-                    $element->setContent($hasSource);
+            if ($element instanceof VariableElement) {
+                if ($elementName == 'quote') {
+                    $element->setContent($post->getQuote());
+                } elseif ($elementName == 'source') {
+                    $element->setContent($post->getSource());
+                } elseif ($elementName == 'length') {
+                    $element->setContent($post->getLength());
                 }
+            } elseif ($element instanceof SourceBlockElement) {
+                $element->setContent($hasSource);
             }
         }
     }

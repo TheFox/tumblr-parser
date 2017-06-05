@@ -648,106 +648,105 @@ class Parser
      */
     private function makePostFromIndex($id, $isPermalinkPage = false)
     {
+        if (!isset($this->settings['posts'][$id])) {
+            return null;
+        }
+
         $htmlId = $id + 1;
+        $post = $this->settings['posts'][$id];
+        $type = strtolower($post['type']);
 
         $postObj = null;
-
-        if (isset($this->settings['posts'][$id])) {
-            $post = $this->settings['posts'][$id];
-            $type = strtolower($post['type']);
-
-            if ($type == 'text') {
-                $postObj = new TextPost();
-                if (isset($post['title'])) {
-                    $postObj->setTitle($post['title']);
-                }
-                if (isset($post['body'])) {
-                    $postObj->setBody($post['body']);
-                }
-            } elseif ($type == 'link') {
-                $postObj = new LinkPost();
-                if (isset($post['url'])) {
-                    $postObj->setUrl($post['url']);
-                }
-                if (isset($post['name'])) {
-                    $postObj->setName($post['name']);
-                }
-                if (isset($post['target'])) {
-                    $postObj->setTarget($post['target']);
-                }
-                if (isset($post['description'])) {
-                    $postObj->setDescription($post['description']);
-                }
-            } elseif ($type == 'photo') {
-                $postObj = $this->makePhoto($post);
-            } elseif ($type == 'photoset') {
-                $postObj = new PhotosetPost();
-                if (isset($post['caption'])) {
-                    $postObj->setCaption($post['caption']);
-                }
-                if (isset($post['photos'])) {
-                    $photos = array();
-                    foreach ($post['photos'] as $photo) {
-                        $photoObj = $this->makePhoto($photo);
-                        if ($photoObj) {
-                            $photos[] = $photoObj;
-                        }
+        if ($type == 'text') {
+            $postObj = new TextPost();
+            if (isset($post['title'])) {
+                $postObj->setTitle($post['title']);
+            }
+            if (isset($post['body'])) {
+                $postObj->setBody($post['body']);
+            }
+        } elseif ($type == 'link') {
+            $postObj = new LinkPost();
+            if (isset($post['url'])) {
+                $postObj->setUrl($post['url']);
+            }
+            if (isset($post['name'])) {
+                $postObj->setName($post['name']);
+            }
+            if (isset($post['target'])) {
+                $postObj->setTarget($post['target']);
+            }
+            if (isset($post['description'])) {
+                $postObj->setDescription($post['description']);
+            }
+        } elseif ($type == 'photo') {
+            $postObj = $this->makePhoto($post);
+        } elseif ($type == 'photoset') {
+            $postObj = new PhotosetPost();
+            if (isset($post['caption'])) {
+                $postObj->setCaption($post['caption']);
+            }
+            if (isset($post['photos'])) {
+                $photos = array();
+                foreach ($post['photos'] as $photo) {
+                    $photoObj = $this->makePhoto($photo);
+                    if ($photoObj) {
+                        $photos[] = $photoObj;
                     }
-                    $postObj->setPhotos($photos);
                 }
-            } elseif ($type == 'quote') {
-                $postObj = new QuotePost();
-                if (isset($post['quote'])) {
-                    $postObj->setQuote($post['quote']);
-                }
-                if (isset($post['source'])) {
-                    $postObj->setSource($post['source']);
-                }
-                if (isset($post['length'])) {
-                    $postObj->setLength($post['length']);
-                }
-            } elseif ($type == 'chat') {
-                $postObj = new ChatPost();
-                if (isset($post['title'])) {
-                    $postObj->setTitle($post['title']);
-                }
-                if (isset($post['chats'])) {
-                    $postObj->setChats($post['chats']);
-                }
-            } elseif ($type == 'answer') {
-                $postObj = new AnswerPost();
-                if (isset($post['asker'])) {
-                    $postObj->setAsker($post['asker']);
-                }
-                if (isset($post['question'])) {
-                    $postObj->setQuestion($post['question']);
-                }
-                if (isset($post['answer'])) {
-                    $postObj->setAnswer($post['answer']);
-                }
+                $postObj->setPhotos($photos);
+            }
+        } elseif ($type == 'quote') {
+            $postObj = new QuotePost();
+            if (isset($post['quote'])) {
+                $postObj->setQuote($post['quote']);
+            }
+            if (isset($post['source'])) {
+                $postObj->setSource($post['source']);
+            }
+            if (isset($post['length'])) {
+                $postObj->setLength($post['length']);
+            }
+        } elseif ($type == 'chat') {
+            $postObj = new ChatPost();
+            if (isset($post['title'])) {
+                $postObj->setTitle($post['title']);
+            }
+            if (isset($post['chats'])) {
+                $postObj->setChats($post['chats']);
+            }
+        } elseif ($type == 'answer') {
+            $postObj = new AnswerPost();
+            if (isset($post['asker'])) {
+                $postObj->setAsker($post['asker']);
+            }
+            if (isset($post['question'])) {
+                $postObj->setQuestion($post['question']);
+            }
+            if (isset($post['answer'])) {
+                $postObj->setAnswer($post['answer']);
+            }
+        }
+
+        if ($postObj) {
+            if (isset($post['permalink'])) {
+                $postObj->setPermalink($post['permalink']);
+            } else {
+                $postObj->setPermalink('?type=post&id=' . $htmlId);
+            }
+            if (isset($post['date'])) {
+                $postDateTime = new DateTime($post['date']);
+                $postObj->setDateTime($postDateTime);
+            }
+            if (isset($post['notes'])) {
+                $postObj->setNotes($post['notes']);
+            }
+            if (isset($post['tags'])) {
+                $postObj->setTags($post['tags']);
             }
 
-            if ($postObj) {
-                if (isset($post['permalink'])) {
-                    $postObj->setPermalink($post['permalink']);
-                } else {
-                    $postObj->setPermalink('?type=post&id=' . $htmlId);
-                }
-                if (isset($post['date'])) {
-                    $postDateTime = new DateTime($post['date']);
-                    $postObj->setDateTime($postDateTime);
-                }
-                if (isset($post['notes'])) {
-                    $postObj->setNotes($post['notes']);
-                }
-                if (isset($post['tags'])) {
-                    $postObj->setTags($post['tags']);
-                }
-
-                $postObj->setIsPermalinkPage($isPermalinkPage);
-                #$postObj->setHasNextPage(isset($this->settings['posts'][$id + 1]));
-                $postObj->setPostId($htmlId);
-            }
+            $postObj->setIsPermalinkPage($isPermalinkPage);
+            $postObj->setPostId($htmlId);
         }
 
         return $postObj;
@@ -802,6 +801,7 @@ class Parser
 
         $this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage,
             $posts, $id, $totalPages, $this->settings['pages']);
+        
         return $this->renderElements($this->rootElement);
     }
 

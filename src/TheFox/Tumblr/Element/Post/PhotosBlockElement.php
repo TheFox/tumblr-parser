@@ -9,17 +9,19 @@ class PhotosBlockElement extends PhotoBlockElement
      */
     public function render()
     {
-        $html = '';
-        
-        /** @var array $photos */
+        /** @var null|array $photos */
         $photos = $this->getContent();
 
-        if ($photos && is_array($photos)) {
-            foreach ($photos as $photoId => $photo) {
-                $this->setContent($photo);
-                $this->setElementsValues();
-                $html .= parent::render();
-            }
+        if (!$photos || !is_array($photos)) {
+            return '';
+        }
+
+        $html = '';
+        foreach ($photos as $photoId => $photo) {
+            $this->setContent($photo);
+            $this->setElementsValues();
+            
+            $html .= parent::render();
         }
 
         // Reset original content.

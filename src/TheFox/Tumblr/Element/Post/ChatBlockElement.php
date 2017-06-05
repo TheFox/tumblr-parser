@@ -9,20 +9,22 @@ class ChatBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        /** @var ChatPost $post */
+        /** @var ChatPost|null $post */
         $post = $this->getContent();
-        
-        if ($post instanceof ChatPost) {
-            foreach ($this->getChildren(true) as $element) {
-                $elementName = strtolower($element->getTemplateName());
 
-                if ($element instanceof VariableElement) {
-                    if ($elementName == 'title') {
-                        $element->setContent($post->getTitle());
-                    }
-                } elseif ($element instanceof LinesBlockElement) {
-                    $element->setContent($post->getChats());
+        if (!$post || !$post instanceof ChatPost) {
+            return;
+        }
+        
+        foreach ($this->getChildren(true) as $element) {
+            $elementName = strtolower($element->getTemplateName());
+
+            if ($element instanceof VariableElement) {
+                if ($elementName == 'title') {
+                    $element->setContent($post->getTitle());
                 }
+            } elseif ($element instanceof LinesBlockElement) {
+                $element->setContent($post->getChats());
             }
         }
     }

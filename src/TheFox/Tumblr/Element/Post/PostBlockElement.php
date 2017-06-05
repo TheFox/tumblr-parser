@@ -17,6 +17,7 @@ class PostBlockElement extends BlockElement
     public function render()
     {
         $this->setElementsValues();
+        
         return parent::render();
     }
 }
