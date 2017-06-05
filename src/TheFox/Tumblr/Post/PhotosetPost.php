@@ -36,7 +36,7 @@ class PhotosetPost extends Post
     }
 
     /**
-     * @param string $photos
+     * @param array $photos
      */
     public function setPhotos($photos)
     {

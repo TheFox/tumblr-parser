@@ -15,9 +15,9 @@ class QuotePost extends Post
     private $source = '';
 
     /**
-     * @var string
+     * @var integer|string
      */
-    private $length = '';
+    private $length;
 
     public function __construct()
     {
@@ -57,7 +57,7 @@ class QuotePost extends Post
     }
 
     /**
-     * @param string $length
+     * @param integer|string $length
      */
     public function setLength($length)
     {
@@ -65,7 +65,7 @@ class QuotePost extends Post
     }
 
     /**
-     * @return string
+     * @return integer|string
      */
     public function getLength()
     {

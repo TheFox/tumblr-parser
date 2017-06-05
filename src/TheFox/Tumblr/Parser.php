@@ -46,6 +46,7 @@ use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 use TheFox\Tumblr\Element\Post\ChatBlockElement;
 use TheFox\Tumblr\Element\Post\LinesBlockElement;
 use TheFox\Tumblr\Element\Post\AnswerBlockElement;
+use TheFox\Tumblr\Post\Post;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
@@ -57,7 +58,7 @@ use TheFox\Tumblr\Post\AnswerPost;
 
 class Parser
 {
-    const VERSION = '0.6.0-dev.2';
+    const VERSION = '0.6.0-dev.3';
 
     public static $variableNames = array(
         '12Hour',
@@ -148,9 +149,9 @@ class Parser
     private $variables = array();
 
     /**
-     * @var null
+     * @var Element
      */
-    private $rootElement = null;
+    private $rootElement;
 
     /**
      * @var int
@@ -267,7 +268,7 @@ class Parser
 
     /**
      * @param string $rawhtml
-     * @param null $parentElement
+     * @param Element|null $parentElement
      * @param int $level
      */
     private function parseElements($rawhtml = '', $parentElement = null, $level = 1)
@@ -281,8 +282,10 @@ class Parser
         }
         if (!$parentElement) {
             $this->elementsId++;
-            $parentElement = $this->rootElement = new Element();
+            $parentElement = new Element();
             $parentElement->setId($this->elementsId);
+
+            $this->rootElement = $parentElement;
         }
 
         $fuse = 0;
@@ -644,7 +647,7 @@ class Parser
     /**
      * @param integer $id
      * @param bool $isPermalinkPage
-     * @return null|ChatPost|LinkPost|PhotoPost|PhotosetPost|QuotePost|TextPost
+     * @return null|Post
      */
     private function makePostFromIndex($id, $isPermalinkPage = false)
     {
