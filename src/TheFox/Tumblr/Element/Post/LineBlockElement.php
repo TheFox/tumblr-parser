@@ -9,16 +9,15 @@ class LineBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        #parent::setElementsValues();
+        /** @var array $content */
+        $content = $this->getContent();
 
-        $post = $this->getContent();
-
-        $hasLabel = isset($post['label']) && $post['label'];
-        $label = $hasLabel ? $post['label'] : '';
-        $line = isset($post['line']) && $post['line'] ? $post['line'] : '';
-        $alt = isset($post['alt']) && $post['alt'] ? $post['alt'] : '';
-        $name = isset($post['name']) && $post['name'] ? $post['name'] : '';
-        $userNumber = isset($post['userNumber']) && $post['userNumber'] ? $post['userNumber'] : '';
+        $hasLabel = isset($content['label']) && $content['label'];
+        $label = $hasLabel ? $content['label'] : '';
+        $line = isset($content['line']) && $content['line'] ? $content['line'] : '';
+        $alt = isset($content['alt']) && $content['alt'] ? $content['alt'] : '';
+        $name = isset($content['name']) && $content['name'] ? $content['name'] : '';
+        $userNumber = isset($content['userNumber']) && $content['userNumber'] ? $content['userNumber'] : '';
 
         foreach ($this->getChildren(true) as $element) {
             $elementName = strtolower($element->getTemplateName());

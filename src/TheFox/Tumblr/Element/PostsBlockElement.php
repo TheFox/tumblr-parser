@@ -11,6 +11,7 @@ use TheFox\Tumblr\Element\Post\ChatBlockElement;
 use TheFox\Tumblr\Element\Post\AnswerBlockElement;
 use TheFox\Tumblr\Element\IndexPageBlockElement;
 use TheFox\Tumblr\Element\PermalinkPageBlockElement;
+use TheFox\Tumblr\Post\Post;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
 use TheFox\Tumblr\Post\PhotoPost;
@@ -21,8 +22,12 @@ use TheFox\Tumblr\Post\AnswerPost;
 
 class PostsBlockElement extends BlockElement
 {
+    /**
+     * @return string
+     */
     public function render()
     {
+        /** @var Post[] $posts */
         $posts = $this->getContent();
 
         $children = array();
@@ -293,10 +298,10 @@ class PostsBlockElement extends BlockElement
                         $html .= $element->render();
                     }
 
-                }
+                } // foreach $this->getChildren()
 
             }
-        }
+        } // if is_array($posts)
 
         #return $this->renderChildren($children);
         return $html;

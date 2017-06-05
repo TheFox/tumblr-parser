@@ -4,6 +4,9 @@ namespace TheFox\Tumblr\Element;
 
 class TagsBlockElement extends BlockElement
 {
+    /**
+     * @return string
+     */
     public function render()
     {
         $tags = $this->getContent();

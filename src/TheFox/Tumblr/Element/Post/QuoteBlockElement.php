@@ -10,8 +10,7 @@ class QuoteBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        #parent::setElementsValues();
-
+        /** @var QuotePost $post */
         $post = $this->getContent();
 
         if ($post && $post instanceof QuotePost) {

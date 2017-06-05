@@ -4,16 +4,26 @@ namespace TheFox\Tumblr\Element\Post;
 
 class LinesBlockElement extends LineBlockElement
 {
+    /**
+     * @return string
+     */
     public function render()
     {
         $html = '';
+        
+        /** @var array $lines */
         $lines = $this->getContent();
 
         if ($lines && is_array($lines)) {
-            $usersId = 0;
+            //$usersId = 0;
             $users = array();
 
             $alt = 'even';
+            
+            /**
+             * @var $lineId
+             * @var array $line
+             */
             foreach ($lines as $lineId => $line) {
                 #$line['name'] = 'your_tumblr_username';
 
@@ -29,12 +39,12 @@ class LinesBlockElement extends LineBlockElement
                         $userNumber = array_push($users, $labelLower);
                     }
                 }
-
-
+                
                 $line['userNumber'] = $userNumber;
 
                 $this->setContent($line);
                 $this->setElementsValues();
+                
                 $html .= parent::render();
             }
         }

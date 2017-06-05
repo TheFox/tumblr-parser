@@ -9,9 +9,9 @@ class AnswerBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        #parent::setElementsValues();
-
+        /** @var AnswerPost $post */
         $post = $this->getContent();
+        
         if ($post instanceof AnswerPost) {
             #$hasTitle = (bool)$post->getTitle();
             foreach ($this->getChildren(true) as $element) {

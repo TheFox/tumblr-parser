@@ -10,7 +10,9 @@ class PhotosetBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
+        /** @var PhotosetPost $post */
         $post = $this->getContent();
+        
         if ($post && $post instanceof PhotosetPost) {
             $hasCapation = (bool)$post->getCaption();
             foreach ($this->getChildren(true) as $element) {

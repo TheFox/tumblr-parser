@@ -4,30 +4,73 @@ namespace TheFox\Tumblr;
 
 class Variable
 {
+    /**
+     * @var int
+     */
     private $id = 0;
-    private $type = '';
-    private $name = '';
-    private $templateName = '';
-    private $ifName = '';
-    private $ifNotName = '';
-    private $value = '';
-    private $reference = null;
 
+    /**
+     * @var string
+     */
+    private $type = '';
+
+    /**
+     * @var string
+     */
+    private $name = '';
+
+    /**
+     * @var string
+     */
+    private $templateName = '';
+
+    /**
+     * @var string
+     */
+    private $ifName = '';
+
+    /**
+     * @var string
+     */
+    private $ifNotName = '';
+
+    /**
+     * @var mixed
+     */
+    private $value;
+
+    /**
+     * @var string
+     */
+    private $reference;
+
+    /**
+     * @param $id
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -52,26 +95,41 @@ class Variable
         $this->templateName = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getTemplateName()
     {
         return $this->templateName;
     }
 
+    /**
+     * @return string
+     */
     public function getIfName()
     {
         return $this->ifName;
     }
 
+    /**
+     * @return string
+     */
     public function getIfNotName()
     {
         return $this->ifNotName;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function setValue($value)
     {
         $this->value = $value;
@@ -81,16 +139,25 @@ class Variable
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+    /**
+     * @param string $reference
+     */
     public function setReference($reference)
     {
         $this->reference = $reference;
     }
 
+    /**
+     * @return string
+     */
     public function getReference()
     {
         return $this->reference;

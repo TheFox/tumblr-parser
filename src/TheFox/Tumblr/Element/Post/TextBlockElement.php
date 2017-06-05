@@ -10,9 +10,9 @@ class TextBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        #parent::setElementsValues();
-
+        /** @var TextPost $post */
         $post = $this->getContent();
+        
         if ($post && $post instanceof TextPost) {
             $hasTitle = (bool)$post->getTitle();
             foreach ($this->getChildren(true) as $element) {

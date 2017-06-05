@@ -11,6 +11,9 @@ class PostBlockElement extends BlockElement
     {
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $this->setElementsValues();

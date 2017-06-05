@@ -4,6 +4,9 @@ namespace TheFox\Tumblr\Element;
 
 class PagesBlockElement extends BlockElement
 {
+    /**
+     * @return string
+     */
     public function render()
     {
         $pages = $this->getContent();
@@ -11,6 +14,7 @@ class PagesBlockElement extends BlockElement
         $html = '';
         if (is_array($pages)) {
             foreach ($pages as $page) {
+                /** @var Element $element */
                 foreach ($this->getChildren(true) as $element) {
                     $elementName = strtolower($element->getTemplateName());
                     if ($element instanceof VariableElement) {

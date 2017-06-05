@@ -10,9 +10,9 @@ class LinkBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        #parent::setElementsValues();
-
+        /** @var LinkPost $post */
         $post = $this->getContent();
+        
         if ($post instanceof LinkPost) {
             $hasDescription = (bool)$post->getDescription();
             foreach ($this->getChildren(true) as $element) {

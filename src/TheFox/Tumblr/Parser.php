@@ -122,25 +122,62 @@ class Parser
         'Year',
     );
 
+    /**
+     * @var array
+     */
     private $settings = array();
+
+    /**
+     * @var string
+     */
     private $template = '';
+
+    /**
+     * @var bool
+     */
     private $templateChanged = false;
+
+    /**
+     * @var int
+     */
     private $variablesId = 0;
+
+    /**
+     * @var array
+     */
     private $variables = array();
+
+    /**
+     * @var null
+     */
     private $rootElement = null;
+
+    /**
+     * @var int
+     */
     private $elementsId = 0;
 
+    /**
+     * Parser constructor.
+     * @param string $template
+     */
     public function __construct($template = '')
     {
         $this->template = $template;
     }
 
+    /**
+     * @param string $template
+     */
     public function setTemplate($template)
     {
         $this->template = $template;
         $this->templateChanged = true;
     }
 
+    /**
+     * @param array $settings
+     */
     public function setSettings($settings)
     {
         if (!isset($settings['vars']) || !is_array($settings['vars'])) {
@@ -161,12 +198,19 @@ class Parser
         $this->parseSettingsVars();
     }
 
+    /**
+     * @param string $file
+     */
     public function loadSettingsFromFile($file)
     {
         $settings = Yaml::parse($file);
         $this->setSettings($settings);
     }
 
+    /**
+     * @param array $variables
+     * @param bool $overwrite
+     */
     private function fillVariables($variables, $overwrite = false)
     {
         foreach ($variables as $key => $val) {
@@ -221,6 +265,11 @@ class Parser
         }
     }
 
+    /**
+     * @param string $rawhtml
+     * @param null $parentElement
+     * @param int $level
+     */
     private function parseElements($rawhtml = '', $parentElement = null, $level = 1)
     {
         if ($level >= 100) {
@@ -443,6 +492,16 @@ class Parser
         }
     }
 
+    /**
+     * @param Element $element
+     * @param bool $isIndexPage
+     * @param bool $isPermalinkPage
+     * @param array $posts
+     * @param int $id
+     * @param int $totalPages
+     * @param array $pages
+     * @param int $level
+     */
     private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false,
                                        $posts = array(), $id = 1, $totalPages = 1, $pages = array(), $level = 1)
     {
@@ -550,11 +609,19 @@ class Parser
         }
     }
 
+    /**
+     * @param Element $element
+     * @return string
+     */
     private function renderElements(Element $element)
     {
         return $element->render();
     }
 
+    /**
+     * @param $post
+     * @return PhotoPost
+     */
     private function makePhoto($post)
     {
         $postObj = new PhotoPost();
@@ -574,6 +641,11 @@ class Parser
         return $postObj;
     }
 
+    /**
+     * @param integer $id
+     * @param bool $isPermalinkPage
+     * @return null|ChatPost|LinkPost|PhotoPost|PhotosetPost|QuotePost|TextPost
+     */
     private function makePostFromIndex($id, $isPermalinkPage = false)
     {
         $htmlId = $id + 1;
@@ -681,6 +753,11 @@ class Parser
         return $postObj;
     }
 
+    /**
+     * @param string $type
+     * @param int $id
+     * @return string
+     */
     public function parse($type = 'page', $id = 1)
     {
         $this->parseMetaSettings();
@@ -728,6 +805,10 @@ class Parser
         return $this->renderElements($this->rootElement);
     }
 
+    /**
+     * @param string $type
+     * @param int $id
+     */
     public function printHtml($type = 'page', $id = 1)
     {
         $html = $this->parse($type, $id);

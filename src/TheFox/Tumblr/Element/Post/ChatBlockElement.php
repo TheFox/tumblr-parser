@@ -9,9 +9,9 @@ class ChatBlockElement extends PostBlockElement
 {
     public function setElementsValues()
     {
-        #parent::setElementsValues();
-
+        /** @var ChatPost $post */
         $post = $this->getContent();
+        
         if ($post instanceof ChatPost) {
             foreach ($this->getChildren(true) as $element) {
                 $elementName = strtolower($element->getTemplateName());
