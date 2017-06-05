@@ -58,7 +58,7 @@ use TheFox\Tumblr\Post\AnswerPost;
 
 class Parser
 {
-    const VERSION = '0.6.0-dev.4';
+    const VERSION = '0.6.0-dev.5';
 
     public static $variableNames = [
         '12Hour',
@@ -162,7 +162,7 @@ class Parser
      * Parser constructor.
      * @param string $template
      */
-    public function __construct($template = '')
+    public function __construct(string $template = '')
     {
         $this->template = $template;
     }
@@ -505,11 +505,15 @@ class Parser
      * @param array $pages
      * @param int $level
      */
-    private function setElementsValues(Element $element, bool $isIndexPage = false, bool $isPermalinkPage = false,
+    private function setElementsValues(Element $element = null, bool $isIndexPage = false, bool $isPermalinkPage = false,
                                        array $posts = [], int $id = 1, int $totalPages = 1, array $pages = [], int $level = 1)
     {
         if ($level >= 100) {
             throw new RuntimeException(__FUNCTION__ . ': Maximum level of 100 reached.', 1);
+        }
+
+        if ($element == null) {
+            return;
         }
 
         $elemtents = $element->getChildren();
@@ -615,8 +619,12 @@ class Parser
      * @param Element $element
      * @return string
      */
-    private function renderElements(Element $element): string
+    private function renderElements(Element $element = null): string
     {
+        if (!$element) {
+            return '';
+        }
+
         return $element->render();
     }
 
@@ -770,16 +778,35 @@ class Parser
 
         $isIndexPage = $type == 'page';
         $isPermalinkPage = $type == 'post';
-        $totalPages = ceil(count($this->settings['posts']) / $this->settings['postsPerPage']);
+
+        if (array_key_exists('posts', $this->settings) && $this->settings['posts']) {
+            $configPosts = $this->settings['posts'];
+        } else {
+            $configPosts = [];
+        }
+
+        if (array_key_exists('postsPerPage', $this->settings) && $this->settings['postsPerPage']) {
+            $configPostsPerPage = (int)$this->settings['postsPerPage'];
+        } else {
+            $configPostsPerPage = 15;
+        }
+
+        if (array_key_exists('pages', $this->settings) && $this->settings['pages']) {
+            $configPages = $this->settings['pages'];
+        } else {
+            $configPages = [];
+        }
+
+        $totalPages = ceil(count($configPosts) / $configPostsPerPage);
 
         $posts = [];
 
         if ($isIndexPage) {
-            $postIdMin = ($id - 1) * $this->settings['postsPerPage'];
-            $postIdMax = $postIdMin + $this->settings['postsPerPage'];
+            $postIdMin = ($id - 1) * $configPostsPerPage;
+            $postIdMax = $postIdMin + $configPostsPerPage;
 
             for ($postId = $postIdMin; $postId < $postIdMax; $postId++) {
-                if (isset($this->settings['posts'][$postId])) {
+                if (isset($configPosts[$postId])) {
                     $postObj = $this->makePostFromIndex($postId, $isPermalinkPage);
                     if ($postObj) {
                         $posts[] = $postObj;
@@ -801,21 +828,28 @@ class Parser
             }
         }
 
+        if (!$this->rootElement) {
+            return '';
+        }
+
         $this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage,
-            $posts, $id, $totalPages, $this->settings['pages']);
+            $posts, $id, $totalPages, $configPages);
 
         return $this->renderElements($this->rootElement);
     }
-
+    
     /**
      * @param string $type
      * @param int $id
+     * @return string
      */
-    public function printHtml(string $type = 'page', int $id = 1)
+    public function printHtml(string $type = 'page', int $id = 1): string
     {
         $html = $this->parse($type, $id);
 
         print $html;
         flush();
+
+        return $html;
     }
 }

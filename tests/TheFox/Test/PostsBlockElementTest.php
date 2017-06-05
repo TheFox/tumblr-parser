@@ -33,7 +33,16 @@ use TheFox\Tumblr\Post\AnswerPost;
 
 class PostsBlockElementTest extends TestCase
 {
-    public function testRender()
+    public function testRenderNull()
+    {
+        $element1 = new PostsBlockElement();
+
+        $html = $element1->render();
+
+        $this->assertEquals('', $html);
+    }
+    
+    public function testRenderValues()
     {
         $tz = new DateTimeZone('Europe/Vienna');
         $dt = new DateTime('2014-11-19 19:16:38', $tz);

@@ -8,7 +8,7 @@ use TheFox\Tumblr\Element\VariableElement;
 
 class PagesBlockElementTest extends TestCase
 {
-    public function testRender()
+    public function testRenderWithContent()
     {
         $element1 = new PagesBlockElement();
         $element1->setContent([
@@ -27,5 +27,11 @@ class PagesBlockElementTest extends TestCase
 
         $html = $element1->render();
         $this->assertEquals('l1u1l2u2', $html);
+    }
+    
+    public function testRenderWithoutContent(){
+        $element1 = new PagesBlockElement();
+        $html = $element1->render();
+        $this->assertEquals('', $html);
     }
 }

@@ -15,7 +15,7 @@ class ChatBlockElement extends PostBlockElement
         if (!$post || !$post instanceof ChatPost) {
             return;
         }
-        
+
         foreach ($this->getChildren(true) as $element) {
             $elementName = strtolower($element->getTemplateName());
 

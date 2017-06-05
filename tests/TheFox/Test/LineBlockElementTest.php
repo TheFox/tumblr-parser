@@ -9,8 +9,7 @@ use TheFox\Tumblr\Element\LabelBlockElement;
 
 class LineBlockElementTest extends TestCase
 {
-
-    public function testSetElementsValues()
+    public function testRenderWithContent()
     {
         $element1 = new LineBlockElement();
         $element1->setContent([
@@ -47,5 +46,10 @@ class LineBlockElementTest extends TestCase
         $html = $element1->render();
         $this->assertEquals('lab1line1alt1name1', $html);
     }
-
+    
+    public function testRenderWithoutContent(){
+        $element1 = new LineBlockElement();
+        $html = $element1->render();
+        $this->assertEquals('', $html);
+    }
 }

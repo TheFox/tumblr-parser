@@ -205,7 +205,7 @@ class ParserTest extends TestCase
                         ['label' => 'God', 'line' => 'Mkay.'],
                         ['label' => 'Justin Bieber', 'line' => 'Aw maaan. :('],
                         ['label' => 'God', 'line' => 'Done.'],
-                    ]
+                    ],
                 ],
                 ['type' => 'answer', 'date' => '1987-03-01 09:08:07', 'notes' => ['text_1', 'text2'],
                     'tags' => ['tag1', 'tag_2'], 'asker' => 'A Asker',
@@ -299,7 +299,7 @@ class ParserTest extends TestCase
             ],
             'posts' => [],
             'postsPerPage' => 15,
-            'pages' => []
+            'pages' => [],
         ]);
 
         $parser->setTemplate($tpl);
@@ -337,7 +337,7 @@ class ParserTest extends TestCase
             ],
             'posts' => [],
             'postsPerPage' => 15,
-            'pages' => []
+            'pages' => [],
         ]);
 
         $parser->setTemplate($tpl);
@@ -392,5 +392,34 @@ class ParserTest extends TestCase
 
         $parser->setTemplate('BEGIN {block:Unknown}x{/block:Unknown} END');
         $this->assertEquals('BEGIN my_title END', $parser->parse());
+    }
+
+    public function testLoadSettingsFromFile()
+    {
+        $filePath = dirname(__FILE__) . '/../../../tmp';
+        $realFilePath = realpath($filePath) . '/settings.json';
+
+        $json = [
+            'vars' => [],
+            'posts' => [],
+            'postsPerPage' => 1,
+            'pages' => 2,
+        ];
+        $written = file_put_contents($realFilePath, json_encode($json));
+        $this->assertTrue($written > 0);
+
+        $parser = new Parser();
+        $parser->loadSettingsFromFile($realFilePath);
+
+        unlink($realFilePath);
+    }
+
+    public function testPrintHtml()
+    {
+        $parser = new Parser();
+
+        $html = $parser->printHtml();
+        
+        $this->assertEquals('', $html);
     }
 }
