@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class LabelBlockElement extends BoolBlockElement{
-	
+class LabelBlockElement extends BoolBlockElement
+{
 }

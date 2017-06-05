@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class LangVariableElement extends VariableElement{
-	
+class LangVariableElement extends VariableElement
+{
 }

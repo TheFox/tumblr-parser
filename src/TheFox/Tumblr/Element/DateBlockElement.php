@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class DateBlockElement extends BoolBlockElement{
-	
+class DateBlockElement extends BoolBlockElement
+{
 }

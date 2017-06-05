@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class LinkUrlBlockElement extends BlockElement{
-	
+class LinkUrlBlockElement extends BlockElement
+{
 }

@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class PostTitleBlockElement extends BoolBlockElement{
-	
+class PostTitleBlockElement extends BoolBlockElement
+{
 }

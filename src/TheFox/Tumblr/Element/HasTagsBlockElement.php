@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class HasTagsBlockElement extends BoolBlockElement{
-	
+class HasTagsBlockElement extends BoolBlockElement
+{
 }

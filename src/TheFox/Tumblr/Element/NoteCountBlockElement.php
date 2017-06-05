@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class NoteCountBlockElement extends BoolBlockElement{
-	
+class NoteCountBlockElement extends BoolBlockElement
+{
 }

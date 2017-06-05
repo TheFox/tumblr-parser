@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class IndexPageBlockElement extends BoolBlockElement{
-	
+class IndexPageBlockElement extends BoolBlockElement
+{
 }

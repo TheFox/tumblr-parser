@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class PostNotesBlockElement extends BoolBlockElement{
-	
+class PostNotesBlockElement extends BoolBlockElement
+{
 }

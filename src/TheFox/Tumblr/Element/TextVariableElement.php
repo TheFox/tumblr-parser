@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class TextVariableElement extends VariableElement{
-	
+class TextVariableElement extends VariableElement
+{
 }

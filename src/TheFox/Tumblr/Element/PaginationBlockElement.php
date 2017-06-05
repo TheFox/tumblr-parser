@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class PaginationBlockElement extends BoolBlockElement{
-	
+class PaginationBlockElement extends BoolBlockElement
+{
 }

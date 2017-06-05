@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class PhotosetBlockElement extends BlockElement{
-	
+class PhotosetBlockElement extends BlockElement
+{
 }

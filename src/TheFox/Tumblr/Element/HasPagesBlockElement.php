@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class HasPagesBlockElement extends BoolBlockElement{
-	
+class HasPagesBlockElement extends BoolBlockElement
+{
 }

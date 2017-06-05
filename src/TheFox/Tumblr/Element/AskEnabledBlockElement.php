@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class AskEnabledBlockElement extends BoolBlockElement{
-	
+class AskEnabledBlockElement extends BoolBlockElement
+{
 }

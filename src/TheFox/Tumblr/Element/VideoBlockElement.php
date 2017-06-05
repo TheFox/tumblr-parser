@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class VideoBlockElement extends BlockElement{
-	
+class VideoBlockElement extends BlockElement
+{
 }

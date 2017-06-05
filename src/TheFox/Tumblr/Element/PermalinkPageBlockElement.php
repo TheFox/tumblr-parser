@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class PermalinkPageBlockElement extends BoolBlockElement{
-	
+class PermalinkPageBlockElement extends BoolBlockElement
+{
 }

@@ -2,6 +2,6 @@
 
 namespace TheFox\Tumblr\Element;
 
-class AudioEmbedBlockElement extends BoolBlockElement{
-	
+class AudioEmbedBlockElement extends BoolBlockElement
+{
 }
