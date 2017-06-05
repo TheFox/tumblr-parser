@@ -3,10 +3,10 @@
 namespace TheFox\Test;
 
 use RuntimeException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Parser;
 
-class ParserTest extends PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
     /**
      * @expectedException RuntimeException

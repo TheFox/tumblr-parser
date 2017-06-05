@@ -2,12 +2,12 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\Post\AnswerBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Post\AnswerPost;
 
-class AnswerBlockElementTest extends PHPUnit_Framework_TestCase
+class AnswerBlockElementTest extends TestCase
 {
     public function testSetElementsValues()
     {

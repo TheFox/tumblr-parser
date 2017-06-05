@@ -2,11 +2,11 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\BoolBlockElement;
 use TheFox\Tumblr\Element\HtmlElement;
 
-class BoolBlockElementTest extends PHPUnit_Framework_TestCase
+class BoolBlockElementTest extends TestCase
 {
     public function testGetDefaultContent()
     {

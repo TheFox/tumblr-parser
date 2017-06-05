@@ -2,14 +2,14 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\Post\PhotosBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\LinkUrlBlockElement;
 use TheFox\Tumblr\Element\CaptionBlockElement;
 use TheFox\Tumblr\Post\PhotoPost;
 
-class PhotosBlockElementTest extends PHPUnit_Framework_TestCase
+class PhotosBlockElementTest extends TestCase
 {
     public function testRender()
     {

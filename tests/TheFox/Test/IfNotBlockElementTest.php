@@ -2,10 +2,10 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\IfNotBlockElement;
 
-class IfNotBlockElementTest extends PHPUnit_Framework_TestCase
+class IfNotBlockElementTest extends TestCase
 {
 
     public function testGetTemplateName()

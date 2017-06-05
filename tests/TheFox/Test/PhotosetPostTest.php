@@ -2,10 +2,10 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Post\PhotosetPost;
 
-class PhotosetPostTest extends PHPUnit_Framework_TestCase
+class PhotosetPostTest extends TestCase
 {
     public function testType()
     {

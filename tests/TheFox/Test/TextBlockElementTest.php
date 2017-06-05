@@ -2,13 +2,13 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\TitleBlockElement;
 use TheFox\Tumblr\Post\TextPost;
 
-class TextBlockElementTest extends PHPUnit_Framework_TestCase
+class TextBlockElementTest extends TestCase
 {
     public function testSetElementsValues()
     {

@@ -2,11 +2,11 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\PagesBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 
-class PagesBlockElementTest extends PHPUnit_Framework_TestCase
+class PagesBlockElementTest extends TestCase
 {
     public function testRender()
     {

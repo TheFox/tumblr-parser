@@ -2,10 +2,10 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\VariableElement;
 
-class VariableElementTest extends PHPUnit_Framework_TestCase
+class VariableElementTest extends TestCase
 {
     public function testRender()
     {

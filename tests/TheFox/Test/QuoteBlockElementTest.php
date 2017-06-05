@@ -2,13 +2,13 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\SourceBlockElement;
 use TheFox\Tumblr\Post\QuotePost;
 
-class QuoteBlockElementTest extends PHPUnit_Framework_TestCase
+class QuoteBlockElementTest extends TestCase
 {
     public function testSetElementsValues()
     {

@@ -2,11 +2,11 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\TagsBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 
-class TagsBlockElementTest extends PHPUnit_Framework_TestCase
+class TagsBlockElementTest extends TestCase
 {
     public function testRender()
     {

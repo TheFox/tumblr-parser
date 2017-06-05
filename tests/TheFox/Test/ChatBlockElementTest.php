@@ -2,14 +2,14 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\Post\ChatBlockElement;
 use TheFox\Tumblr\Element\Post\LinesBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\LabelBlockElement;
 use TheFox\Tumblr\Post\ChatPost;
 
-class ChatBlockElementTest extends PHPUnit_Framework_TestCase
+class ChatBlockElementTest extends TestCase
 {
     public function testSetElementsValues()
     {

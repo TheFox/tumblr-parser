@@ -4,7 +4,7 @@ namespace TheFox\Test;
 
 use DateTime;
 use DateTimeZone;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\PostsBlockElement;
 use TheFox\Tumblr\Element\Post\TextBlockElement;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
@@ -31,7 +31,7 @@ use TheFox\Tumblr\Post\QuotePost;
 use TheFox\Tumblr\Post\ChatPost;
 use TheFox\Tumblr\Post\AnswerPost;
 
-class PostsBlockElementTest extends PHPUnit_Framework_TestCase
+class PostsBlockElementTest extends TestCase
 {
     public function testRender()
     {

@@ -3,10 +3,10 @@
 namespace TheFox\Test;
 
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Post\Post;
 
-class PostTest extends PHPUnit_Framework_TestCase
+class PostTest extends TestCase
 {
     public function testType()
     {

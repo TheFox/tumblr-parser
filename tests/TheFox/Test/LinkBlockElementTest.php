@@ -2,13 +2,13 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\Post\LinkBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\DescriptionBlockElement;
 use TheFox\Tumblr\Post\LinkPost;
 
-class LinkBlockElementTest extends PHPUnit_Framework_TestCase
+class LinkBlockElementTest extends TestCase
 {
     public function testSetElementsValues()
     {

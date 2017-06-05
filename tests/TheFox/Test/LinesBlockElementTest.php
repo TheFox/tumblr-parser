@@ -2,12 +2,12 @@
 
 namespace TheFox\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use TheFox\Tumblr\Element\Post\LinesBlockElement;
 use TheFox\Tumblr\Element\VariableElement;
 use TheFox\Tumblr\Element\LabelBlockElement;
 
-class LinesBlockElementTest extends PHPUnit_Framework_TestCase
+class LinesBlockElementTest extends TestCase
 {
     public function testRender()
     {
