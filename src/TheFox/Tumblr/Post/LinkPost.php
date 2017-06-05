@@ -30,9 +30,9 @@ class LinkPost extends Post
     }
 
     /**
-     * @param $url
+     * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
     }
@@ -40,7 +40,7 @@ class LinkPost extends Post
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -48,7 +48,7 @@ class LinkPost extends Post
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -56,7 +56,7 @@ class LinkPost extends Post
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -64,7 +64,7 @@ class LinkPost extends Post
     /**
      * @param string $target
      */
-    public function setTarget($target)
+    public function setTarget(string $target)
     {
         $this->target = $target;
     }
@@ -72,7 +72,7 @@ class LinkPost extends Post
     /**
      * @return string
      */
-    public function getTarget()
+    public function getTarget(): string
     {
         return $this->target;
     }
@@ -80,7 +80,7 @@ class LinkPost extends Post
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
@@ -88,7 +88,7 @@ class LinkPost extends Post
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }

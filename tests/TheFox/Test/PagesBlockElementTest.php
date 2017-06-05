@@ -11,10 +11,10 @@ class PagesBlockElementTest extends PHPUnit_Framework_TestCase
     public function testRender()
     {
         $element1 = new PagesBlockElement();
-        $element1->setContent(array(
-            array('label' => 'l1', 'url' => 'u1'),
-            array('label' => 'l2', 'url' => 'u2'),
-        ));
+        $element1->setContent([
+            ['label' => 'l1', 'url' => 'u1'],
+            ['label' => 'l2', 'url' => 'u2'],
+        ]);
 
         $varLabel = new VariableElement();
         $varLabel->setName('label');

@@ -15,10 +15,10 @@ class ChatBlockElementTest extends PHPUnit_Framework_TestCase
     {
         $element2 = new ChatPost();
         $element2->setTitle('chat1');
-        $element2->setChats(array(
-            array('name' => 'x1', 'label' => 'lab1'),
-            array('name' => 'x2', 'label' => 'lab2'),
-        ));
+        $element2->setChats([
+            ['name' => 'x1', 'label' => 'lab1'],
+            ['name' => 'x2', 'label' => 'lab2'],
+        ]);
 
         $element1 = new ChatBlockElement();
         $element1->setContent($element2);

@@ -4,7 +4,7 @@ namespace TheFox\Tumblr;
 
 use RuntimeException;
 use DateTime;
-use ReflectionClass;
+//use ReflectionClass;
 use Symfony\Component\Yaml\Yaml;
 use TheFox\Tumblr\Element\Element;
 use TheFox\Tumblr\Element\AskEnabledBlockElement;
@@ -60,7 +60,7 @@ class Parser
 {
     const VERSION = '0.6.0-dev.3';
 
-    public static $variableNames = array(
+    public static $variableNames = [
         '12Hour',
         '12HourWithZero',
         '24Hour',
@@ -121,12 +121,12 @@ class Parser
         'UserNumber',
         'WeekOfYear',
         'Year',
-    );
+    ];
 
     /**
      * @var array
      */
-    private $settings = array();
+    private $settings = [];
 
     /**
      * @var string
@@ -146,7 +146,7 @@ class Parser
     /**
      * @var array
      */
-    private $variables = array();
+    private $variables = [];
 
     /**
      * @var Element
@@ -170,7 +170,7 @@ class Parser
     /**
      * @param string $template
      */
-    public function setTemplate($template)
+    public function setTemplate(string $template)
     {
         $this->template = $template;
         $this->templateChanged = true;
@@ -179,7 +179,7 @@ class Parser
     /**
      * @param array $settings
      */
-    public function setSettings($settings)
+    public function setSettings(array $settings)
     {
         if (!isset($settings['vars']) || !is_array($settings['vars'])) {
             throw new RuntimeException(__FUNCTION__ . ': "vars" not set in settings.', 1);
@@ -202,7 +202,7 @@ class Parser
     /**
      * @param string $file
      */
-    public function loadSettingsFromFile($file)
+    public function loadSettingsFromFile(string $file)
     {
         $settings = Yaml::parse($file);
         $this->setSettings($settings);
@@ -212,7 +212,7 @@ class Parser
      * @param array $variables
      * @param bool $overwrite
      */
-    private function fillVariables($variables, $overwrite = false)
+    private function fillVariables(array $variables, bool $overwrite = false)
     {
         foreach ($variables as $key => $val) {
             $this->variablesId++;
@@ -256,9 +256,9 @@ class Parser
 
     private function parseMetaSettings()
     {
-        foreach (array('if', 'text') as $type) {
+        foreach (['if', 'text'] as $type) {
             preg_match_all('/<meta name="(' . $type . ':[^"]+)" content="([^"]+)"/i', $this->template, $matches);
-            $variables = array();
+            $variables = [];
             if ($matches[1] && $matches[2]) {
                 $variables = array_combine($matches[1], $matches[2]);
             }
@@ -271,7 +271,7 @@ class Parser
      * @param Element|null $parentElement
      * @param int $level
      */
-    private function parseElements($rawhtml = '', $parentElement = null, $level = 1)
+    private function parseElements(string $rawhtml = '', Element $parentElement = null, int $level = 1)
     {
         if ($level >= 100) {
             throw new RuntimeException(__FUNCTION__ . ': Maximum level of 100 reached.', 2);
@@ -343,8 +343,8 @@ class Parser
 
                         // Search close tag for the opened tag.
                         $offset = 0;
-                        $newoffset = 0;
-                        $testhtml = '';
+                        //$newoffset = 0;
+                        //$testhtml = '';
                         $temphtml = $rawhtml;
                         do {
                             $temphtml = substr($temphtml, $offset);
@@ -505,10 +505,9 @@ class Parser
      * @param array $pages
      * @param int $level
      */
-    private function setElementsValues(Element $element, $isIndexPage = false, $isPermalinkPage = false,
-                                       $posts = array(), $id = 1, $totalPages = 1, $pages = array(), $level = 1)
+    private function setElementsValues(Element $element, bool $isIndexPage = false, bool $isPermalinkPage = false,
+                                       array $posts = [], int $id = 1, int $totalPages = 1, array $pages = [], int $level = 1)
     {
-
         if ($level >= 100) {
             throw new RuntimeException(__FUNCTION__ . ': Maximum level of 100 reached.', 1);
         }
@@ -517,13 +516,13 @@ class Parser
         foreach ($elemtents as $elementId => $element) {
             $elementName = $element->getTemplateName();
 
-            $elementNameOut = '';
-            if ($elementName) {
-                $elementNameOut = ', "' . $elementName . '"';
-            }
+            //$elementNameOut = '';
+            //if ($elementName) {
+            //    $elementNameOut = ', "' . $elementName . '"';
+            //}
 
-            $rc = new ReflectionClass(get_class($element));
-            $className = $rc->getShortName();
+            //$rc = new ReflectionClass(get_class($element));
+            //$className = $rc->getShortName();
 
             $setSub = true;
             if ($element instanceof VariableElement) {
@@ -616,16 +615,16 @@ class Parser
      * @param Element $element
      * @return string
      */
-    private function renderElements(Element $element)
+    private function renderElements(Element $element): string
     {
         return $element->render();
     }
 
     /**
-     * @param $post
+     * @param array $post
      * @return PhotoPost
      */
-    private function makePhoto($post)
+    private function makePhoto(array $post): PhotoPost
     {
         $postObj = new PhotoPost();
         if (isset($post['url'])) {
@@ -645,11 +644,11 @@ class Parser
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      * @param bool $isPermalinkPage
      * @return null|Post
      */
-    private function makePostFromIndex($id, $isPermalinkPage = false)
+    private function makePostFromIndex(int $id, bool $isPermalinkPage = false)
     {
         if (!isset($this->settings['posts'][$id])) {
             return null;
@@ -690,7 +689,7 @@ class Parser
                 $postObj->setCaption($post['caption']);
             }
             if (isset($post['photos'])) {
-                $photos = array();
+                $photos = [];
                 foreach ($post['photos'] as $photo) {
                     $photoObj = $this->makePhoto($photo);
                     if ($photoObj) {
@@ -760,7 +759,7 @@ class Parser
      * @param int $id
      * @return string
      */
-    public function parse($type = 'page', $id = 1)
+    public function parse(string $type = 'page', int $id = 1): string
     {
         $this->parseMetaSettings();
 
@@ -773,7 +772,7 @@ class Parser
         $isPermalinkPage = $type == 'post';
         $totalPages = ceil(count($this->settings['posts']) / $this->settings['postsPerPage']);
 
-        $posts = array();
+        $posts = [];
 
         if ($isIndexPage) {
             $postIdMin = ($id - 1) * $this->settings['postsPerPage'];
@@ -804,7 +803,7 @@ class Parser
 
         $this->setElementsValues($this->rootElement, $isIndexPage, $isPermalinkPage,
             $posts, $id, $totalPages, $this->settings['pages']);
-        
+
         return $this->renderElements($this->rootElement);
     }
 
@@ -812,7 +811,7 @@ class Parser
      * @param string $type
      * @param int $id
      */
-    public function printHtml($type = 'page', $id = 1)
+    public function printHtml(string $type = 'page', int $id = 1)
     {
         $html = $this->parse($type, $id);
 

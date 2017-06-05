@@ -32,7 +32,7 @@ class PhotoPost extends Post
     /**
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
     }
@@ -40,7 +40,7 @@ class PhotoPost extends Post
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -48,7 +48,7 @@ class PhotoPost extends Post
     /**
      * @param string $alt
      */
-    public function setAlt($alt)
+    public function setAlt(string $alt)
     {
         $this->alt = $alt;
     }
@@ -56,7 +56,7 @@ class PhotoPost extends Post
     /**
      * @return string
      */
-    public function getAlt()
+    public function getAlt(): string
     {
         return $this->alt;
     }
@@ -64,7 +64,7 @@ class PhotoPost extends Post
     /**
      * @param string $link
      */
-    public function setLinkUrl($link)
+    public function setLinkUrl(string $link)
     {
         $this->link = $link;
     }
@@ -72,7 +72,7 @@ class PhotoPost extends Post
     /**
      * @return  string
      */
-    public function getLinkUrl()
+    public function getLinkUrl(): string
     {
         return $this->link;
     }
@@ -80,7 +80,7 @@ class PhotoPost extends Post
     /**
      * @param string $caption
      */
-    public function setCaption($caption)
+    public function setCaption(string $caption)
     {
         $this->caption = $caption;
     }
@@ -88,7 +88,7 @@ class PhotoPost extends Post
     /**
      * @return string
      */
-    public function getCaption()
+    public function getCaption(): string
     {
         return $this->caption;
     }

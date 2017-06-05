@@ -27,7 +27,7 @@ class AnswerPost extends Post
     /**
      * @param string $asker
      */
-    public function setAsker($asker)
+    public function setAsker(string $asker)
     {
         $this->asker = $asker;
     }
@@ -35,7 +35,7 @@ class AnswerPost extends Post
     /**
      * @return string
      */
-    public function getAsker()
+    public function getAsker(): string
     {
         return $this->asker;
     }
@@ -43,7 +43,7 @@ class AnswerPost extends Post
     /**
      * @param string $question
      */
-    public function setQuestion($question)
+    public function setQuestion(string $question)
     {
         $this->question = $question;
     }
@@ -51,7 +51,7 @@ class AnswerPost extends Post
     /**
      * @return string
      */
-    public function getQuestion()
+    public function getQuestion(): string
     {
         return $this->question;
     }
@@ -59,7 +59,7 @@ class AnswerPost extends Post
     /**
      * @param string $answer
      */
-    public function setAnswer($answer)
+    public function setAnswer(string $answer)
     {
         $this->answer = $answer;
     }
@@ -67,7 +67,7 @@ class AnswerPost extends Post
     /**
      * @return string
      */
-    public function getAnswer()
+    public function getAnswer(): string
     {
         return $this->answer;
     }

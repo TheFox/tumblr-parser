@@ -17,7 +17,7 @@ class TextPost extends Post
     /**
      * @param string $body
      */
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
     }
@@ -25,7 +25,7 @@ class TextPost extends Post
     /**
      * @return string
      */
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }

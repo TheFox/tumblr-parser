@@ -38,14 +38,14 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase
         $tz = new DateTimeZone('Europe/Vienna');
         $dt = new DateTime('2014-11-19 19:16:38', $tz);
 
-        $posts = array();
+        $posts = [];
 
         $post = new TextPost();
         $post->setPermalink('url1');
         $post->setIsPermalinkPage(true);
         $post->setDateTime($dt);
-        $post->setNotes(array('node1', 'node2'));
-        $post->setTags(array('tag1', 'tag2'));
+        $post->setNotes(['node1', 'node2']);
+        $post->setTags(['tag1', 'tag2']);
         $post->setPostId(1);
         $post->setTitle('text1.title');
         $post->setBody('text1.body');
@@ -54,8 +54,8 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase
         $post = new LinkPost();
         $post->setPermalink('url2');
         $post->setDateTime($dt);
-        $post->setNotes(array());
-        $post->setTags(array());
+        $post->setNotes([]);
+        $post->setTags([]);
         $post->setPostId(2);
         $post->setTitle('text2.title');
         $post->setUrl('text2.url');
@@ -67,8 +67,8 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase
         $post = new PhotoPost();
         $post->setPermalink('url3');
         $post->setDateTime($dt);
-        $post->setNotes(array());
-        $post->setTags(array());
+        $post->setNotes([]);
+        $post->setTags([]);
         $post->setPostId(3);
         $post->setTitle('text3.title');
         $posts[] = $post;
@@ -76,8 +76,8 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase
         $post = new PhotosetPost();
         $post->setPermalink('url4');
         $post->setDateTime($dt);
-        $post->setNotes(array());
-        $post->setTags(array());
+        $post->setNotes([]);
+        $post->setTags([]);
         $post->setPostId(4);
         $post->setTitle('text4.title');
         $posts[] = $post;
@@ -85,8 +85,8 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase
         $post = new QuotePost();
         $post->setPermalink('url5');
         $post->setDateTime($dt);
-        $post->setNotes(array());
-        $post->setTags(array());
+        $post->setNotes([]);
+        $post->setTags([]);
         $post->setPostId(5);
         $post->setTitle('text5.title');
         $posts[] = $post;
@@ -94,8 +94,8 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase
         $post = new ChatPost();
         $post->setPermalink('url6');
         $post->setDateTime($dt);
-        $post->setNotes(array());
-        $post->setTags(array());
+        $post->setNotes([]);
+        $post->setTags([]);
         $post->setPostId(6);
         $post->setTitle('text6.title');
         $posts[] = $post;
@@ -103,14 +103,14 @@ class PostsBlockElementTest extends PHPUnit_Framework_TestCase
         $post = new AnswerPost();
         $post->setPermalink('url7');
         $post->setDateTime($dt);
-        $post->setNotes(array());
-        $post->setTags(array());
+        $post->setNotes([]);
+        $post->setTags([]);
         $post->setPostId(7);
         $post->setTitle('text7.title');
         $posts[] = $post;
 
 
-        $blocks = array();
+        $blocks = [];
         $blocks[] = new TextBlockElement();
         $blocks[] = new LinkBlockElement();
         $blocks[] = new PhotoBlockElement();

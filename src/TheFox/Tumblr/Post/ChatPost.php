@@ -7,7 +7,7 @@ class ChatPost extends Post
     /**
      * @var array
      */
-    private $chats = array();
+    private $chats = [];
 
     public function __construct()
     {
@@ -17,7 +17,7 @@ class ChatPost extends Post
     /**
      * @param array $chats
      */
-    public function setChats($chats)
+    public function setChats(array $chats)
     {
         $this->chats = $chats;
     }
@@ -25,7 +25,7 @@ class ChatPost extends Post
     /**
      * @return array
      */
-    public function getChats()
+    public function getChats(): array 
     {
         return $this->chats;
     }

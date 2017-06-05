@@ -13,13 +13,13 @@ class LineBlockElementTest extends PHPUnit_Framework_TestCase
     public function testSetElementsValues()
     {
         $element1 = new LineBlockElement();
-        $element1->setContent(array(
+        $element1->setContent([
             'label' => 'lab1',
             'line' => 'line1',
             'alt' => 'alt1',
             'name' => 'name1',
             'usernumber' => 'usernumber1',
-        ));
+        ]);
 
         $subElement = new VariableElement();
         $subElement->setName('label');

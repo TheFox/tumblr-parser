@@ -7,7 +7,7 @@ class PagesBlockElement extends BlockElement
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         /** @var null|array $pages */
         $pages = $this->getContent();
@@ -15,7 +15,7 @@ class PagesBlockElement extends BlockElement
         if (!$pages || !is_array($pages)) {
             return '';
         }
-        
+
         $html = '';
         foreach ($pages as $page) {
             /** @var Element $element */

@@ -7,7 +7,7 @@ class IfNotBlockElement extends BoolBlockElement
     /**
      * @return string
      */
-    public function getTemplateName()
+    public function getTemplateName(): string
     {
         return 'IfNot' . $this->getName();
     }
@@ -15,7 +15,7 @@ class IfNotBlockElement extends BoolBlockElement
     /**
      * @return bool
      */
-    public function getDefaultContent()
+    public function getDefaultContent(): bool
     {
         return true;
     }

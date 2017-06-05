@@ -5,10 +5,11 @@ namespace TheFox\Tumblr\Element;
 class VariableElement extends Element
 {
     /**
-     * @return string
+     * @return mixed
      */
     public function render()
     {
-        return $this->getContent();
+        $content = $this->getContent();
+        return $content;
     }
 }

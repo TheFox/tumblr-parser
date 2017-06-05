@@ -7,7 +7,7 @@ class TagsBlockElement extends BlockElement
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         /** @var null|array $tags */
         $tags = $this->getContent();
@@ -32,7 +32,7 @@ class TagsBlockElement extends BlockElement
                 $html .= $element->render();
             }
         }
-        
+
         return $html;
     }
 }

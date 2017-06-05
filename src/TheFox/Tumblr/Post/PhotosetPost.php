@@ -12,7 +12,7 @@ class PhotosetPost extends Post
     /**
      * @var array
      */
-    private $photos = array();
+    private $photos = [];
 
     public function __construct()
     {
@@ -22,7 +22,7 @@ class PhotosetPost extends Post
     /**
      * @param string $caption
      */
-    public function setCaption($caption)
+    public function setCaption(string $caption)
     {
         $this->caption = $caption;
     }
@@ -30,7 +30,7 @@ class PhotosetPost extends Post
     /**
      * @return string
      */
-    public function getCaption()
+    public function getCaption(): string
     {
         return $this->caption;
     }
@@ -38,7 +38,7 @@ class PhotosetPost extends Post
     /**
      * @param array $photos
      */
-    public function setPhotos($photos)
+    public function setPhotos(array $photos)
     {
         $this->photos = $photos;
     }
@@ -46,7 +46,7 @@ class PhotosetPost extends Post
     /**
      * @return array
      */
-    public function getPhotos()
+    public function getPhotos(): array
     {
         return $this->photos;
     }

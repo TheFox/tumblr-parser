@@ -25,9 +25,9 @@ class PhotosetPostTest extends PHPUnit_Framework_TestCase
     {
         $post = new PhotosetPost();
 
-        $this->assertEquals(array(), $post->getPhotos());
+        $this->assertEquals([], $post->getPhotos());
 
-        $post->setPhotos(array('photo1', 'photo2'));
-        $this->assertEquals(array('photo1', 'photo2'), $post->getPhotos());
+        $post->setPhotos(['photo1', 'photo2']);
+        $this->assertEquals(['photo1', 'photo2'], $post->getPhotos());
     }
 }

@@ -12,10 +12,10 @@ class LinesBlockElementTest extends PHPUnit_Framework_TestCase
     public function testRender()
     {
         $element1 = new LinesBlockElement();
-        $element1->setContent(array(
-            array('name' => 'x1', 'label' => 'lab1'),
-            array('name' => 'x2', 'label' => 'lab2'),
-        ));
+        $element1->setContent([
+            ['name' => 'x1', 'label' => 'lab1'],
+            ['name' => 'x2', 'label' => 'lab2'],
+        ]);
 
         $subElement = new VariableElement();
         $subElement->setName('label');

@@ -7,7 +7,7 @@ class LinesBlockElement extends LineBlockElement
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         /** @var null|array $lines */
         $lines = $this->getContent();
@@ -16,7 +16,7 @@ class LinesBlockElement extends LineBlockElement
             return '';
         }
 
-        $users = array();
+        $users = [];
 
         $html = '';
         $alt = 'even';
@@ -48,7 +48,7 @@ class LinesBlockElement extends LineBlockElement
 
             $html .= parent::render();
         }
-        
+
 
         // Reset original content.
         $this->setContent($lines);

@@ -5,7 +5,7 @@ namespace TheFox\Tumblr\Element;
 class HtmlElement extends Element
 {
     /**
-     * @return string
+     * @return mixed
      */
     public function render()
     {

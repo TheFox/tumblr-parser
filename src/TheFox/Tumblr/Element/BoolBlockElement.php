@@ -7,7 +7,7 @@ class BoolBlockElement extends BlockElement
     /**
      * @return bool
      */
-    public function getDefaultContent()
+    public function getDefaultContent(): bool
     {
         return false;
     }
@@ -15,7 +15,7 @@ class BoolBlockElement extends BlockElement
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         if ($this->getContent()) {
             return parent::render();

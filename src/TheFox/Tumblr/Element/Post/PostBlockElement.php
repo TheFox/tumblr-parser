@@ -3,7 +3,8 @@
 namespace TheFox\Tumblr\Element\Post;
 
 use TheFox\Tumblr\Element\BlockElement;
-use TheFox\Tumblr\Post\Post;
+
+//use TheFox\Tumblr\Post\Post;
 
 class PostBlockElement extends BlockElement
 {
@@ -14,10 +15,10 @@ class PostBlockElement extends BlockElement
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         $this->setElementsValues();
-        
+
         return parent::render();
     }
 }

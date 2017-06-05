@@ -10,7 +10,7 @@ class Element
      * @var int
      */
     private $id = 0;
-    
+
     #private $type = '';
 
     /**
@@ -31,7 +31,7 @@ class Element
     /**
      * @var array
      */
-    protected $children = array();
+    protected $children = [];
 
     public function __construct()
     {
@@ -41,7 +41,7 @@ class Element
     /**
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -49,7 +49,7 @@ class Element
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -65,7 +65,7 @@ class Element
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -73,7 +73,7 @@ class Element
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -81,7 +81,7 @@ class Element
     /**
      * @return string
      */
-    public function getTemplateName()
+    public function getTemplateName(): string
     {
         return $this->getName();
     }
@@ -129,7 +129,7 @@ class Element
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         $name = $this->getName();
         $rc = new ReflectionClass(get_class($this));
@@ -145,7 +145,7 @@ class Element
     /**
      * @param array $children
      */
-    public function setChildren($children)
+    public function setChildren(array $children)
     {
         $this->children = $children;
     }
@@ -163,10 +163,10 @@ class Element
      * @param bool $recursive
      * @return Element[]
      */
-    public function getChildren($recursive = false)
+    public function getChildren(bool $recursive = false): array
     {
         if ($recursive) {
-            $rv = array();
+            $rv = [];
             foreach ($this->children as $element) {
                 $rv[] = $element;
                 $rv = array_merge($rv, $element->getChildren($recursive));
@@ -181,7 +181,7 @@ class Element
      * @param array $children
      * @return string
      */
-    public function renderChildren($children)
+    public function renderChildren(array $children): string
     {
         $html = '';
         /** @var Element $element */

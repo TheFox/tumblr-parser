@@ -27,7 +27,7 @@ class QuotePost extends Post
     /**
      * @param string $quote
      */
-    public function setQuote($quote)
+    public function setQuote(string $quote)
     {
         $this->quote = $quote;
     }
@@ -35,7 +35,7 @@ class QuotePost extends Post
     /**
      * @return string
      */
-    public function getQuote()
+    public function getQuote(): string
     {
         return $this->quote;
     }
@@ -43,7 +43,7 @@ class QuotePost extends Post
     /**
      * @param string $source
      */
-    public function setSource($source)
+    public function setSource(string $source)
     {
         $this->source = $source;
     }
@@ -51,7 +51,7 @@ class QuotePost extends Post
     /**
      * @return string
      */
-    public function getSource()
+    public function getSource(): string
     {
         return $this->source;
     }

@@ -82,7 +82,7 @@ class ElementTest extends PHPUnit_Framework_TestCase
     {
         $element1 = new Element();
 
-        $this->assertEquals(array(), $element1->getChildren());
+        $this->assertEquals([], $element1->getChildren());
     }
 
     public function testSetChildren2()
@@ -91,8 +91,8 @@ class ElementTest extends PHPUnit_Framework_TestCase
         $element2 = new Element();
         $element3 = new Element();
 
-        $element1->setChildren(array($element2, $element3));
-        $this->assertEquals(array($element2, $element3), $element1->getChildren());
+        $element1->setChildren([$element2, $element3]);
+        $this->assertEquals([$element2, $element3], $element1->getChildren());
     }
 
     public function testAddChild()
@@ -101,12 +101,11 @@ class ElementTest extends PHPUnit_Framework_TestCase
         $element2 = new Element();
         $element3 = new Element();
 
-        #$element1->setChildren(array($element2, $element3));
         $element1->addChild($element2);
-        $this->assertEquals(array($element2), $element1->getChildren());
+        $this->assertEquals([$element2], $element1->getChildren());
 
         $element1->addChild($element3);
-        $this->assertEquals(array($element2, $element3), $element1->getChildren());
+        $this->assertEquals([$element2, $element3], $element1->getChildren());
     }
 
     public function testGetChildren()
@@ -118,9 +117,9 @@ class ElementTest extends PHPUnit_Framework_TestCase
 
         $element3->addChild($element4);
 
-        $element1->setChildren(array($element2, $element3));
-        $this->assertEquals(array($element2, $element3), $element1->getChildren());
-        $this->assertEquals(array($element2, $element3, $element4), $element1->getChildren(true));
+        $element1->setChildren([$element2, $element3]);
+        $this->assertEquals([$element2, $element3], $element1->getChildren());
+        $this->assertEquals([$element2, $element3, $element4], $element1->getChildren(true));
     }
 
     public function testRenderChildren1()
@@ -131,7 +130,7 @@ class ElementTest extends PHPUnit_Framework_TestCase
         $element4 = new HtmlElement();
 
         $element3->addChild($element4);
-        $element1->setChildren(array($element2, $element3));
+        $element1->setChildren([$element2, $element3]);
 
         $this->assertEquals('', $element1->renderChildren($element1->getChildren()));
     }
@@ -142,7 +141,7 @@ class ElementTest extends PHPUnit_Framework_TestCase
         $element2 = new HtmlElement();
         $element3 = new HtmlElement();
 
-        $element1->setChildren(array($element2, $element3));
+        $element1->setChildren([$element2, $element3]);
 
         $element2->setContent('el2');
         $element3->setContent('el3');

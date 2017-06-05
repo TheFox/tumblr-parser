@@ -7,7 +7,7 @@ class PhotosBlockElement extends PhotoBlockElement
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         /** @var null|array $photos */
         $photos = $this->getContent();
@@ -20,7 +20,7 @@ class PhotosBlockElement extends PhotoBlockElement
         foreach ($photos as $photoId => $photo) {
             $this->setContent($photo);
             $this->setElementsValues();
-            
+
             $html .= parent::render();
         }
 

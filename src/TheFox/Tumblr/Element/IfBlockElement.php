@@ -7,7 +7,7 @@ class IfBlockElement extends BoolBlockElement
     /**
      * @return string
      */
-    public function getTemplateName()
+    public function getTemplateName(): string
     {
         return 'If' . $this->getName();
     }

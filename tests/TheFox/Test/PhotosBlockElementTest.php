@@ -13,7 +13,7 @@ class PhotosBlockElementTest extends PHPUnit_Framework_TestCase
 {
     public function testRender()
     {
-        $photos = array();
+        $photos = [];
 
         $subElement = new PhotoPost();
         $subElement->setUrl('url1');

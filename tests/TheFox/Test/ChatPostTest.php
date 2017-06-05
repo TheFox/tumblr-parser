@@ -18,10 +18,10 @@ class ChatPostTest extends PHPUnit_Framework_TestCase
     {
         $post = new ChatPost();
 
-        $this->assertEquals(array(), $post->getChats());
+        $this->assertEquals([], $post->getChats());
 
-        $post->setChats(array('chat1', 'chat2'));
-        $this->assertEquals(array('chat1', 'chat2'), $post->getChats());
+        $post->setChats(['chat1', 'chat2']);
+        $this->assertEquals(['chat1', 'chat2'], $post->getChats());
     }
 
 }

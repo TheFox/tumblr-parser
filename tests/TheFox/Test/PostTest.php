@@ -54,20 +54,20 @@ class PostTest extends PHPUnit_Framework_TestCase
     {
         $post = new Post();
 
-        $this->assertEquals(array(), $post->getNotes());
+        $this->assertEquals([], $post->getNotes());
 
-        $post->setNotes(array('node1', 'node2'));
-        $this->assertEquals(array('node1', 'node2'), $post->getNotes());
+        $post->setNotes(['node1', 'node2']);
+        $this->assertEquals(['node1', 'node2'], $post->getNotes());
     }
 
     public function testSetTags()
     {
         $post = new Post();
 
-        $this->assertEquals(array(), $post->getTags());
+        $this->assertEquals([], $post->getTags());
 
-        $post->setTags(array('tag1', 'tag2'));
-        $this->assertEquals(array('tag1', 'tag2'), $post->getTags());
+        $post->setTags(['tag1', 'tag2']);
+        $this->assertEquals(['tag1', 'tag2'], $post->getTags());
     }
 
     public function testSetPostId()

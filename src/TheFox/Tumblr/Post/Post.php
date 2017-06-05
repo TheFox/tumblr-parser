@@ -29,12 +29,12 @@ class Post
     /**
      * @var array
      */
-    private $notes = array();
+    private $notes = [];
 
     /**
      * @var array
      */
-    private $tags = array();
+    private $tags = [];
 
     /**
      * @var int
@@ -47,9 +47,9 @@ class Post
     private $title = '';
 
     /**
-     * @param $type
+     * @param string $type
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
     }
@@ -57,7 +57,7 @@ class Post
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -65,7 +65,7 @@ class Post
     /**
      * @param string $permalink
      */
-    public function setPermalink($permalink)
+    public function setPermalink(string $permalink)
     {
         $this->permalink = $permalink;
     }
@@ -73,7 +73,7 @@ class Post
     /**
      * @return string
      */
-    public function getPermalink()
+    public function getPermalink(): string
     {
         return $this->permalink;
     }
@@ -81,7 +81,7 @@ class Post
     /**
      * @param bool $isPermalinkPage
      */
-    public function setIsPermalinkPage($isPermalinkPage)
+    public function setIsPermalinkPage(bool $isPermalinkPage)
     {
         $this->isPermalinkPage = $isPermalinkPage;
     }
@@ -89,7 +89,7 @@ class Post
     /**
      * @return bool
      */
-    public function getIsPermalinkPage()
+    public function getIsPermalinkPage(): bool
     {
         return $this->isPermalinkPage;
     }
@@ -105,7 +105,7 @@ class Post
     /**
      * @return DateTime
      */
-    public function getDateTime()
+    public function getDateTime(): DateTime
     {
         return $this->dateTime;
     }
@@ -113,7 +113,7 @@ class Post
     /**
      * @param array $notes
      */
-    public function setNotes($notes)
+    public function setNotes(array $notes)
     {
         $this->notes = $notes;
     }
@@ -121,7 +121,7 @@ class Post
     /**
      * @return array
      */
-    public function getNotes()
+    public function getNotes(): array
     {
         return $this->notes;
     }
@@ -129,7 +129,7 @@ class Post
     /**
      * @param array $tags
      */
-    public function setTags($tags)
+    public function setTags(array $tags)
     {
         $this->tags = $tags;
     }
@@ -137,7 +137,7 @@ class Post
     /**
      * @return array
      */
-    public function getTags()
+    public function getTags(): array
     {
         return $this->tags;
     }
@@ -145,7 +145,7 @@ class Post
     /**
      * @param int $postId
      */
-    public function setPostId($postId)
+    public function setPostId(int $postId)
     {
         $this->postId = $postId;
     }
@@ -153,7 +153,7 @@ class Post
     /**
      * @return int
      */
-    public function getPostId()
+    public function getPostId(): int
     {
         return $this->postId;
     }
@@ -161,7 +161,7 @@ class Post
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -169,7 +169,7 @@ class Post
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }

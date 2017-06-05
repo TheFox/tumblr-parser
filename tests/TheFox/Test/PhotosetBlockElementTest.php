@@ -14,7 +14,7 @@ class PhotosetBlockElementTest extends PHPUnit_Framework_TestCase
 {
     public function testSetElementsValues()
     {
-        $photos = array();
+        $photos = [];
 
         $element2 = new PhotosetPost();
         $element2->setCaption('capt1');

@@ -45,9 +45,9 @@ class Variable
     private $reference;
 
     /**
-     * @param $id
+     * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -55,7 +55,7 @@ class Variable
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -63,7 +63,7 @@ class Variable
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -71,7 +71,7 @@ class Variable
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -98,7 +98,7 @@ class Variable
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -106,7 +106,7 @@ class Variable
     /**
      * @return string
      */
-    public function getTemplateName()
+    public function getTemplateName(): string
     {
         return $this->templateName;
     }
@@ -114,7 +114,7 @@ class Variable
     /**
      * @return string
      */
-    public function getIfName()
+    public function getIfName(): string
     {
         return $this->ifName;
     }
@@ -122,7 +122,7 @@ class Variable
     /**
      * @return string
      */
-    public function getIfNotName()
+    public function getIfNotName(): string
     {
         return $this->ifNotName;
     }
@@ -158,7 +158,7 @@ class Variable
     /**
      * @return string
      */
-    public function getReference()
+    public function getReference(): string
     {
         return $this->reference;
     }

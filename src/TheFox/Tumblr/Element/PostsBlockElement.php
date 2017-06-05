@@ -9,8 +9,9 @@ use TheFox\Tumblr\Element\Post\PhotosetBlockElement;
 use TheFox\Tumblr\Element\Post\QuoteBlockElement;
 use TheFox\Tumblr\Element\Post\ChatBlockElement;
 use TheFox\Tumblr\Element\Post\AnswerBlockElement;
-use TheFox\Tumblr\Element\IndexPageBlockElement;
-use TheFox\Tumblr\Element\PermalinkPageBlockElement;
+
+//use TheFox\Tumblr\Element\IndexPageBlockElement;
+//use TheFox\Tumblr\Element\PermalinkPageBlockElement;
 use TheFox\Tumblr\Post\Post;
 use TheFox\Tumblr\Post\TextPost;
 use TheFox\Tumblr\Post\LinkPost;
@@ -25,7 +26,7 @@ class PostsBlockElement extends BlockElement
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         /** @var Post[]|null $posts */
         $posts = $this->getContent();
@@ -243,7 +244,7 @@ class PostsBlockElement extends BlockElement
 
             // Collect level 1 children for rendering.
             foreach ($this->getChildren() as $element) {
-                $rc = new \ReflectionClass(get_class($element));
+                //$rc = new \ReflectionClass(get_class($element));
 
                 $add = false;
                 if ($element instanceof TextBlockElement) {
@@ -302,7 +303,7 @@ class PostsBlockElement extends BlockElement
 
             } // foreach $this->getChildren()
 
-        }
+        } // foreach $posts
 
         return $html;
     }

@@ -11,7 +11,7 @@ class TagsBlockElementTest extends PHPUnit_Framework_TestCase
     public function testRender()
     {
         $element1 = new TagsBlockElement();
-        $element1->setContent(array('tag1', 'tag_2'));
+        $element1->setContent(['tag1', 'tag_2']);
 
         $varTag = new VariableElement();
         $varTag->setName('tag');
