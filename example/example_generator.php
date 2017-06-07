@@ -40,7 +40,7 @@ $settings = array(
 	),
 );
 
-file_put_contents(__DIR__.'/example.settings.yml', Yaml::dump($settings));
+file_put_contents(__DIR__.'/example_settings.yml', Yaml::dump($settings));
 
 print ''.count($settings['posts']).' posts ('.$settings['postsPerPage'].'/page)'."\n";
 print ''.count($settings['pages']).' pages'."\n";

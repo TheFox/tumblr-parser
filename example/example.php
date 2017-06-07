@@ -18,11 +18,11 @@ if(isset($_GET['id'])){
 	$id = $_GET['id'];
 }
 
-$template = file_get_contents(__DIR__.'/example.tpl.html');
+$template = file_get_contents(__DIR__.'/example_template.html');
 
 $parser = new Parser();
 $parser->setTemplate($template);
-$parser->loadSettingsFromFile(__DIR__.'/example.settings.yml');
+$parser->loadSettingsFromFile(__DIR__.'/example_settings.yml');
 
 
 if(PHP_SAPI == 'cli'){

@@ -14,12 +14,9 @@ The preferred method of installation is via [Packagist](https://packagist.org/pa
 
 To get started first look into the [example.php](example/example.php) in the `example` directory. There are several ways to use this tool. You can generate a whole weblog or just a single post. You can do this in your browser or in background in your shell.
 
-## Example files
+## Example
 
-- `example.php`: In this basic example the template is loaded from a file. Also the settings are loaded from a `.yml` file. To load the template and the settings from files is optional. You also can do it with a string or in case of the settings with an `array()`.
-- `example.settings.yml`: Optional. Used by `example.php` but not necessary to use Tumblr Parser.
-- `example.tpl.html`: Optional. Used by `example.php` but not necessary to use Tumblr Parser.
-- `example.gen.php`: Optional. Just a generator for settings in `.yml` format. You don't need this script to use Tumblr Parser.
+See example in [example directory](example).
 
 ## [Tumblr Custom Theme](http://www.tumblr.com/docs/en/custom_themes) Implementation
 
