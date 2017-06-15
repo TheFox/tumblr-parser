@@ -1,3 +1,4 @@
+CHANGELOG-*.txt
 composer.lock
 composer.phar
 /tmp/
