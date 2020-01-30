@@ -1,5 +1,10 @@
 # Release Notes for Tumblr Parser v0.x
 
+## v0.7.0 [unreleased]
+
+- MIT License
+- Remove Travis CI support.
+
 ## v0.6.0
 
 - PSR1/PSR2
