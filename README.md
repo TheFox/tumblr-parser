@@ -157,7 +157,6 @@ You're welcome to contribute to this project. Fork this project at <https://gith
 ## Links
 
 - [Packagist Package](https://packagist.org/packages/thefox/tumblr-parser)
-- [Travis CI Repository](https://travis-ci.org/TheFox/tumblr-parser)
 
 ## License
 
